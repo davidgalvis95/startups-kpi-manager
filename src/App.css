@@ -13,6 +13,12 @@
   }
 }
 
+.divApp {
+  background-color: black;
+  min-height: 100vh;
+  margin-left: 68px;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

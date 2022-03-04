@@ -1,0 +1,11 @@
+.profileImage {
+  border-radius: 50%;
+  padding: 10px;
+  box-sizing: border-box;
+  max-width: 350px;
+}
+
+.photoContainer {
+  display: flex;
+  justify-content: center;
+}

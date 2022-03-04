@@ -1,0 +1,39 @@
+@import "./commons.scss";
+
+.SideBarMenu {
+    background-color: #282c34;
+    color: #fff;
+    position: absolute;
+    left:0;
+    top: 0;
+    height:flex;
+    height:100%;
+    display: flex;
+    flex-direction:column;
+
+    @include transition(width);
+    
+    //This "&" takes this as if we were defining a class .SideBarMenu.expanded
+    &.expanded {
+        width: 300px;
+    }
+
+    &.collapsed {
+        width: 68px;
+    }
+
+    .menuButton {
+        display: flex;
+        justify-content: flex-end;
+    
+        .hamburguerIcon {
+            cursor: pointer;
+            border: none;
+            background-color: transparent;
+            color: white;
+            padding: 10px;
+            width: 68px;
+            // margin-right: 20px;
+        }
+    }
+}

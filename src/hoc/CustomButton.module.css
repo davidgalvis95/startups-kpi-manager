@@ -1,0 +1,17 @@
+.buttonWrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.buttonEl {
+    background-color: #54a0ff; /* Green */
+    border: none;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }

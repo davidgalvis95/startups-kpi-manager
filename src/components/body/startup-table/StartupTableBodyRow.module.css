@@ -1,0 +1,36 @@
+.column1 {
+    width: 90px;
+    padding-left: 40px;
+  }
+  
+  .column2 {
+    width: 260px;
+  }
+  
+  .column3 {
+    width: 100px;
+  }
+  
+  .column4 {
+    width: 300px;
+  }
+  
+  .column5 {
+    width: 120px;
+  }
+  
+  .column6 {
+    width: 120px;
+    padding-right: 62px;
+  }
+
+  .profileImage {
+    border-radius: 50%;
+    padding: 2px;
+    box-sizing: border-box;
+    max-width: 40px;
+  }
+
+  .activeCell {
+      display: flex;
+  }

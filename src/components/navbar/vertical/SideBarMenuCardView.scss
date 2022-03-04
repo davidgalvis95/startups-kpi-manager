@@ -1,0 +1,43 @@
+@import "./commons.scss";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&display=swap');
+
+.SideBarMenuCardView {
+    text-align: center;
+
+    .profile{
+        border-radius: 50%;
+        padding: 10px;
+        box-sizing: border-box;
+        max-width: 128px;
+    }
+
+    .profileInfo{
+        overflow: hidden;
+        height: 80px;
+        @include transition(height);
+        &.collapsed {
+            opacity: 0;
+            height: 0;
+        }
+    }
+
+    .name {
+        font-size: 20px;
+        font-weight: bold;
+        font-family: 'Montserrat', sans-serif;
+        color: #f1f2f6;
+        opacity: 0.7;
+    }
+
+    .url {
+        a{
+            color: #79a8ff;
+            font-family: 'Poppins', sans-serif;
+            
+            &:hover {
+                color: #fff;
+            }
+        }
+    }
+}

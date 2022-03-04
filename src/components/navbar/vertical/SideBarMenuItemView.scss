@@ -1,0 +1,79 @@
+@import "./commons.scss";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&display=swap');
+
+.SideBarMenuItemView {
+    text-align: left;
+    align-items: center;
+    margin: 0 5px;
+    display: flex;
+
+    a {
+        color: #fff;
+        text-decoration: none;
+        display: block;
+        padding: 10px;
+        width: 100%;
+        border-radius: 5px;
+
+        .ItemContent {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            overflow: hidden;
+            width: 100%;
+            white-space: nowrap;
+            @include transition(width);
+
+            &.collapsed {
+                width: 35px;
+            }
+
+            .icon{
+                width: 32px;
+                height: 32px;
+            }
+
+            .label{
+                font-weight: 500;
+                margin-left: 10px;
+                overflow: hidden;
+                font-family: 'Poppins', sans-serif;
+                color: #f1f2f6;
+                opacity: 0.7;
+            }
+        }
+
+        &:hover {
+            background-color: #54a0ff;
+            color: #fff;
+        }
+
+        &:hover {
+            & + .tooltip {
+                display: inline-block;
+                animation-duration: 0.4s;
+                animation-name: tooltip;
+            }
+        }
+    }
+
+    .tooltip {
+        position: absolute;
+        background-color: black;
+        left: 70px;
+        padding: 10px;
+        border-radius: 4px;
+        text-transform: capitalize;
+        display: none;
+    }
+}
+
+@keyframes tooltip {
+    from{
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
