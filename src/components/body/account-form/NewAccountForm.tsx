@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Grid } from "@mui/material";
+import { useSelector } from "react-redux";
 import InputCustomField from "../../../hoc/InputCustomField";
 import Card from "../../../hoc/Card";
 import classes from "./NewAccountForm.module.css";
 import CustomButton from "../../../hoc/CustomButton";
+import { RootState } from "../../../store/reducers/rootReducer";
 
 const NewAccountForm = () => {
 

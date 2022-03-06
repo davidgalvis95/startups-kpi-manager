@@ -20,9 +20,9 @@ export default function SideBarMenuItemView({
       <a href={item.url}>
         <div className={classNames("ItemContent", isOpen ? "" : "collapsed")}>
           <div className="icon">
-            {item.label==="Perfil"?<item.icon size="32" style={profileStyle}></item.icon>:
-            (item.label==="Dashboard"?<item.icon size="32" style={dashboardStyle}></item.icon>:
-            <item.icon size="32" style={tableStyle}></item.icon>)}
+            {item.label==="Perfil"?<item.icon size="30" style={profileStyle}></item.icon>:
+            (item.label==="Dashboard"?<item.icon size="30" style={dashboardStyle}></item.icon>:
+            <item.icon size="30" style={tableStyle}></item.icon>)}
           </div>
           <span className="label">{item.label}</span>
         </div>

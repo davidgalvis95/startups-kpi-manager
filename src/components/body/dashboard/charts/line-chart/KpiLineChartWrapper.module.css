@@ -1,0 +1,10 @@
+.chartFilterWrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.selectorLabel {
+    color: #8395a7;
+    font-size: 11px;
+    margin:auto 0px;
+}

@@ -1,19 +1,27 @@
 import { SideBarMenu } from "./components/navbar/vertical/SideBarMenu";
 import { TopNavBarMenu } from "./components/navbar/horizontal/TopNavBarMenu";
-import Profile from "./components/body/profile/Profile"
-import StartupTable from "./components/body/startup-table/StartupTable"
-import NewAccountForm from "./components/body/account-form/NewAccountForm"
+import { useSelector } from "react-redux";
+import { RootState } from "./store/reducers/rootReducer";
+import Profile from "./components/body/profile/Profile";
+import StartupTable from "./components/body/startup-table/StartupTable";
+import NewAccountForm from "./components/body/account-form/NewAccountForm";
 import { SideBarMenuCard, SideBarMenuItem } from "./types/types";
 import { GoGraph } from "react-icons/go";
 import { BsFillPersonFill } from "react-icons/bs";
 import { BsGrid1X2Fill } from "react-icons/bs";
 import { buildSampleRowContent } from "./assets/sample-data/StartUpBodyRowContentSample";
-import {StartUpBodyRowContent} from "./types/types";
-import "./App.css"
-
-
+import { StartUpBodyRowContent } from "./types/types";
+import classes from "./App.module.css";
+import { useEffect } from "react";
+import sideNavBarStatus from "./store/actions/sideNavBarStatus";
+import Dashboard from "./components/body/dashboard/DashBoard";
 
 function App() {
+  const sideNavBarStatus = useSelector(
+    (state: RootState) => state?.sideNavBarStatusReducer
+  );
+
+  useEffect(() => {}, [sideNavBarStatus]);
 
   const startupsContent: StartUpBodyRowContent[] = buildSampleRowContent();
 
@@ -50,13 +58,20 @@ function App() {
   return (
     <div>
       {/* <header> */}
-        <SideBarMenu items={items} card={card} />
-        <div className="divApp">
-            <TopNavBarMenu photoUrl={card.photoUrl}/>
-            {/* <Profile card={card}/> */}
-            {/* <StartupTable contentArray={startupsContent}/> */}
-            <NewAccountForm/>
-        </div>
+      <SideBarMenu items={items} card={card} />
+      <div
+        className={
+          sideNavBarStatus.isOpen
+            ? `${classes.bodyApp} ${classes.bodyAppCollapsed}`
+            : `${classes.bodyApp} ${classes.bodyAppExpanded}`
+        }
+      >
+        <TopNavBarMenu photoUrl={card.photoUrl} />
+        {/* <Profile card={card}/> */}
+        {/* <StartupTable contentArray={startupsContent}/> */}
+        {/* <NewAccountForm /> */}
+        <Dashboard/>
+      </div>
 
       {/* </header> */}
     </div>

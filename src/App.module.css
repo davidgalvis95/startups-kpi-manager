@@ -1,3 +1,5 @@
+@import "./components//navbar/vertical/commons.scss";
+
 .App {
   text-align: center;
 }
@@ -13,10 +15,22 @@
   }
 }
 
-.divApp {
+.bodyApp {
   background-color: black;
   min-height: 100vh;
   margin-left: 68px;
+}
+
+.bodyAppExpanded {
+  margin-left: 68px;
+  transition: margin-left 0.2s ease-in-out;
+  transition-delay: 0.01s;
+}
+
+.bodyAppCollapsed {
+  margin-left: 300px;
+  transition: margin-left 0.2s ease-in-out;
+  transition-delay: 0.05s;
 }
 
 .App-header {
@@ -41,4 +55,12 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+body::-webkit-scrollbar {
+  width: 0;
+}
+
+body{
+  background-color:black;
 }

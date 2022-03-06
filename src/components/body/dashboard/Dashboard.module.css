@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&family=Montserrat&family=Poppins&display=swap');
+
+.generalKpiInfoWrapper {
+  width: 80%;
+  margin: 0rem auto;
+}
+
+.chartAndSpecificKpiInfoWrapper {
+  width: 90%;
+  margin: 1rem auto;
+}
+
+.dashboardChartsWrapper {
+  overflow-y: scroll;
+  max-height: 70vh;
+}
+
+.dashboardChartsWrapper::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+.dashboardChartsWrapper::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 8px;
+}
+
+.dashboardChartsWrapper::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #54a0ff;
+  outline: 2px solid;
+}
+
+.importantKpiWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+}
+
+.importantKpiWrapper div{
+    margin: auto 0px;
+    max-height: 57px;
+}
+
+.importantKpiWrapper label{
+    color: #b2bec3;
+    font-weight: bold;
+    /* font-size: 1em; */
+    font-family: 'Poppins', sans-serif;
+}
+
+.importantKpiValue{
+    color: #2ecc71;
+    font-weight: bold;
+    /* font-size: 0.9vw; */
+    font-family: 'Poppins', sans-serif;
+}
+
+.positive{
+    color: #2ecc71;
+}
+
+.negative{
+    color: #eb4d4b;
+}
+
+.kpiTitle {
+    color: #b2bec3;
+    margin: 3px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.dashboardGeneral{
+    width: 80%;
+    margin: 0rem auto;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.dashboardNameTitle {
+    color: #b2bec3;
+    font-family: 'Poppins', sans-serif;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.buttonWrapper{
+    margin: auto;
+    margin-right: 0px;
+}
+
+.chartFilterWrapper {
+    display: flex;
+    justify-content: flex-end;
+}
