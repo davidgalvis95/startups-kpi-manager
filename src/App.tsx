@@ -71,8 +71,8 @@ function App() {
         {/* <Profile card={card}/> */}
         {/* <StartupTable contentArray={startupsContent}/> */}
         {/* <NewAccountForm /> */}
-        <Dashboard/>
-        {/* <CreateNewKpi/> */}
+        {/* <Dashboard/> */}
+        <CreateNewKpi/>
       </div>
 
       {/* </header> */}

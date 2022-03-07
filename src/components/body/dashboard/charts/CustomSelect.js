@@ -140,7 +140,6 @@ const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
 
 const CustomSelectComp = (props) => {
   const handleClick = (e) => {
-    console.log(e.target.textContent);
     props.clickHandler(e.target.textContent);
   };
   return (

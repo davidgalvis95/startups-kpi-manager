@@ -141,7 +141,9 @@ const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
 });
 
 const CustomSelectComp = (props) => {
-
+  const handleClick = (e) => {
+    props.click(e);
+  };
 
   return (
     <div>
@@ -151,7 +153,11 @@ const CustomSelectComp = (props) => {
           Seleccione una opcion
         </StyledOption>
         {props?.values?.map((value, i) => {
-          return <StyledOption key={value} value={10}>{value}</StyledOption>;
+          return (
+            <StyledOption key={value} value={value}>
+              <div onClick={(e) => handleClick(e)}>{value}</div>
+            </StyledOption>
+          );
         })}
       </CustomSelect>
     </div>

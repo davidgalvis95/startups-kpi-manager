@@ -2,9 +2,14 @@ import { Button, styled } from "@mui/material";
 
 interface AddButtonCompProps {
   name: string;
+  click?: Function;
 }
 
-const AddButtonComp = ({ name }: AddButtonCompProps) => {
+const AddButtonComp = ({
+  name,
+  click = () =>
+    console.log("The operation could not be completed: 'click' is undefined"),
+}: AddButtonCompProps) => {
   const AddButton = styled(Button)({
     boxShadow: "none",
     textTransform: "none",
@@ -22,7 +27,11 @@ const AddButtonComp = ({ name }: AddButtonCompProps) => {
       boxShadow: "none",
     },
   });
-  return <AddButton variant="contained">{name}</AddButton>;
+  return (
+    <AddButton variant="contained" onClick={(e) => click(e)}>
+      {name}
+    </AddButton>
+  );
 };
 
 export default AddButtonComp;

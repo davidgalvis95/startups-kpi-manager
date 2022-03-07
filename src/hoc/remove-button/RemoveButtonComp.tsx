@@ -2,9 +2,16 @@ import { Button, styled } from "@mui/material";
 
 interface RemoveButtonCompProps {
   name: string;
+  index?: number;
+  click?: Function;
 }
 
-const RemoveButtonComp = ({ name }: RemoveButtonCompProps) => {
+const RemoveButtonComp = ({
+  name,
+  index = -1,
+  click = (e: any, index: number) =>
+    console.log("Cannot execute function: undefined"),
+}: RemoveButtonCompProps) => {
   const RemoveButton = styled(Button)({
     boxShadow: "none",
     textTransform: "none",
@@ -23,7 +30,11 @@ const RemoveButtonComp = ({ name }: RemoveButtonCompProps) => {
     },
   });
 
-  return <RemoveButton variant="contained">{name}</RemoveButton>;
+  return (
+    <RemoveButton variant="contained" onClick={(e: any) => click(e, index)}>
+      {name}
+    </RemoveButton>
+  );
 };
 
 export default RemoveButtonComp;
