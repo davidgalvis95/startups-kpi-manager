@@ -68,6 +68,7 @@ const drawImportantKpis = (kpis: ImportantKpi[]): JSX.Element[] => {
 const Dashboard = () => {
   const importantKpis: ImportantKpi[] = sampleDataSet.importantKpis;
   const kpis: Kpi[] = sampleDataSet.allKpisDetailed;
+  //TODO use reducer to get data from company
 
   const createKpiHandler = () => {};
 

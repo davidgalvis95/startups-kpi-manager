@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&display=swap");
+
+.textBox {
+  height: 35px;
+  background-color: #3c6382;
+  border-radius: 4px;
+  width: 300px;
+}
+
+.textBoxLabel {
+  color: #95afc0;
+  font-size: 12px;
+  margin-bottom: 3px;
+  margin-left: 2px;
+  margin-right: 3px;
+}

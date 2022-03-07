@@ -15,6 +15,7 @@ import classes from "./App.module.css";
 import { useEffect } from "react";
 import sideNavBarStatus from "./store/actions/sideNavBarStatus";
 import Dashboard from "./components/body/dashboard/DashBoard";
+import CreateNewKpi from "./components/body/create-kpi-form/CreateNewKpi";
 
 function App() {
   const sideNavBarStatus = useSelector(
@@ -71,6 +72,7 @@ function App() {
         {/* <StartupTable contentArray={startupsContent}/> */}
         {/* <NewAccountForm /> */}
         <Dashboard/>
+        {/* <CreateNewKpi/> */}
       </div>
 
       {/* </header> */}

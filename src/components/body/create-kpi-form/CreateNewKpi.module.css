@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&display=swap");
+
+.textBox {
+  height: 35px;
+  background-color: #3c6382;
+  border-radius: 4px;
+  width: 300px;
+}
+
+.textBoxLabel {
+  color: #95afc0;
+  font-size: 12px;
+  margin-bottom: 3px;
+  margin-left: 2px;
+  margin-right: 3px;
+}
+
+.formRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.chackBoxWrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.chackBoxWrapperParent {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  /* margin: 1.7rem 10px; */
+}
+
+.margined {
+      margin: 1.7rem 10px;
+}
+
+.checkBoxLabel {
+  font-size: 15px;
+}
+
+.title {
+  font-size: 20px;
+  font-family: "Poppins", sans-serif;
+  color: #f1f2f6;
+  margin-left: 20px;
+}
+
+.matButton{
+    margin-top: 1.7rem;
+    background-color: #00a8ff;
+    /* color: black; */
+}
+
+.matButtonWrapper{
+    margin-top: 1.7rem;
+}
+
+.buttonsWrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.saveButtonWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
