@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,8 +9,10 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import ColorSelection from "./ColorSelection";
-import { sampleDataSet } from "../../../../assets/sample-data/BarLineChartDataset";
+import ColorSelection from "../ColorSelection";
+import { sampleDataSet } from "../../../../../assets/sample-data/BarLineChartDataset";
+import { KpiChartWrapperContext } from "../KpiChartWrapper";
+import { ElementsToChar, ElementsToCharData } from "../../../../../types/types";
 
 ChartJS.register(
   CategoryScale,
@@ -22,8 +24,11 @@ ChartJS.register(
 );
 
 const KpiStackedBarChart = React.memo(() => {
-  const addCustomLabel = (context) => {
-    const date = sampleDataSet.attributes[0].labels[context.dataIndex];
+
+  const { labels, und, data } = useContext<ElementsToChar<string, string, ElementsToCharData>>(KpiChartWrapperContext)
+
+  const addCustomLabel = (context:any) => {
+    const date = labels[context.dataIndex];
     let label = context.dataset.label || "";
 
     if (label) {
@@ -35,7 +40,7 @@ const KpiStackedBarChart = React.memo(() => {
         " - " +
         context.parsed.y +
         " " +
-        sampleDataSet.und;
+        und;
     }
     return label;
   };
@@ -91,13 +96,12 @@ const KpiStackedBarChart = React.memo(() => {
     return (
       <Bar
         options={options}
-        type="bar"
         data={{
-          labels: sampleDataSet.attributes[0].labels.map((value) => value),
-          datasets: sampleDataSet.attributes.map((element) => {
+          labels: labels.map((value) => value),
+          datasets: data.map((element) => {
             const color = getColor();
             return {
-              label: element.attribute,
+              label: element.name,
               data: element.values,
               backgroundColor: color[0],
             };

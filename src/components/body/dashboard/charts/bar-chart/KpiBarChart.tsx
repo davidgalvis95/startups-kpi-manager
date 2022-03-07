@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,10 +9,13 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import ColorSelection from "./ColorSelection";
-import { sampleDataSet } from "../../../../assets/sample-data/BarLineChartDataset";
+import ColorSelection from "../ColorSelection";
+import { ElementsToChar, ElementsToCharData } from "../../../../../types/types";
+import { KpiChartWrapperContext } from "../KpiChartWrapper";
 
-const KpiBarChart = React.memo((props) => {
+const KpiBarChart = React.memo(() => {
+
+  const { labels, und, data } = useContext<ElementsToChar<string, string, ElementsToCharData>>(KpiChartWrapperContext);
   const chartRef = useRef(null);
 
   ChartJS.register(
@@ -24,8 +27,8 @@ const KpiBarChart = React.memo((props) => {
     Legend
   );
 
-  const addCustomLabel = (context) => {
-    const date = sampleDataSet.attributes[0].labels[context.dataIndex];
+  const addCustomLabel = (context:any) => {
+    const date = labels[context.dataIndex];
     let label = context.dataset.label || "";
 
     if (label) {
@@ -37,7 +40,7 @@ const KpiBarChart = React.memo((props) => {
         " - " +
         context.parsed.y +
         " " +
-        sampleDataSet.und;
+        und;
     }
     return label;
   };
@@ -95,13 +98,12 @@ const KpiBarChart = React.memo((props) => {
       <Bar
         ref={chartRef}
         options={options}
-        type="bar"
         data={{
-          labels: sampleDataSet.attributes[0].labels.map((value) => value),
-          datasets: sampleDataSet.attributes.map((element) => {
+          labels: labels.map((value) => value),
+          datasets: data.map((element) => {
             const color = getColor();
             return {
-              label: element.attribute,
+              label: element.name,
               data: element.values,
               // borderColor: color[0],
               backgroundColor: color[1],

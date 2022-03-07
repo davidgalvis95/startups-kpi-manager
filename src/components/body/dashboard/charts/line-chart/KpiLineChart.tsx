@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,9 +10,9 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import { sampleDataSet } from "../../../../assets/sample-data/BarLineChartDataset";
-import ColorSelection from "./ColorSelection";
-import { ElementsToChar } from "../../../../types/types";
+import ColorSelection from "../ColorSelection";
+import { ElementsToChar, ElementsToCharData } from "../../../../../types/types";
+import { KpiChartWrapperContext } from "../KpiChartWrapper";
 
 ChartJS.register(
   CategoryScale,
@@ -24,15 +24,14 @@ ChartJS.register(
   Legend
 );
 
-interface KpiLineChartProps {
-  element: ElementsToChar
-}
 
 //TODO tipify those props
-const KpiLineChart = React.memo(({element}:KpiLineChartProps) => {
+const KpiLineChart = React.memo(() => {
+
+  const { labels, und, data } = useContext<ElementsToChar<string, string, ElementsToCharData>>(KpiChartWrapperContext)
 
   const addCustomLabel = (context:any) => {
-    const date = element.labels[context.dataIndex];
+    const date = labels[context.dataIndex];
     let label = context.dataset.label || "";
 
     if (label) {
@@ -44,7 +43,7 @@ const KpiLineChart = React.memo(({element}:KpiLineChartProps) => {
         " - " +
         context.parsed.y +
         " " +
-        element.und;
+        und;
     }
     return label;
   };
@@ -100,8 +99,8 @@ const KpiLineChart = React.memo(({element}:KpiLineChartProps) => {
       <Line
         options={options}
         data={{
-          labels: element.labels.map((value) => value),
-          datasets: element.data.map((e) => {
+          labels: labels.map((value) => value),
+          datasets: data.map((e) => {
             const color = getColor();
             return {
               label: e.name,
