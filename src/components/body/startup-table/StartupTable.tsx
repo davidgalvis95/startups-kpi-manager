@@ -6,27 +6,38 @@ import StartupTableBodyRow from "./StartupTableBodyRow";
 import StartupTableHeadRow from "./StartupTableHeadRow";
 import classes from "./StartupTable.module.css";
 import CustomButton from "../../../hoc/CustomButton";
-import InputCustomField from "../../../hoc/InputCustomField";
 import { range } from "../../../util/RangeGenerator";
+import CustomInputComp from "../../../hoc/custom-input/CustomInputComp";
+import { RootState } from "../../../store/reducers/rootReducer";
+import { useDispatch, useSelector } from "react-redux";
 
 interface StartupTableProps {
-  contentArray: StartUpBodyRowContent[];
+  displayContentArray: StartUpBodyRowContent[];
 }
 
 const numberOfElementsPerPage: number = 13;
 
-const StartupTable = ({ contentArray }: StartupTableProps) => {
+const StartupTable = ({ displayContentArray }: StartupTableProps) => {
+  const [contentArray, setContentArray] = useState<StartUpBodyRowContent[]>(displayContentArray);
   const [numberOfPageButtons, setNumberOfPageButtons] =
     useState<JSX.Element[]>();
   const [rowsContentArray, setRowsContentArray] = useState<
     StartUpBodyRowContent[]
   >(contentArray.filter((el, i) => i < numberOfElementsPerPage));
+  const [seeKpis, setSeeKpis] = useState<boolean>(false);
+  // const {kpisData, isLoading} = useSelector((state: RootState) => state?.sideNavBarStatusReducer);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setSeeKpis(false);
+  },[]);
 
   useEffect(() => {
     pages();
+    switchPageHandler(1);
   }, [contentArray.length]);
 
-  const pages = () => {
+  const pages = ():void => {
     const numberOfPages = Math.ceil(
       contentArray.length / numberOfElementsPerPage
     );
@@ -45,7 +56,7 @@ const StartupTable = ({ contentArray }: StartupTableProps) => {
     setNumberOfPageButtons(buttons);
   };
 
-  const switchPageHandler = (pageNumber: number) => {
+  const switchPageHandler = (pageNumber: number):void => {
     const fromElement = numberOfElementsPerPage * (pageNumber - 1);
     const toElement = numberOfElementsPerPage * pageNumber;
     setRowsContentArray(
@@ -53,8 +64,19 @@ const StartupTable = ({ contentArray }: StartupTableProps) => {
     );
   };
 
+  const handleFilterContent = (e:any) => {
+    const newArray: StartUpBodyRowContent[]= [...displayContentArray].filter(c=>c.name.toLowerCase().includes(`${e.target.value.toLowerCase()}`));
+    setContentArray(newArray);
+  }
+
   const handleCreateAccount = () => {};
 
+
+  const handleClickToViewKpis = (id:string) => {
+    //Send a request to get the KPIs from DB
+    // dispatch(allActions.sendSetSideBarStatus.sendSetSideBarStatus({type:isOpen ? "COLLAPSE" : "OPEN"}));
+    setSeeKpis(true);
+  }
   return (
     <div>
       <Card width={90} padding={"1rem"}>
@@ -72,11 +94,15 @@ const StartupTable = ({ contentArray }: StartupTableProps) => {
             <p className={classes.title}>Listado de Startups</p>
           </div>
           <div style={{ width: "100%", margin: "auto" }}>
-            <InputCustomField
-              text={"Buscar cuenta"}
-              placeholder={"Introduzca un nombre"}
-			  width={"100%"}
-            />
+            <div className={classes.searchWrapper}>
+              <CustomInputComp
+                // value={attribute.name}
+                label={`Buscar Cuenta`}
+                placeholder={"Valor del atributo en el periodo"}
+                change={handleFilterContent}
+                valueNotReferencedFromParent={true}
+              />
+            </div>
           </div>
         </div>
       </Card>
@@ -88,14 +114,14 @@ const StartupTable = ({ contentArray }: StartupTableProps) => {
             </thead>
             <tbody>
               {rowsContentArray.map((content) => (
-                <StartupTableBodyRow key={content.id} cellsContent={content} />
+                <StartupTableBodyRow key={content.id} cellsContent={content} click={(id:string) => handleClickToViewKpis(id)}/>
               ))}
             </tbody>
           </table>
-          <div className={classes.buttonsWrapper}>
+          {contentArray.length?<div className={classes.buttonsWrapper}>
             <p style={{ color: "#fff", marginRight: "8px" }}>Page Navigation</p>
             {numberOfPageButtons}
-          </div>
+          </div>:null}
         </div>
       </Card>
     </div>

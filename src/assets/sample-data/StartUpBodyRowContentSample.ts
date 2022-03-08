@@ -9,7 +9,7 @@ export function buildSampleRowContent(): StartUpBodyRowContent[] {
     sampleRowContents.push({
       id: uuid(),
       photoUrl: "./assets/images/cube_logo.jpg",
-      name: "Cube S.A.S",
+      name: i>25?"Triangle S.A.S":"Cube S.A.S",
       status: i % 2 == 0 ? "Activa" : "Inactiva",
       address: "Cll 100 # 20 - 55 oficina 103",
       city: "Bogota",

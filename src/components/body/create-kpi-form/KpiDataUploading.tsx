@@ -77,15 +77,36 @@ const KpiDataUploading = ({ kpis }: KpiDataUploadingProps) => {
   const saveNewData = (e: any) => {
     let kpiToPersist: Kpi;
     if (!kpiLabelsOfDateType) {
-      kpiToPersist = { ...currentKpi, labels: currentVariables };
+      kpiToPersist = {
+        ...currentKpi,
+        labels: currentVariables,
+        total: recalculateTotals(currentVariables, currentKpi.attributes),
+      };
     } else {
       const newLabels: string[] = { ...currentKpi }.labels;
       newLabels.push(currentMonth + "-" + currentYear);
-      kpiToPersist = { ...currentKpi, labels: newLabels };
+      kpiToPersist = {
+        ...currentKpi,
+        labels: newLabels,
+        total: recalculateTotals(newLabels, currentKpi.attributes),
+      };
     }
     //TODO Validate Data
     //TODO send api request to save data
     console.log(kpiToPersist);
+  };
+
+  const recalculateTotals = (
+    labels: string[],
+    attributes: KpiAttribute[]
+  ): number[] => {
+    return labels.map((label, labIndex) => {
+      const tolatValueForLabelIndex = 0;
+      attributes.forEach(
+        (attribute) => tolatValueForLabelIndex + attribute.values[labIndex]
+      );
+      return tolatValueForLabelIndex;
+    });
   };
 
   const addNewComparativeVariable = (e: any) => {

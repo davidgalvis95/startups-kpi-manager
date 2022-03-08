@@ -73,12 +73,12 @@ function App() {
         }
       >
         <TopNavBarMenu photoUrl={card.photoUrl} />
-        {/* <Profile card={card}/> */}
-        {/* <StartupTable contentArray={startupsContent}/> */}
+        <Profile card={card}/>
+        {/* <StartupTable displayContentArray={startupsContent}/> */}
         {/* <NewAccountForm /> */}
         {/* <Dashboard/> */}
-        <CreateNewKpi/>
-        <UpdateKpi kpis={kpis}/>
+        {/* <CreateNewKpi/> */}
+        {/* <UpdateKpi kpis={kpis}/> */}
         {/* <KpiDataUploading kpis={kpis}/> */}
       </div>
 

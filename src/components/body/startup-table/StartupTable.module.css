@@ -117,3 +117,8 @@ tbody tr:hover {
   justify-content: flex-end;
   padding: 20px;
 }
+
+.searchWrapper{
+  display: flex;
+  justify-content: center;
+}
