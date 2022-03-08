@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {useState, useEffect} from "react";
 import SelectUnstyled, {
   selectUnstyledClasses,
 } from "@mui/base/SelectUnstyled";
@@ -145,12 +145,21 @@ const CustomSelectComp = (props) => {
     props.click(e, index);
   };
 
+  // const [defValue, setDefValue] = useState(10000);
+
+  // useEffect(()=>{
+  //   console.log(props.value)
+  //   if(props.value !==''){
+  //     setDefValue(props.value)
+  //   }
+  // },[props.value])
+
   return (
     <div>
       <p className={classes.textBoxLabel}>{props?.label}</p>
       <CustomSelect defaultValue={10000} disabled={props.disabled}>
         <StyledOption value={10000} style={{ display: "none" }}>
-          Seleccione una opcion
+          {props.value? props.value:'Seleccione una opcion'}
         </StyledOption>
         {props?.values?.map((value, i) => {
           return (

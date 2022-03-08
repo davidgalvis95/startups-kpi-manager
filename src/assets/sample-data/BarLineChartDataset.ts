@@ -43,7 +43,7 @@ export const sampleDataSet = {
         "Oct-2021",
         "Nov-2021",
       ],
-      chartTypes: ["bar", "ring", "stackedBar", "line"],
+      chartTypes: ["Barras", "Anillo", "Barras Agrupadas", "Linea"],
       attributesGroupName: "Canal de Venta",
       attributes: [
         {
@@ -73,7 +73,7 @@ export const sampleDataSet = {
       name: "Empleados por Contrato",
       und: "USD",
       total: [300, 305, 310, 315, 300, 280, 290, 310, 295, 320, 305],
-      labelType: "date",
+      labelType: "Texto (Ejemplo: Negro, Gris, Blanco)",
       labels: [
         "Ene-2021",
         "Feb-2021",
@@ -87,7 +87,7 @@ export const sampleDataSet = {
         "Oct-2021",
         "Nov-2021",
       ],
-      chartTypes: ["bar", "ring", "stackedBar", "line"],
+      chartTypes: ["Barras", "Anillo", "Barras Agrupadas", "Linea"],
       attributesGroupName: "Tipo de Contrato",
       attributes: [
         {

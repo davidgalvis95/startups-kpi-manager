@@ -18,6 +18,7 @@ import Dashboard from "./components/body/dashboard/DashBoard";
 import CreateNewKpi from "./components/body/create-kpi-form/CreateNewKpi";
 import KpiDataUploading from "./components/body/create-kpi-form/KpiDataUploading";
 import { sampleDataSet } from "./assets/sample-data/BarLineChartDataset"
+import UpdateKpi from "./components/body/create-kpi-form/UpdateKpi";
 
 function App() {
   const sideNavBarStatus = useSelector(
@@ -76,8 +77,9 @@ function App() {
         {/* <StartupTable contentArray={startupsContent}/> */}
         {/* <NewAccountForm /> */}
         {/* <Dashboard/> */}
-        {/* <CreateNewKpi/> */}
-        <KpiDataUploading kpis={kpis}/>
+        <CreateNewKpi/>
+        <UpdateKpi kpis={kpis}/>
+        {/* <KpiDataUploading kpis={kpis}/> */}
       </div>
 
       {/* </header> */}
