@@ -1,5 +1,5 @@
 import { styled, TextField } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classNames from "./CustomInputComp.module.css";
 
 interface CustomInputCompProps {
@@ -9,6 +9,7 @@ interface CustomInputCompProps {
   disabled?: boolean;
   change?: Function;
   index?: number;
+  valueNotReferencedFromParent?: boolean;
 }
 
 const CustomInputComp = React.memo(
@@ -18,8 +19,15 @@ const CustomInputComp = React.memo(
     value,
     disabled = false,
     change = () => console.log(""),
-    index = -1
+    index = -1,
+    valueNotReferencedFromParent = false,
   }: CustomInputCompProps) => {
+    const [textValue, setTextValue] = useState<string>("");
+    const [textLabel, setTextLabel] = useState<string>("");
+
+    useEffect(()=> {
+      setTextValue("");
+    },[label])
 
     const CustomTextField = styled(TextField)({
       input: {
@@ -44,7 +52,7 @@ const CustomInputComp = React.memo(
         },
       },
     });
-    
+
     return (
       <div>
         <p className={classNames.textBoxLabel}>{label}</p>
@@ -56,9 +64,17 @@ const CustomInputComp = React.memo(
           id="outlined-required"
           placeholder={placeholder}
           size="small"
-          value={value}
+          value={valueNotReferencedFromParent ? textValue : value}
           disabled={disabled}
-          onChange={(e) => change(e, index)}
+          onChange={(e) => {
+            if (valueNotReferencedFromParent) {
+              setTextValue(e.target.value);
+            }
+            change(e, index);
+            if(textLabel !== label){
+              setTextLabel(label);
+            }
+          }}
           InputProps={{
             style: {
               textOverflow: "ellipsis",

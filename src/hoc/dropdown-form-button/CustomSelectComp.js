@@ -141,21 +141,21 @@ const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
 });
 
 const CustomSelectComp = (props) => {
-  const handleClick = (e) => {
-    props.click(e);
+  const handleClick = (e, index) => {
+    props.click(e, index);
   };
 
   return (
     <div>
       <p className={classes.textBoxLabel}>{props?.label}</p>
-      <CustomSelect defaultValue={10000}>
+      <CustomSelect defaultValue={10000} disabled={props.disabled}>
         <StyledOption value={10000} style={{ display: "none" }}>
           Seleccione una opcion
         </StyledOption>
         {props?.values?.map((value, i) => {
           return (
             <StyledOption key={value} value={value}>
-              <div onClick={(e) => handleClick(e)}>{value}</div>
+              <div onClick={(e) => handleClick(e, i)}>{value}</div>
             </StyledOption>
           );
         })}

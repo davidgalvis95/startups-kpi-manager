@@ -20,15 +20,17 @@ const defaultKpi: Kpi = {
   attributes: [],
 };
 
+export const newKpiVariablesValues = [
+  "Fecha (Ejemplo: ene-2022, feb-2022)",
+  "Texto (Ejemplo: Negro, Gris, Blanco)",
+  "Numero (Ejemplo: 1000, 10000, 100000)",
+];
+
 const CreateNewKpi = (props: any) => {
   const [attributes, setAttributes] = useState<string[]>([]);
   const [kpiData, setKpiData] = useState<Kpi>(defaultKpi);
 
-  const newKpiVariablesValues = [
-    "Fecha (Ejemplo: ene-2022, feb-2022)",
-    "Texto (Ejemplo: Negro, Gris, Blanco)",
-    "Numero (Ejemplo: 1000, 10000, 100000)",
-  ];
+
 
   const saveInfoHandler = () => {
     const kpiDataCopy: Kpi = {
@@ -37,8 +39,8 @@ const CreateNewKpi = (props: any) => {
         return { name: attributeName, values: [] };
       }),
     };
-    //Validate all the fields
-    //Handle the API request to save the KPI
+    //TODO Validate all the fields
+    //TODO Handle the API request to save the KPI
     console.log(kpiDataCopy);
   };
 
@@ -214,7 +216,6 @@ const CreateNewKpi = (props: any) => {
             </div>
           ) : null}
           {/* Create attribute component */}
-
           <div className={classes.saveButtonWrapper}>
             <AddButtonComp
               name={"Guardar Datos"}

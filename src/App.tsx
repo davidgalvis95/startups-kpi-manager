@@ -16,6 +16,8 @@ import { useEffect } from "react";
 import sideNavBarStatus from "./store/actions/sideNavBarStatus";
 import Dashboard from "./components/body/dashboard/DashBoard";
 import CreateNewKpi from "./components/body/create-kpi-form/CreateNewKpi";
+import KpiDataUploading from "./components/body/create-kpi-form/KpiDataUploading";
+import { sampleDataSet } from "./assets/sample-data/BarLineChartDataset"
 
 function App() {
   const sideNavBarStatus = useSelector(
@@ -23,6 +25,8 @@ function App() {
   );
 
   useEffect(() => {}, [sideNavBarStatus]);
+
+  const kpis = sampleDataSet.allKpisDetailed;
 
   const startupsContent: StartUpBodyRowContent[] = buildSampleRowContent();
 
@@ -72,7 +76,8 @@ function App() {
         {/* <StartupTable contentArray={startupsContent}/> */}
         {/* <NewAccountForm /> */}
         {/* <Dashboard/> */}
-        <CreateNewKpi/>
+        {/* <CreateNewKpi/> */}
+        <KpiDataUploading kpis={kpis}/>
       </div>
 
       {/* </header> */}
