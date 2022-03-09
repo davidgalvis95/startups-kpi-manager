@@ -4,6 +4,7 @@ interface RemoveButtonCompProps {
   name: string;
   index?: number;
   click?: Function;
+  marginTop?: string;
 }
 
 const RemoveButtonComp = ({
@@ -11,6 +12,7 @@ const RemoveButtonComp = ({
   index = -1,
   click = (e: any, index: number) =>
     console.log("Cannot execute function: undefined"),
+  marginTop = "1.9rem",
 }: RemoveButtonCompProps) => {
   const RemoveButton = styled(Button)({
     boxShadow: "none",
@@ -21,7 +23,7 @@ const RemoveButtonComp = ({
     lineHeight: 1.5,
     backgroundColor: "#ff7675",
     borderColor: "#ff7675",
-    marginTop: "1.9rem",
+    marginTop: marginTop,
     marginLeft: "1.4rem",
     "&:hover": {
       backgroundColor: "#ff7675",

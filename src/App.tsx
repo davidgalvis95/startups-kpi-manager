@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "./store/reducers/rootReducer";
 import Profile from "./components/body/profile/Profile";
 import StartupTable from "./components/body/startup-table/StartupTable";
-import NewAccountForm from "./components/body/account-form/NewAccountForm";
+import NewPymeAccountForm from "./components/body/account-form/NewPymeAccountForm";
 import { SideBarMenuCard, SideBarMenuItem } from "./types/types";
 import { GoGraph } from "react-icons/go";
 import { BsFillPersonFill } from "react-icons/bs";
@@ -19,7 +19,9 @@ import CreateNewKpi from "./components/body/create-kpi-form/CreateNewKpi";
 import KpiDataUploading from "./components/body/create-kpi-form/KpiDataUploading";
 import { sampleDataSet } from "./assets/sample-data/BarLineChartDataset"
 import UpdateKpi from "./components/body/create-kpi-form/UpdateKpi";
-import {SampleUser} from "./assets/sample-data/SampleUser"
+import {SampleUser} from "./assets/sample-data/SamplePymeAndUserData"
+import {SamplePymes} from "./assets/sample-data/SamplePymeAndUserData"
+import NewUserAccountForm from "./components/body/account-form/NewUserAccountForm";
 
 function App() {
   const sideNavBarStatus = useSelector(
@@ -76,7 +78,8 @@ function App() {
         <TopNavBarMenu photoUrl={card.photoUrl} />
         <Profile card={card} user={SampleUser}/>
         {/* <StartupTable displayContentArray={startupsContent}/> */}
-        {/* <NewAccountForm /> */}
+        {/* <NewPymeAccountForm /> */}
+        {/* <NewUserAccountForm pymes={SamplePymes}/> */}
         {/* <Dashboard/> */}
         {/* <CreateNewKpi/> */}
         {/* <UpdateKpi kpis={kpis}/> */}

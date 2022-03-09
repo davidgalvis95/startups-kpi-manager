@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Grid } from "@mui/material";
 import classes from "./ProfileModifiableSection.module.css";
-import { AiFillEdit } from "react-icons/ai";
 import { StartUpType } from "../../../types/userTypes";
 import CustomInputComp from "../../../hoc/custom-input/CustomInputComp";
 import CustomCheckBoxComp from "../../../hoc/checkbox-button/CustomCheckBoxComp";
 import { StartUp } from "../../../types/StartUp";
 import { AccessRights } from "./AccessRights";
+import { BiEdit } from "react-icons/bi";
+import AddButtonComp from "../../../hoc/add-button/AddButtonComp";
 
 interface PymeModifiableSectionProps {
   pymeData: StartUpType;
@@ -53,12 +54,12 @@ const PymeModifiableSection = ({
       <div className={classes.infoHeader}>
         <div className={classes.title}>
           {/* TODO set this to be dynamic */}
-          <label>Informacion del Usuario</label>
+          <label>Informacion de la Start-Up</label>
         </div>
         <div className={classes.title}>
           {isInEditableMode ? (
             <div onClick={() => handleEdition()}>
-              <AiFillEdit />
+              <BiEdit cursor={"pointer"} />
             </div>
           ) : null}
         </div>
@@ -145,14 +146,8 @@ const PymeModifiableSection = ({
         </Grid>
       </Grid>
       {!isInEditableMode ? (
-        <div className={classes.imageUploadCont} onClick={() => saveData()}>
-          <div className={classes.fileInput}>
-            <input type="text" id="file" className={classes.file} />
-            <label>
-              Guardar Datos
-              <p className={classes.fileName}></p>
-            </label>
-          </div>
+        <div className={classes.imageUploadCont}>
+          <AddButtonComp name={"Guardar Datos"} click={saveData} />
         </div>
       ) : null}
     </div>

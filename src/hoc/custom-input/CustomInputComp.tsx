@@ -1,19 +1,19 @@
 import { styled, TextField } from "@mui/material";
-import { makeStyles, createStyles } from '@mui/styles';
+import { makeStyles, createStyles } from "@mui/styles";
 import React, { useEffect, useState } from "react";
 import classNames from "./CustomInputComp.module.css";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
   inputRoot: {
-    '&$disabled': {
-      color:'red'
+    "&$disabled": {
+      color: "red",
     },
   },
-  disabled: {}
+  disabled: {},
 }));
 
 interface CustomInputCompProps {
@@ -24,6 +24,8 @@ interface CustomInputCompProps {
   change?: Function;
   index?: number;
   valueNotReferencedFromParent?: boolean;
+  width?: string;
+  type?: string;
 }
 
 const CustomInputComp = React.memo(
@@ -35,17 +37,17 @@ const CustomInputComp = React.memo(
     change = () => console.log(""),
     index = -1,
     valueNotReferencedFromParent = false,
+    width,
+    type,
   }: CustomInputCompProps) => {
     const [textValue, setTextValue] = useState<string>("");
     const [textLabel, setTextLabel] = useState<string>("");
 
-
-
     const classes = useStyles();
 
-    useEffect(()=> {
+    useEffect(() => {
       setTextValue("");
-    },[label])
+    }, [label]);
 
     // const CustomTextField = styled(TextField)({
     //   input: {
@@ -75,6 +77,7 @@ const CustomInputComp = React.memo(
       <div>
         <p className={classNames.textBoxLabel}>{label}</p>
         <TextField
+          type={type !== "" ? type : ""}
           color="info"
           focused
           className={classNames.textBox}
@@ -89,17 +92,18 @@ const CustomInputComp = React.memo(
               setTextValue(e.target.value);
             }
             change(e, index);
-            if(textLabel !== label){
+            if (textLabel !== label) {
               setTextLabel(label);
             }
           }}
           InputProps={{
-            classes: { root: classes.inputRoot, disabled: classes.disabled},
+            classes: { root: classes.inputRoot, disabled: classes.disabled },
             style: {
               textOverflow: "ellipsis",
               whiteSpace: "nowrap",
               overflow: "hidden",
               color: "#c7ecee",
+              width: width !== "" ? width : "300px",
             },
           }}
         />

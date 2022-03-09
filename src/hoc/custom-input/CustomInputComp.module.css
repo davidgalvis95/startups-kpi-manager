@@ -9,8 +9,11 @@
 }
 
 .textBoxLabel {
-  color: #95afc0;
   font-size: 12px;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+  color: #f1f2f6;
+  opacity: 0.7;
   margin-bottom: 3px;
   margin-left: 2px;
   margin-right: 3px;

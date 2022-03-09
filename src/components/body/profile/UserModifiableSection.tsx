@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import { Grid } from "@mui/material";
 import classes from "./ProfileModifiableSection.module.css";
-import { AiFillEdit } from "react-icons/ai";
+import { BiEdit } from "react-icons/bi";
 import { StartUpType, UserDataType } from "../../../types/userTypes";
 import CustomInputComp from "../../../hoc/custom-input/CustomInputComp";
 import User from "../../../types/User";
+import AddButtonComp from "../../../hoc/add-button/AddButtonComp";
 
 interface UserModifiableSectionProps {
   userData: UserDataType;
 }
 
-const UserModifiableSection = ({
-  userData,
-}: UserModifiableSectionProps) => {
+const UserModifiableSection = ({ userData }: UserModifiableSectionProps) => {
   const [isInEditableMode, setIsInEditableMode] = useState<boolean>(true);
   const [firstName, setFirstName] = useState<string>(userData?.firstName || "");
   const [lastName, setLastName] = useState<string>(userData?.lastName || "");
@@ -54,7 +53,7 @@ const UserModifiableSection = ({
         <div className={classes.title}>
           {isInEditableMode ? (
             <div onClick={() => handleEdition()}>
-              <AiFillEdit />
+              <BiEdit cursor={"pointer"} />
             </div>
           ) : null}
         </div>
@@ -128,14 +127,8 @@ const UserModifiableSection = ({
         </Grid>
       </Grid>
       {!isInEditableMode ? (
-        <div className={classes.imageUploadCont} onClick={() => saveData()}>
-          <div className={classes.fileInput}>
-            <input type="text" id="file" className={classes.file} />
-            <label>
-              Guardar Datos
-              <p className={classes.fileName}></p>
-            </label>
-          </div>
+        <div className={classes.imageUploadCont}>
+          <AddButtonComp name={"Guardar Datos"} click={saveData} />
         </div>
       ) : null}
     </div>

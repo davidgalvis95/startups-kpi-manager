@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Grid } from "@mui/material";
 import Card from "../../../hoc/Card";
 import { SideBarMenuCard } from "../../../types/types";
@@ -9,6 +9,7 @@ import { UserDataType } from "../../../types/userTypes";
 import useAxios from "../../../hooks/useAxios";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/reducers/rootReducer";
+import RemoveButtonComp from "../../../hoc/remove-button/RemoveButtonComp";
 
 interface ProfileProps {
   card: SideBarMenuCard;
@@ -47,11 +48,20 @@ const Profile = ({ card, user }: ProfileProps) => {
 
   const { uploadImagePointer } = useAxios();
 
+  useEffect(() => {
+    const newUser = { ...user, photoUrl: imageUrl };
+    // TODO: send api request to save image
+  }, [imageUrl]);
+
   const uploadPhoto = (files: FileList | null): void => {
     if (files) {
       uploadImagePointer(files[0]);
     }
   };
+
+  const exitHandler = () => {
+    // TODO:implement this
+  }
 
   const outputComponent = (
     <Grid container>
@@ -59,17 +69,16 @@ const Profile = ({ card, user }: ProfileProps) => {
         <Grid xs={12}>
           <Card width={80} padding={"1rem"}>
             <div>
-            <div className={classes.photoContainer}>
-              {isLoading ? (
-                <div className={classes.ldsSpinner}></div>
-              ) : (
+              <div className={classes.photoContainer}>
+                {isLoading ? (
+                  <div className={classes.ldsSpinner}></div>
+                ) : (
                   <img
                     className={classes.profileImage}
                     src={imageUrl === "" ? defualtUser.photoUrl : imageUrl}
                     width="100%"
                   />
-
-              )}
+                )}
               </div>
               <div className={classes.imageUploadCont}>
                 <div className={classes.fileInput}>
@@ -99,7 +108,10 @@ const Profile = ({ card, user }: ProfileProps) => {
         </div>
         <div>
           <Card width={80} padding={"1rem"}>
-            <PymeModifiableSection pymeData={user.pyme} accessRights={user.rights} />
+            <PymeModifiableSection
+              pymeData={user.pyme}
+              accessRights={user.rights}
+            />
           </Card>
         </div>
       </Grid>
@@ -108,7 +120,20 @@ const Profile = ({ card, user }: ProfileProps) => {
 
   return (
     <div>
-      <div>{outputComponent}</div>
+      <Card width={90} padding={"1rem"}>
+        <div style={{ display: 'flex', justifyContent: 'space-around'}}>
+        <div className={classes.title}>
+          {/* TODO set this to be dynamic */}
+          <label>Formulario Para Actualizacion de Informacion de Usuario y Start-up</label>
+        </div>
+        <RemoveButtonComp name={"Salir"} click={exitHandler} marginTop={"0rem"}/>
+        </div>
+
+        </Card>
+
+      <div>
+        <div>{outputComponent}</div>
+      </div>
     </div>
   );
 };
