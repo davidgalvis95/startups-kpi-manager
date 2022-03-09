@@ -25,28 +25,6 @@ export interface StartUpBodyRowContent {
   affiliationDate: string;
 }
 
-export interface ImportantKpi {
-    name: string;
-    value: number;
-    und: string;
-}
-
-export interface KpiAttribute {
-  name: string;
-  values: number[];
-}
-
-export interface Kpi {
-  name: string;
-  und: string;
-  labelType: string;
-  total: number[];
-  labels: string[];
-  chartTypes: string[];
-  attributesGroupName: string;
-  attributes: KpiAttribute[];
-}
-
 export interface ElementsToCharData {
   name: string;
   values: number[];

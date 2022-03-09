@@ -1,12 +1,9 @@
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import allActions from "../store/actions/allActions";
-import { KpiActions, PymeActions } from "../store/actions/ActionTypes";
-import { StartUpType } from "../types/userPymeTypes";
+import { KpiActions } from "../store/actions/ActionTypes";
 import { kpiStartUpManagerAxios } from "../config/axios/KpiStartUpManagerAxios";
-import { SamplePymes } from "../assets/sample-data/SamplePymes";
 import { SampleKpis } from "../assets/sample-data/SampleKpis";
-import { PymeRelatedRequestImpl } from "../store/actions/pymeActions";
 import { Kpi, PymeKpiWrapper } from "../types/Kpi";
 import { KpiRelatedRequestImpl } from "../store/actions/kpiActions";
 

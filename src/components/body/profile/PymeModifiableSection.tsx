@@ -8,6 +8,8 @@ import { StartUp } from "../../../types/StartUp";
 import { AccessRights } from "./AccessRights";
 import { BiEdit } from "react-icons/bi";
 import AddButtonComp from "../../../hoc/add-button/AddButtonComp";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/reducers/rootReducer";
 
 interface PymeModifiableSectionProps {
   pymeData: StartUpType;
@@ -28,6 +30,9 @@ const PymeModifiableSection = ({
   const [city, setCity] = useState<string>(pymeData?.city || "");
   const [country, setCountry] = useState<string>(pymeData?.country || "");
   const [phone, setPhone] = useState<string>(pymeData?.phone || "");
+  const { pymeOperationLoading } = useSelector(
+    (state: RootState) => state?.pymeReducer
+  );
 
   const handleEdition = (): void => {
     setIsInEditableMode(!isInEditableMode);
@@ -147,7 +152,11 @@ const PymeModifiableSection = ({
       </Grid>
       {!isInEditableMode ? (
         <div className={classes.imageUploadCont}>
-          <AddButtonComp name={"Guardar Datos"} click={saveData} />
+          {pymeOperationLoading ? (
+            <div className={classes.ldsSpinnerSmall}></div>
+          ) : (
+            <AddButtonComp name={"Guardar Datos"} click={saveData} />
+          )}
         </div>
       ) : null}
     </div>

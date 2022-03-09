@@ -36,6 +36,10 @@ const NewPymeAccountForm = () => {
     (state: RootState) => state?.pictureChangeReducer
   );
 
+  const { pymeOperationLoading } = useSelector(
+    (state: RootState) => state?.pymeReducer
+  );
+
   const { uploadImagePointer } = useFileUploadAxios();
 
   const uploadPhoto = (files: FileList | null): void => {
@@ -140,7 +144,11 @@ const NewPymeAccountForm = () => {
         </Grid>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <RemoveButtonComp name={"Salir"} click={exitHandler} />
-          <AddButtonComp name={"Guardar Datos"} click={saveData} />
+          {pymeOperationLoading ? (
+            <div className={classes.ldsSpinnerSmall}></div>
+          ) : (
+            <AddButtonComp name={"Guardar Datos"} click={saveData} />
+          )}
         </div>
       </div>
     </Card>

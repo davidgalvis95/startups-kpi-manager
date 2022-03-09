@@ -6,9 +6,11 @@ import CustomInputComp from "../../../hoc/custom-input/CustomInputComp";
 import CustomCheckBoxComp from "../../../hoc/checkbox-button/CustomCheckBoxComp";
 import RemoveButtonComp from "../../../hoc/remove-button/RemoveButtonComp";
 import AddButtonComp from "../../../hoc/add-button/AddButtonComp";
-import { Kpi, KpiAttribute } from "../../../types/types";
+import { Kpi, KpiAttribute } from "../../../types/Kpi";
 import { useEffect, useState } from "react";
 import { newKpiVariablesValues } from "./CreateNewKpi";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/reducers/rootReducer";
 
 interface KpiDataUploadingProps {
   kpis?: Kpi[];
@@ -45,23 +47,34 @@ const defaultKpi: Kpi = {
   chartTypes: [],
   attributesGroupName: "",
   attributes: [],
+  mainKpi: false,
 };
 
-const KpiDataUploading = ({ kpis }: KpiDataUploadingProps) => {
+const KpiDataUploading = () => {
+  const { kpis } = useSelector((state: RootState) => state?.kpiReducer);
+
   const [currentKpi, setCurrentKpi] = useState<Kpi>(defaultKpi);
   const [currentYear, setCurrentYear] = useState<string>("");
   const [currentMonth, setCurrentMonth] = useState<string>("");
   const [currentVariables, setCurrentVariables] = useState<string[]>([]);
   const [newVariableValue, setNewVariableValue] = useState<string>("");
   const [selectedValueIndex, setSelectedValueIndex] = useState<number>(-1);
-  const [kpisForDataUpload, setKpisForDataUpload] = useState<Kpi[]>(
-    kpis || [defaultKpi]
-  );
+  const [kpisForDataUpload, setKpisForDataUpload] = useState<Kpi[]>([
+    defaultKpi,
+  ]);
   const [years, setYears] = useState<string[]>([]);
   const [kpiLabelsOfDateType, setKpiLabelsOfDateType] = useState<
     boolean | undefined
   >(false);
   const [newVarComparative, setNewVarComparative] = useState<boolean>(false);
+
+  const { kpiOperationLoading } = useSelector(
+    (state: RootState) => state?.kpiReducer
+  );
+
+  useEffect(() => {
+    setKpisForDataUpload(kpis?.allKpisDetailed || []);
+  }, [kpis?.allKpisDetailed, kpis]);
 
   useEffect(() => {
     const yearsArray: string[] = setRagneOfYears();
@@ -311,7 +324,11 @@ const KpiDataUploading = ({ kpis }: KpiDataUploadingProps) => {
           {/* Create attribute component */}
 
           <div className={classes.saveButtonWrapper}>
-            <AddButtonComp name={"Guardar Datos"} click={saveNewData} />
+            {kpiOperationLoading ? (
+              <div className={classes.ldsSpinnerSmall}></div>
+            ) : (
+              <AddButtonComp name={"Guardar Datos"} click={saveNewData} />
+            )}
           </div>
         </div>
       </Card>

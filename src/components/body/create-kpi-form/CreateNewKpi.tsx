@@ -7,7 +7,9 @@ import CustomCheckBoxComp from "../../../hoc/checkbox-button/CustomCheckBoxComp"
 import RemoveButtonComp from "../../../hoc/remove-button/RemoveButtonComp";
 import AddButtonComp from "../../../hoc/add-button/AddButtonComp";
 import React, { useState } from "react";
-import { Kpi, KpiAttribute } from "../../../types/types";
+import { Kpi, KpiAttribute } from "../../../types/Kpi";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/reducers/rootReducer";
 
 const defaultKpi: Kpi = {
   name: "",
@@ -18,6 +20,7 @@ const defaultKpi: Kpi = {
   chartTypes: [],
   attributesGroupName: "",
   attributes: [],
+  mainKpi: false,
 };
 
 export const newKpiVariablesValues = [
@@ -30,7 +33,9 @@ const CreateNewKpi = (props: any) => {
   const [attributes, setAttributes] = useState<string[]>([]);
   const [kpiData, setKpiData] = useState<Kpi>(defaultKpi);
 
-
+  const { kpiOperationLoading } = useSelector(
+    (state: RootState) => state?.kpiReducer
+  );
 
   const saveInfoHandler = () => {
     const kpiDataCopy: Kpi = {
@@ -221,6 +226,11 @@ const CreateNewKpi = (props: any) => {
               name={"Guardar Datos"}
               click={(e: any) => saveInfoHandler()}
             />
+            {kpiOperationLoading ? (
+              <div className={classes.ldsSpinnerSmall}></div>
+            ) : (
+              <AddButtonComp name={"Guardar Datos"} click={saveInfoHandler} />
+            )}
           </div>
         </div>
       </Card>

@@ -17,27 +17,48 @@ interface StartupTableProps {
 
 const numberOfElementsPerPage: number = 13;
 
-const StartupTable = ({ displayContentArray }: StartupTableProps) => {
-  const [contentArray, setContentArray] = useState<StartUpBodyRowContent[]>(displayContentArray);
+const StartupTable = () => {
+  const { pymes } = useSelector((state: RootState) => state?.pymeReducer);
+  const [displayContentArray, setDisplayContentArray] = useState<
+    StartUpBodyRowContent[]
+  >([]);
+  const [contentArray, setContentArray] =
+    useState<StartUpBodyRowContent[]>(displayContentArray);
   const [numberOfPageButtons, setNumberOfPageButtons] =
     useState<JSX.Element[]>();
   const [rowsContentArray, setRowsContentArray] = useState<
     StartUpBodyRowContent[]
   >(contentArray.filter((el, i) => i < numberOfElementsPerPage));
   const [seeKpis, setSeeKpis] = useState<boolean>(false);
-  // const {kpisData, isLoading} = useSelector((state: RootState) => state?.sideNavBarStatusReducer);
-  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const newContent: StartUpBodyRowContent[] =
+      pymes?.map((pyme): StartUpBodyRowContent => {
+        return {
+          id: pyme.pymeId,
+          photoUrl: pyme.photoUrl,
+          name: pyme.name,
+          status: pyme.active.toString(),
+          address: pyme.address,
+          city: pyme.city,
+          //TODO add this date to the pyme object and save this info in the pyme creation account
+          affiliationDate: new Date().toISOString(),
+        };
+      }) || [];
+
+    setDisplayContentArray(newContent);
+  }, [pymes]);
 
   useEffect(() => {
     setSeeKpis(false);
-  },[]);
+  }, []);
 
   useEffect(() => {
     pages();
     switchPageHandler(1);
   }, [contentArray.length]);
 
-  const pages = ():void => {
+  const pages = (): void => {
     const numberOfPages = Math.ceil(
       contentArray.length / numberOfElementsPerPage
     );
@@ -56,7 +77,7 @@ const StartupTable = ({ displayContentArray }: StartupTableProps) => {
     setNumberOfPageButtons(buttons);
   };
 
-  const switchPageHandler = (pageNumber: number):void => {
+  const switchPageHandler = (pageNumber: number): void => {
     const fromElement = numberOfElementsPerPage * (pageNumber - 1);
     const toElement = numberOfElementsPerPage * pageNumber;
     setRowsContentArray(
@@ -64,19 +85,20 @@ const StartupTable = ({ displayContentArray }: StartupTableProps) => {
     );
   };
 
-  const handleFilterContent = (e:any) => {
-    const newArray: StartUpBodyRowContent[]= [...displayContentArray].filter(c=>c.name.toLowerCase().includes(`${e.target.value.toLowerCase()}`));
+  const handleFilterContent = (e: any) => {
+    const newArray: StartUpBodyRowContent[] = [...displayContentArray].filter(
+      (c) => c.name.toLowerCase().includes(`${e.target.value.toLowerCase()}`)
+    );
     setContentArray(newArray);
-  }
+  };
 
   const handleCreateAccount = () => {};
 
-
-  const handleClickToViewKpis = (id:string) => {
+  const handleClickToViewKpis = (id: string) => {
     //Send a request to get the KPIs from DB
     // dispatch(allActions.sendSetSideBarStatus.sendSetSideBarStatus({type:isOpen ? "COLLAPSE" : "OPEN"}));
     setSeeKpis(true);
-  }
+  };
   return (
     <div>
       <Card width={90} padding={"1rem"}>
@@ -114,14 +136,22 @@ const StartupTable = ({ displayContentArray }: StartupTableProps) => {
             </thead>
             <tbody>
               {rowsContentArray.map((content) => (
-                <StartupTableBodyRow key={content.id} cellsContent={content} click={(id:string) => handleClickToViewKpis(id)}/>
+                <StartupTableBodyRow
+                  key={content.id}
+                  cellsContent={content}
+                  click={(id: string) => handleClickToViewKpis(id)}
+                />
               ))}
             </tbody>
           </table>
-          {contentArray.length?<div className={classes.buttonsWrapper}>
-            <p style={{ color: "#fff", marginRight: "8px" }}>Page Navigation</p>
-            {numberOfPageButtons}
-          </div>:null}
+          {contentArray.length ? (
+            <div className={classes.buttonsWrapper}>
+              <p style={{ color: "#fff", marginRight: "8px" }}>
+                Page Navigation
+              </p>
+              {numberOfPageButtons}
+            </div>
+          ) : null}
         </div>
       </Card>
     </div>

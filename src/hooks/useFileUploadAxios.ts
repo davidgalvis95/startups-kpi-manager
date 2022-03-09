@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { cloudinaryAxios } from "../config/axios/CloudinaryAxios";
 import allActions from "../store/actions/allActions";
-import {FileUploadActions} from "../store/actions/ActionTypes"
+
 
 const FORM_DATA_UPLOAD_PRESET_VALUE = "yiqjdpmj";
 const FORM_DATA_UPLOAD_PRESET_PREFIX = "upload_preset";
@@ -16,7 +16,7 @@ const useFileUploadAxios = () => {
     const upLoadImageActions = allActions.pictureChangeActions;
     console.log(file);
     dispatch(
-      upLoadImageActions.uploadPictureAction({ type: FileUploadActions.UPLOADING, url: "" })
+      upLoadImageActions.uploadPictureAction({ type: "UPLOADING", url: "" })
     );
     console.log(file);
 
@@ -31,7 +31,7 @@ const useFileUploadAxios = () => {
       const response = await cloudinaryAxios.post("", formData);
       dispatch(
         upLoadImageActions.pictureUploadedAction({
-          type: FileUploadActions.UPLOADED,
+          type: "UPLOADED",
           url: response.data.url,
         })
       );

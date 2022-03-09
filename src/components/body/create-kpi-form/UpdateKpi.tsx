@@ -6,9 +6,11 @@ import CustomInputComp from "../../../hoc/custom-input/CustomInputComp";
 import CustomCheckBoxComp from "../../../hoc/checkbox-button/CustomCheckBoxComp";
 import RemoveButtonComp from "../../../hoc/remove-button/RemoveButtonComp";
 import AddButtonComp from "../../../hoc/add-button/AddButtonComp";
-import { Kpi, KpiAttribute } from "../../../types/types";
+import { Kpi, KpiAttribute } from "../../../types/Kpi";
 import { useEffect, useState } from "react";
 import { newKpiVariablesValues } from "./CreateNewKpi";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/reducers/rootReducer";
 
 interface UpdateKpiProps {
   kpis?: Kpi[];
@@ -23,6 +25,7 @@ const defaultKpi: Kpi = {
   chartTypes: [],
   attributesGroupName: "",
   attributes: [],
+  mainKpi: false,
 };
 
 const UpdateKpi = ({ kpis }: UpdateKpiProps) => {
@@ -32,6 +35,10 @@ const UpdateKpi = ({ kpis }: UpdateKpiProps) => {
   );
   const [attributeNames, setAttributeNames] = useState<string[]>([]);
   const [kpiChartTypes, setKpiChartTypes] = useState<string[]>([]);
+
+  const { kpiOperationLoading } = useSelector(
+    (state: RootState) => state?.kpiReducer
+  );
 
   useEffect(() => {
     const attributesArray: string[] = [];
@@ -121,7 +128,7 @@ const UpdateKpi = ({ kpis }: UpdateKpiProps) => {
     setAttributeNames(
       e.target.checked
         ? currentKpi.attributes.length > 0
-          ? currentKpi.attributes.map(a => a.name)
+          ? currentKpi.attributes.map((a) => a.name)
           : [""]
         : []
     );
@@ -266,10 +273,11 @@ const UpdateKpi = ({ kpis }: UpdateKpiProps) => {
           ) : null}
           {/* Create attribute component */}
           <div className={classes.saveButtonWrapper}>
-            <AddButtonComp
-              name={"Guardar Datos"}
-              click={() => saveInfoHandler()}
-            />
+            {kpiOperationLoading ? (
+              <div className={classes.ldsSpinnerSmall}></div>
+            ) : (
+              <AddButtonComp name={"Guardar Datos"} click={saveInfoHandler} />
+            )}
           </div>
         </div>
       </Card>

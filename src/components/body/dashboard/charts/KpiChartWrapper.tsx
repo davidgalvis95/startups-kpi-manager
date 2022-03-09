@@ -1,11 +1,8 @@
 import { Grid } from "@mui/material";
 import React, { createContext, useState } from "react";
 import Card from "../../../../hoc/Card";
-import {
-  ElementsToChar,
-  ElementsToCharData,
-  Kpi,
-} from "../../../../types/types";
+import { ElementsToChar, ElementsToCharData } from "../../../../types/types";
+import { Kpi } from "../../../../types/Kpi";
 import CustomSelectComp from "./CustomSelect";
 import classes from "./KpiChartWrapper.module.css";
 import KpiChartLogicHandler from "./KpiChartLogicHandler";

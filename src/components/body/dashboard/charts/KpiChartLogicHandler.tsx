@@ -1,8 +1,6 @@
-import {
-  ElementsToChar,
-  ElementsToCharData,
-  Kpi,
-} from "../../../../types/types";
+import { KpiAttribute } from "../../../../types/Kpi";
+import { ElementsToChar, ElementsToCharData } from "../../../../types/types";
+import { Kpi } from "../../../../types/Kpi";
 import KpiBarChart from "./bar-chart/KpiBarChart";
 import ChartTypes from "./ChartTypes";
 import KpiLineChartWrapper from "./KpiChartWrapper";
@@ -11,7 +9,10 @@ import KpiRingChart from "./ring-chart/KpiRingChart";
 import KpiStackedBarChart from "./stacked-bar-chart/KpiStackedBarChart";
 
 class KpiChartLogicHandler {
-  private static charts: Map<string, JSX.Element> = new Map<ChartTypes, JSX.Element>();
+  private static charts: Map<string, JSX.Element> = new Map<
+    ChartTypes,
+    JSX.Element
+  >();
   private static instance: KpiChartLogicHandler;
   member: number;
 
@@ -22,7 +23,10 @@ class KpiChartLogicHandler {
     this.member = 0;
     KpiChartLogicHandler.charts.set(ChartTypes.BAR, <KpiBarChart />);
     KpiChartLogicHandler.charts.set(ChartTypes.LINE, <KpiLineChart />);
-    KpiChartLogicHandler.charts.set(ChartTypes.STACKED_BAR, <KpiStackedBarChart />);
+    KpiChartLogicHandler.charts.set(
+      ChartTypes.STACKED_BAR,
+      <KpiStackedBarChart />
+    );
     KpiChartLogicHandler.charts.set(ChartTypes.RING, <KpiRingChart />);
   }
 
@@ -32,17 +36,19 @@ class KpiChartLogicHandler {
     return KpiChartLogicHandler.instance;
   }
 
-  drawChartsFromChartTypesArray(chartTypes:string[], kpi:Kpi):JSX.Element[]{
-    return chartTypes.map((chartType: string):JSX.Element => {
-      return(<KpiLineChartWrapper
-        key={chartType}
-        kpi={kpi}
-        chartType={chartType as ChartTypes}
-      />);
+  drawChartsFromChartTypesArray(chartTypes: string[], kpi: Kpi): JSX.Element[] {
+    return chartTypes.map((chartType: string): JSX.Element => {
+      return (
+        <KpiLineChartWrapper
+          key={chartType}
+          kpi={kpi}
+          chartType={chartType as ChartTypes}
+        />
+      );
     });
   }
 
-  getChartToPlot(chartType:ChartTypes):JSX.Element{
+  getChartToPlot(chartType: ChartTypes): JSX.Element {
     return KpiChartLogicHandler.charts.get(chartType)!;
   }
 
@@ -65,7 +71,7 @@ class KpiChartLogicHandler {
       elementToChar = {
         labels: kpi?.labels,
         und: kpi?.und,
-        data: kpi?.attributes.map((attribute) => {
+        data: kpi?.attributes.map((attribute: KpiAttribute) => {
           return { name: attribute?.name, values: attribute?.values };
         }),
       };
@@ -82,7 +88,7 @@ class KpiChartLogicHandler {
       ...kpiToFilter,
       total: kpiToFilter?.total?.slice(fromIndex, toIndex + 1),
       labels: kpiToFilter?.labels?.slice(fromIndex, toIndex + 1),
-      attributes: kpiToFilter?.attributes?.map((a) => {
+      attributes: kpiToFilter?.attributes?.map((a: KpiAttribute) => {
         return {
           ...a,
           values: a.values.slice(fromIndex, toIndex + 1),

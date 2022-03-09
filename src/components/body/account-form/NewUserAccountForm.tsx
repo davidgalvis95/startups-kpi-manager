@@ -3,7 +3,6 @@ import { Grid } from "@mui/material";
 import { useSelector } from "react-redux";
 import Card from "../../../hoc/Card";
 import classes from "./NewAccountForm.module.css";
-import CustomButton from "../../../hoc/CustomButton";
 import { RootState } from "../../../store/reducers/rootReducer";
 import CustomInputComp from "../../../hoc/custom-input/CustomInputComp";
 import { StartUpType, UserDataType } from "../../../types/userPymeTypes";
@@ -31,7 +30,8 @@ interface NewUserAccountFormProps {
   pymes?: StartUpType[];
 }
 
-const NewUserAccountForm = ({ pymes }: NewUserAccountFormProps) => {
+const NewUserAccountForm = () => {
+  const { pymes } = useSelector((state: RootState) => state?.pymeReducer);
   const [firstName, setFirstName] = useState<string>(defaultUser.firstName);
   const [lastName, setLastName] = useState<string>(defaultUser.lastName);
   const [email, setEmail] = useState<string>(defaultUser.emailAddress);
@@ -44,6 +44,10 @@ const NewUserAccountForm = ({ pymes }: NewUserAccountFormProps) => {
   const [pymesToDisplay, setPymesToDisplay] = useState<string[]>([]);
   const [pyme, setPyme] = useState<string>();
   var pattern = /^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;
+
+  const { userOperationLoading } = useSelector(
+    (state: RootState) => state?.userReducer
+  );
 
   useEffect(() => {
     setPymesToDisplay(pymes ? pymes.map((pyme) => pyme.name) : []);
@@ -190,7 +194,11 @@ const NewUserAccountForm = ({ pymes }: NewUserAccountFormProps) => {
         </Grid>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <RemoveButtonComp name={"Salir"} click={exitHandler} />
-          <AddButtonComp name={"Guardar Datos"} click={saveData} />
+          {userOperationLoading ? (
+            <div className={classes.ldsSpinnerSmall}></div>
+          ) : (
+            <AddButtonComp name={"Guardar Datos"} click={saveData} />
+          )}
         </div>
       </div>
     </Card>

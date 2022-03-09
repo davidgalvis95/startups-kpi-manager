@@ -6,6 +6,8 @@ import { StartUpType, UserDataType } from "../../../types/userPymeTypes";
 import CustomInputComp from "../../../hoc/custom-input/CustomInputComp";
 import User from "../../../types/User";
 import AddButtonComp from "../../../hoc/add-button/AddButtonComp";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/reducers/rootReducer";
 
 interface UserModifiableSectionProps {
   userData: UserDataType;
@@ -23,6 +25,9 @@ const UserModifiableSection = ({ userData }: UserModifiableSectionProps) => {
   );
   const [address, setAddress] = useState<string>(userData?.address || "");
   const [phone, setPhone] = useState<string>(userData?.phone || "");
+  const { userOperationLoading } = useSelector(
+    (state: RootState) => state?.userReducer
+  );
 
   const saveData = (): void => {
     const newUser: UserDataType = new User(
@@ -128,7 +133,11 @@ const UserModifiableSection = ({ userData }: UserModifiableSectionProps) => {
       </Grid>
       {!isInEditableMode ? (
         <div className={classes.imageUploadCont}>
-          <AddButtonComp name={"Guardar Datos"} click={saveData} />
+          {userOperationLoading ? (
+            <div className={classes.ldsSpinnerSmall}></div>
+          ) : (
+            <AddButtonComp name={"Guardar Datos"} click={saveData} />
+          )}
         </div>
       ) : null}
     </div>

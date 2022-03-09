@@ -1,12 +1,14 @@
 import { Grid } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Card from "../../../hoc/Card";
 import CustomButton from "../../../hoc/CustomButton";
 import KpiLineChartWrapper from "./charts/KpiChartWrapper";
 import classes from "./Dashboard.module.css";
-import { sampleDataSet } from "../../../assets/sample-data/BarLineChartDataset";
+import { SampleKpis as sampleDataSet } from "../../../assets/sample-data/SampleKpis";
 import ChartTypes from "./charts/ChartTypes";
-import { ImportantKpi, Kpi } from "../../../types/types";
+import { ImportantKpi, Kpi } from "../../../types/Kpi";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/reducers/rootReducer";
 
 const drawKpiChartsWrapper = (
   chartTypes: string[],
@@ -66,8 +68,20 @@ const drawImportantKpis = (kpis: ImportantKpi[]): JSX.Element[] => {
 };
 
 const Dashboard = () => {
-  const importantKpis: ImportantKpi[] = sampleDataSet.importantKpis;
-  const kpis: Kpi[] = sampleDataSet.allKpisDetailed;
+  const { kpi, kpis } = useSelector((state: RootState) => state?.kpiReducer);
+  const [importantKpis, setImportantKpis] = useState<ImportantKpi[]>([]);
+  const [kpisDetails, setKpisDetails] = useState<Kpi[]>([]);
+
+  useEffect(() => {
+    setKpisDetails(kpis?.allKpisDetailed || []);
+  }, [kpis?.importantKpis, kpis]);
+
+  useEffect(() => {
+    setImportantKpis(kpis?.importantKpis || []);
+  }, [kpis?.allKpisDetailed, kpis]);
+
+  // const importantKpis: ImportantKpi[] = sampleDataSet.importantKpis;
+  // const kpis: Kpi[] = sampleDataSet.allKpisDetailed;
   //TODO use reducer to get data from company
 
   const createKpiHandler = () => {};
@@ -93,7 +107,7 @@ const Dashboard = () => {
         <Grid container>{drawImportantKpis(importantKpis)}</Grid>
       </div>
       <div className={classes.dashboardChartsWrapper}>
-        {drawKpisAsCharts(kpis)}
+        {drawKpisAsCharts(kpisDetails)}
       </div>
     </div>
   );

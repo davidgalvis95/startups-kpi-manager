@@ -12,7 +12,6 @@ import { RootState } from "../../../store/reducers/rootReducer";
 import RemoveButtonComp from "../../../hoc/remove-button/RemoveButtonComp";
 
 interface ProfileProps {
-  card: SideBarMenuCard;
   user: UserDataType;
 }
 
@@ -41,9 +40,13 @@ const defualtUser: UserDataType = {
   },
 };
 
-const Profile = ({ card, user }: ProfileProps) => {
+const Profile = () => {
   const { isLoading, imageUrl } = useSelector(
     (state: RootState) => state?.pictureChangeReducer
+  );
+
+  const { user } = useSelector(
+    (state: RootState) => state?.userReducer
   );
 
   const { uploadImagePointer } = useFileUploadAxios();
@@ -103,14 +106,14 @@ const Profile = ({ card, user }: ProfileProps) => {
       <Grid item xs={12} sm={12} md={6}>
         <div>
           <Card width={80} padding={"1rem"}>
-            <UserModifiableSection userData={user} />
+            <UserModifiableSection userData={user!} />
           </Card>
         </div>
         <div>
           <Card width={80} padding={"1rem"}>
             <PymeModifiableSection
-              pymeData={user.pyme}
-              accessRights={user.rights}
+              pymeData={user!.pyme}
+              accessRights={user!.rights}
             />
           </Card>
         </div>
