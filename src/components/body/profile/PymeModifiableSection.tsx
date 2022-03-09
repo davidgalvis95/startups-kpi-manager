@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Grid } from "@mui/material";
 import classes from "./ProfileModifiableSection.module.css";
-import { StartUpType } from "../../../types/userTypes";
+import { StartUpType } from "../../../types/userPymeTypes";
 import CustomInputComp from "../../../hoc/custom-input/CustomInputComp";
 import CustomCheckBoxComp from "../../../hoc/checkbox-button/CustomCheckBoxComp";
 import { StartUp } from "../../../types/StartUp";

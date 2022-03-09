@@ -76,10 +76,10 @@ function App() {
         }
       >
         <TopNavBarMenu photoUrl={card.photoUrl} />
-        <Profile card={card} user={SampleUser}/>
+        {/* <Profile card={card} user={SampleUser}/> */}
         {/* <StartupTable displayContentArray={startupsContent}/> */}
         {/* <NewPymeAccountForm /> */}
-        {/* <NewUserAccountForm pymes={SamplePymes}/> */}
+        <NewUserAccountForm pymes={SamplePymes}/>
         {/* <Dashboard/> */}
         {/* <CreateNewKpi/> */}
         {/* <UpdateKpi kpis={kpis}/> */}

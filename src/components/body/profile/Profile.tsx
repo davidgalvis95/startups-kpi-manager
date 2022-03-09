@@ -5,7 +5,7 @@ import { SideBarMenuCard } from "../../../types/types";
 import classes from "./Profile.module.css";
 import UserModifiableSection from "./UserModifiableSection";
 import PymeModifiableSection from "./PymeModifiableSection";
-import { UserDataType } from "../../../types/userTypes";
+import { UserDataType } from "../../../types/userPymeTypes";
 import useAxios from "../../../hooks/useAxios";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/reducers/rootReducer";

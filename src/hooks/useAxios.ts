@@ -37,6 +37,23 @@ const useAxios = () => {
     } catch (error) {}
   }, []);
 
+  // const uploadImage = useCallback(async (file: File) => {
+  //   const weatherApiActions = allActions.weatherApiActions;
+  //   dispatch(weatherApiActions.sendRequest());
+ 
+  //   try {
+  //     //const result = await api.get(query);
+  //     const result = await Promise.all([fakeGetApiCall(city), fakeGetApiForecastCall(city)]);
+
+  //     dispatch(weatherApiActions.processResponse((result[0]).data, `${kindOfQuery.CURRENT_WEATHER}${city}`));
+  //     dispatch(weatherApiActions.processResponse((result[1]).data, `${kindOfQuery.HOURS_DAYS_FORECAST}${city}`));
+  //     dispatch(weatherApiActions.stopLoader());
+  //   } catch (error) {
+  //     console.log(error);
+  //     dispatch(weatherApiActions.handleError(error));
+  //   }
+  // }, []);
+
   return {
     uploadImagePointer: uploadImage,
   };

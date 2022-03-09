@@ -5,7 +5,7 @@ import Card from "../../../hoc/Card";
 import classes from "./NewAccountForm.module.css";
 import { RootState } from "../../../store/reducers/rootReducer";
 import CustomInputComp from "../../../hoc/custom-input/CustomInputComp";
-import { StartUpType } from "../../../types/userTypes";
+import { StartUpType } from "../../../types/userPymeTypes";
 import useAxios from "../../../hooks/useAxios";
 import { StartUp } from "../../../types/StartUp";
 import AddButtonComp from "../../../hoc/add-button/AddButtonComp";

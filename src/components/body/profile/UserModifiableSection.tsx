@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Grid } from "@mui/material";
 import classes from "./ProfileModifiableSection.module.css";
 import { BiEdit } from "react-icons/bi";
-import { StartUpType, UserDataType } from "../../../types/userTypes";
+import { StartUpType, UserDataType } from "../../../types/userPymeTypes";
 import CustomInputComp from "../../../hoc/custom-input/CustomInputComp";
 import User from "../../../types/User";
 import AddButtonComp from "../../../hoc/add-button/AddButtonComp";

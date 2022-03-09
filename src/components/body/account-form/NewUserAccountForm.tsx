@@ -6,7 +6,7 @@ import classes from "./NewAccountForm.module.css";
 import CustomButton from "../../../hoc/CustomButton";
 import { RootState } from "../../../store/reducers/rootReducer";
 import CustomInputComp from "../../../hoc/custom-input/CustomInputComp";
-import { StartUpType, UserDataType } from "../../../types/userTypes";
+import { StartUpType, UserDataType } from "../../../types/userPymeTypes";
 import useAxios from "../../../hooks/useAxios";
 import CustomSelectComp from "../../../hoc/dropdown-form-button/CustomSelectComp";
 import UserWithoutPyme from "../../../types/UserWithoutPyme";

@@ -1,4 +1,4 @@
-import { StartUpType, UserDataType } from "../../types/userTypes";
+import { StartUpType, UserDataType } from "../../types/userPymeTypes";
 
 export const SampleUser: UserDataType = {
   id: "30a97c3f-81ec-41bd-822e-a43eb63f60d6",

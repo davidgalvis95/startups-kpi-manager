@@ -1,4 +1,4 @@
-import { StartUpType } from "./userTypes";
+import { StartUpType } from "./userPymeTypes";
 
 export class StartUp implements StartUpType {
   pymeId: string;

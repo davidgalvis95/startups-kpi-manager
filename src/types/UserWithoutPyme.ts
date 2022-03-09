@@ -1,5 +1,5 @@
 import { AccessRights } from "../components/body/profile/AccessRights";
-import { UserDataType } from "./userTypes";
+import { UserDataType } from "./userPymeTypes";
 
 class UserWithoutPyme implements UserDataType {
     id: string;
