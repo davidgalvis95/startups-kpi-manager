@@ -1,13 +1,14 @@
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { cloudinaryAxios } from "../config/CloudinaryAxios";
+import { cloudinaryAxios } from "../config/axios/CloudinaryAxios";
 import allActions from "../store/actions/allActions";
+import {FileUploadActions} from "../store/actions/ActionTypes"
 
 const FORM_DATA_UPLOAD_PRESET_VALUE = "yiqjdpmj";
 const FORM_DATA_UPLOAD_PRESET_PREFIX = "upload_preset";
 const FORM_DATA_FILE_NAME_PREFIX = "file";
 
-const useAxios = () => {
+const useFileUploadAxios = () => {
   const dispatch = useDispatch();
 
   const uploadImage = useCallback(async (file: File) => {
@@ -15,7 +16,7 @@ const useAxios = () => {
     const upLoadImageActions = allActions.pictureChangeActions;
     console.log(file);
     dispatch(
-      upLoadImageActions.uploadPictureAction({ type: "UPLOAD", url: "" })
+      upLoadImageActions.uploadPictureAction({ type: FileUploadActions.UPLOADING, url: "" })
     );
     console.log(file);
 
@@ -30,33 +31,16 @@ const useAxios = () => {
       const response = await cloudinaryAxios.post("", formData);
       dispatch(
         upLoadImageActions.pictureUploadedAction({
-          type: "UPLOADED",
+          type: FileUploadActions.UPLOADED,
           url: response.data.url,
         })
       );
     } catch (error) {}
   }, []);
 
-  // const uploadImage = useCallback(async (file: File) => {
-  //   const weatherApiActions = allActions.weatherApiActions;
-  //   dispatch(weatherApiActions.sendRequest());
- 
-  //   try {
-  //     //const result = await api.get(query);
-  //     const result = await Promise.all([fakeGetApiCall(city), fakeGetApiForecastCall(city)]);
-
-  //     dispatch(weatherApiActions.processResponse((result[0]).data, `${kindOfQuery.CURRENT_WEATHER}${city}`));
-  //     dispatch(weatherApiActions.processResponse((result[1]).data, `${kindOfQuery.HOURS_DAYS_FORECAST}${city}`));
-  //     dispatch(weatherApiActions.stopLoader());
-  //   } catch (error) {
-  //     console.log(error);
-  //     dispatch(weatherApiActions.handleError(error));
-  //   }
-  // }, []);
-
   return {
     uploadImagePointer: uploadImage,
   };
 };
 
-export default useAxios;
+export default useFileUploadAxios;

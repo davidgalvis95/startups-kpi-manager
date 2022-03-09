@@ -6,7 +6,7 @@ import classes from "./NewAccountForm.module.css";
 import { RootState } from "../../../store/reducers/rootReducer";
 import CustomInputComp from "../../../hoc/custom-input/CustomInputComp";
 import { StartUpType } from "../../../types/userPymeTypes";
-import useAxios from "../../../hooks/useAxios";
+import useFileUploadAxios from "../../../hooks/useFileUploadAxios";
 import { StartUp } from "../../../types/StartUp";
 import AddButtonComp from "../../../hoc/add-button/AddButtonComp";
 import RemoveButtonComp from "../../../hoc/remove-button/RemoveButtonComp";
@@ -36,7 +36,7 @@ const NewPymeAccountForm = () => {
     (state: RootState) => state?.pictureChangeReducer
   );
 
-  const { uploadImagePointer } = useAxios();
+  const { uploadImagePointer } = useFileUploadAxios();
 
   const uploadPhoto = (files: FileList | null): void => {
     if (files) {

@@ -10,15 +10,15 @@ export interface KpiRelatedRequest {
 
 export class KpiRelatedRequestImpl implements KpiRelatedRequest {
   type: KpiActions;
-  kpi: Kpi;
-  kpis: PymeKpiWrapper;
+  kpi?: Kpi;
+  kpis?: PymeKpiWrapper;
   errorOnKpiOp?: Error;
 
   constructor(
     public typeOfAction: KpiActions,
-    public incomingKpi: Kpi,
-    public incomingKpis: PymeKpiWrapper,
-    public errorData: Error
+    public incomingKpi: Kpi | undefined,
+    public incomingKpis: PymeKpiWrapper | undefined,
+    public errorData: Error | undefined
   ) {
     this.type = typeOfAction;
     this.kpi = incomingKpi;

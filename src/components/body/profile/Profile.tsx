@@ -6,7 +6,7 @@ import classes from "./Profile.module.css";
 import UserModifiableSection from "./UserModifiableSection";
 import PymeModifiableSection from "./PymeModifiableSection";
 import { UserDataType } from "../../../types/userPymeTypes";
-import useAxios from "../../../hooks/useAxios";
+import useFileUploadAxios from "../../../hooks/useFileUploadAxios";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/reducers/rootReducer";
 import RemoveButtonComp from "../../../hoc/remove-button/RemoveButtonComp";
@@ -46,7 +46,7 @@ const Profile = ({ card, user }: ProfileProps) => {
     (state: RootState) => state?.pictureChangeReducer
   );
 
-  const { uploadImagePointer } = useAxios();
+  const { uploadImagePointer } = useFileUploadAxios();
 
   useEffect(() => {
     const newUser = { ...user, photoUrl: imageUrl };

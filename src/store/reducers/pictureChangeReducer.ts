@@ -1,4 +1,6 @@
 import { PictureChangeState } from "../actions/pictureChangeActions";
+import { FileUploadActions } from "../actions/ActionTypes";
+
 
 interface PictureUploadStatus {
   isLoading: boolean;
@@ -25,9 +27,9 @@ const pictureChangeReducer = (
   action: PictureChangeState
 ): PictureUploadStatus => {
   switch (action.type) {
-    case "UPLOAD":
+    case FileUploadActions.UPLOADING:
       return new PictureUploadStatusImpl(true, "");
-    case "UPLOADED":
+    case FileUploadActions.UPLOADED:
       return new PictureUploadStatusImpl(false, action.url);
     default:
       return defaultState;

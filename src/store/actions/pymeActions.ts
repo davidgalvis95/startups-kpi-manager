@@ -10,15 +10,15 @@ export interface PymeRelatedRequest {
 
 export class PymeRelatedRequestImpl implements PymeRelatedRequest {
   type: PymeActions;
-  pyme: StartUpType;
-  pymes: StartUpType[];
+  pyme?: StartUpType;
+  pymes?: StartUpType[];
   errorOnPymeOp?: Error;
 
   constructor(
     public typeOfAction: PymeActions,
-    public incomingPyme: StartUpType,
-    public incomingPymes: StartUpType[],
-    public errorData: Error
+    public incomingPyme: StartUpType | undefined,
+    public incomingPymes: StartUpType[] | undefined,
+    public errorData: Error | undefined
   ) {
     this.type = typeOfAction;
     this.pyme = incomingPyme;

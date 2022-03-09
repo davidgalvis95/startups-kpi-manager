@@ -10,13 +10,13 @@ export interface UserRelatedRequest {
 
 export class UserRelatedRequestImpl implements UserRelatedRequest {
   type: UserActions;
-  user: UserDataType;
+  user?: UserDataType;
   errorOnUserOp?: Error;
 
   constructor(
     public typeOfAction: UserActions,
-    public incomingUser: UserDataType,
-    public errorData: Error
+    public incomingUser: UserDataType | undefined,
+    public errorData: Error | undefined
   ) {
     this.type = typeOfAction;
     this.user = incomingUser;

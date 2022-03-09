@@ -7,7 +7,7 @@ import CustomButton from "../../../hoc/CustomButton";
 import { RootState } from "../../../store/reducers/rootReducer";
 import CustomInputComp from "../../../hoc/custom-input/CustomInputComp";
 import { StartUpType, UserDataType } from "../../../types/userPymeTypes";
-import useAxios from "../../../hooks/useAxios";
+import useFileUploadAxios from "../../../hooks/useFileUploadAxios";
 import CustomSelectComp from "../../../hoc/dropdown-form-button/CustomSelectComp";
 import UserWithoutPyme from "../../../types/UserWithoutPyme";
 import AddButtonComp from "../../../hoc/add-button/AddButtonComp";
@@ -53,7 +53,7 @@ const NewUserAccountForm = ({ pymes }: NewUserAccountFormProps) => {
     (state: RootState) => state?.pictureChangeReducer
   );
 
-  const { uploadImagePointer } = useAxios();
+  const { uploadImagePointer } = useFileUploadAxios();
 
   const uploadPhoto = (files: FileList | null): void => {
     if (files) {

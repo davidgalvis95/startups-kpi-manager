@@ -1,6 +1,6 @@
 export interface PymeKpiWrapper {
     importantKpis:ImportantKpi[];
-    kpis:Kpi[];
+    allKpisDetailed:Kpi[];
 }
 
 export interface ImportantKpi {

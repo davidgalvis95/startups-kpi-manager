@@ -31,6 +31,6 @@ export enum NavBarActions {
 }
 
 export enum FileUploadActions {
-    UPLOAD = "UPLOAD", 
+    UPLOADED = "UPLOADED", 
     UPLOADING = "UPLOADING",
 }
