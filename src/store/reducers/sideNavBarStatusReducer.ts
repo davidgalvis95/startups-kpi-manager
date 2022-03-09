@@ -1,4 +1,3 @@
-import { color } from "@mui/system";
 import { SideBarStatusRequest } from "../actions/sideNavBarStatus";
 
 interface SideBarStatus {

@@ -3,16 +3,55 @@ import { Grid } from "@mui/material";
 import Card from "../../../hoc/Card";
 import { SideBarMenuCard } from "../../../types/types";
 import classes from "./Profile.module.css";
-import ProfileModifiableSection from "./ProfileModifiableSection";
-import CustomButton from "../../../hoc/CustomButton";
+import UserModifiableSection from "./UserModifiableSection";
+import PymeModifiableSection from "./PymeModifiableSection";
+import { UserDataType } from "../../../types/userTypes";
+import useAxios from "../../../hooks/useAxios";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/reducers/rootReducer";
 
 interface ProfileProps {
   card: SideBarMenuCard;
+  user: UserDataType;
 }
 
-const Profile = ({ card }: ProfileProps) => {
-  // TODO implement this function
-  const uploadPhoto = (): void => {};
+const defualtUser: UserDataType = {
+  id: "30a97c3f-81ec-41bd-822e-a43eb63f60d6",
+  firstName: "",
+  lastName: "",
+  cityOfResidence: "",
+  countryOfResicence: "",
+  address: "",
+  photoUrl: "./assets/images/profile.png",
+  phone: "",
+  emailAddress: "",
+  rights: "",
+  pymeId: "",
+  pyme: {
+    pymeId: "",
+    active: true,
+    name: "",
+    city: "",
+    country: "",
+    address: "",
+    emailAddress: "",
+    photoUrl: "",
+    phone: "",
+  },
+};
+
+const Profile = ({ card, user }: ProfileProps) => {
+  const { isLoading, imageUrl } = useSelector(
+    (state: RootState) => state?.pictureChangeReducer
+  );
+
+  const { uploadImagePointer } = useAxios();
+
+  const uploadPhoto = (files: FileList | null): void => {
+    if (files) {
+      uploadImagePointer(files[0]);
+    }
+  };
 
   const outputComponent = (
     <Grid container>
@@ -20,20 +59,34 @@ const Profile = ({ card }: ProfileProps) => {
         <Grid xs={12}>
           <Card width={80} padding={"1rem"}>
             <div>
-              <div className={classes.photoContainer}>
-                <img
-                  className={classes.profileImage}
-                  src={card.photoUrl}
-                  width="100%"
-                />
+            <div className={classes.photoContainer}>
+              {isLoading ? (
+                <div className={classes.ldsSpinner}></div>
+              ) : (
+                  <img
+                    className={classes.profileImage}
+                    src={imageUrl === "" ? defualtUser.photoUrl : imageUrl}
+                    width="100%"
+                  />
+
+              )}
               </div>
-              <CustomButton
-                clickHandler={() => uploadPhoto()}
-                text={"Cargar Foto"}
-                padding={"8px"}
-                width={"70px"}
-                fontSize={"12px"}
-              />
+              <div className={classes.imageUploadCont}>
+                <div className={classes.fileInput}>
+                  <input
+                    type="file"
+                    id="file"
+                    className={classes.file}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                      uploadPhoto(event.target.files)
+                    }
+                  />
+                  <label>
+                    Cargar Foto
+                    <p className={classes.fileName}></p>
+                  </label>
+                </div>
+              </div>
             </div>
           </Card>
         </Grid>
@@ -41,12 +94,12 @@ const Profile = ({ card }: ProfileProps) => {
       <Grid item xs={12} sm={12} md={6}>
         <div>
           <Card width={80} padding={"1rem"}>
-            <ProfileModifiableSection />
+            <UserModifiableSection userData={user} />
           </Card>
         </div>
         <div>
           <Card width={80} padding={"1rem"}>
-            <ProfileModifiableSection />
+            <PymeModifiableSection pymeData={user.pyme} accessRights={user.rights} />
           </Card>
         </div>
       </Grid>

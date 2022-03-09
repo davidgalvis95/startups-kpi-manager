@@ -1,5 +1,3 @@
-import { request } from "http";
-
 export interface SideBarStatusRequest {
   type: string;
 }

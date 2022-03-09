@@ -1,6 +1,20 @@
 import { styled, TextField } from "@mui/material";
+import { makeStyles, createStyles } from '@mui/styles';
 import React, { useEffect, useState } from "react";
 import classNames from "./CustomInputComp.module.css";
+
+const useStyles = makeStyles(theme => ({
+  container: {
+    display: "flex",
+    flexWrap: "wrap"
+  },
+  inputRoot: {
+    '&$disabled': {
+      color:'red'
+    },
+  },
+  disabled: {}
+}));
 
 interface CustomInputCompProps {
   label: string;
@@ -25,33 +39,37 @@ const CustomInputComp = React.memo(
     const [textValue, setTextValue] = useState<string>("");
     const [textLabel, setTextLabel] = useState<string>("");
 
+
+
+    const classes = useStyles();
+
     useEffect(()=> {
       setTextValue("");
     },[label])
 
-    const CustomTextField = styled(TextField)({
-      input: {
-        "&::placeholder": {
-          color: "#95afc0",
-          fontFamily: "IBM Plex Sans, sans-serif",
-          fontSize: "16px",
-        },
-        "&:hover": {
-          borderColor: "#54a0ff",
-        },
-      },
-      "& .MuiOutlinedInput-root": {
-        "& fieldset": {
-          borderColor: "#00a8ff",
-        },
-        "&:hover fieldset": {
-          borderColor: "#00a8ff",
-        },
-        "&.Mui-focused fieldset": {
-          borderColor: "#00a8ff",
-        },
-      },
-    });
+    // const CustomTextField = styled(TextField)({
+    //   input: {
+    //     "&::placeholder": {
+    //       color: "#95afc0",
+    //       fontFamily: "IBM Plex Sans, sans-serif",
+    //       fontSize: "16px",
+    //     },
+    //     "&:hover": {
+    //       borderColor: "#54a0ff",
+    //     },
+    //   },
+    //   "& .MuiOutlinedInput-root": {
+    //     "& fieldset": {
+    //       borderColor: "#00a8ff",
+    //     },
+    //     "&:hover fieldset": {
+    //       borderColor: "#00a8ff",
+    //     },
+    //     "&.Mui-focused fieldset": {
+    //       borderColor: "#00a8ff",
+    //     },
+    //   },
+    // });
 
     return (
       <div>
@@ -76,6 +94,7 @@ const CustomInputComp = React.memo(
             }
           }}
           InputProps={{
+            classes: { root: classes.inputRoot, disabled: classes.disabled},
             style: {
               textOverflow: "ellipsis",
               whiteSpace: "nowrap",

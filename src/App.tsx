@@ -19,6 +19,7 @@ import CreateNewKpi from "./components/body/create-kpi-form/CreateNewKpi";
 import KpiDataUploading from "./components/body/create-kpi-form/KpiDataUploading";
 import { sampleDataSet } from "./assets/sample-data/BarLineChartDataset"
 import UpdateKpi from "./components/body/create-kpi-form/UpdateKpi";
+import {SampleUser} from "./assets/sample-data/SampleUser"
 
 function App() {
   const sideNavBarStatus = useSelector(
@@ -73,7 +74,7 @@ function App() {
         }
       >
         <TopNavBarMenu photoUrl={card.photoUrl} />
-        <Profile card={card}/>
+        <Profile card={card} user={SampleUser}/>
         {/* <StartupTable displayContentArray={startupsContent}/> */}
         {/* <NewAccountForm /> */}
         {/* <Dashboard/> */}
@@ -88,3 +89,4 @@ function App() {
 }
 
 export default App;
+// yiqjdpmj
