@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { Grid } from "@mui/material";
 import classes from "./ProfileModifiableSection.module.css";
 import { BiEdit } from "react-icons/bi";
-import { StartUpType, UserDataType } from "../../../types/userPymeTypes";
+import { UserDataType } from "../../../types/userPymeTypes";
 import CustomInputComp from "../../../hoc/custom-input/CustomInputComp";
 import User from "../../../types/User";
 import AddButtonComp from "../../../hoc/add-button/AddButtonComp";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/reducers/rootReducer";
+import useUserAxios from "../../../hooks/useUserAxios";
 
 interface UserModifiableSectionProps {
   userData: UserDataType;
@@ -29,8 +30,10 @@ const UserModifiableSection = ({ userData }: UserModifiableSectionProps) => {
     (state: RootState) => state?.userReducer
   );
 
+  const { updateUserPointer, startOperationPointer } = useUserAxios();
+
   const saveData = (): void => {
-    const newUser: UserDataType = new User(
+    const newUser: User = new User(
       userData,
       firstName,
       lastName,
@@ -39,8 +42,10 @@ const UserModifiableSection = ({ userData }: UserModifiableSectionProps) => {
       address,
       phone
     );
+    //TODO validate data
     console.log(newUser);
-    //TODO send request to server
+    updateUserPointer(newUser);
+    startOperationPointer();
     handleEdition();
   };
 
@@ -131,7 +136,7 @@ const UserModifiableSection = ({ userData }: UserModifiableSectionProps) => {
           </div>
         </Grid>
       </Grid>
-      {!isInEditableMode ? (
+      {!isInEditableMode && !userOperationLoading ? (
         <div className={classes.imageUploadCont}>
           {userOperationLoading ? (
             <div className={classes.ldsSpinnerSmall}></div>

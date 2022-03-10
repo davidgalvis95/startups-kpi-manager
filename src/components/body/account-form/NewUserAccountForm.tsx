@@ -11,6 +11,7 @@ import CustomSelectComp from "../../../hoc/dropdown-form-button/CustomSelectComp
 import UserWithoutPyme from "../../../types/UserWithoutPyme";
 import AddButtonComp from "../../../hoc/add-button/AddButtonComp";
 import RemoveButtonComp from "../../../hoc/remove-button/RemoveButtonComp";
+import useUserAxios from "../../../hooks/useUserAxios";
 
 const defaultUser: UserDataType = {
   id: "",
@@ -49,6 +50,9 @@ const NewUserAccountForm = () => {
     (state: RootState) => state?.userReducer
   );
 
+  const { uploadImagePointer } = useFileUploadAxios();
+  const { createUserPointer, startOperationPointer } = useUserAxios();
+
   useEffect(() => {
     setPymesToDisplay(pymes ? pymes.map((pyme) => pyme.name) : []);
   }, []);
@@ -56,8 +60,6 @@ const NewUserAccountForm = () => {
   const { isLoading, imageUrl } = useSelector(
     (state: RootState) => state?.pictureChangeReducer
   );
-
-  const { uploadImagePointer } = useFileUploadAxios();
 
   const uploadPhoto = (files: FileList | null): void => {
     if (files) {
@@ -74,7 +76,7 @@ const NewUserAccountForm = () => {
 
   const saveData = (): void => {
     if (password === passwordConfirmation && pattern.test(password)) {
-      const user: UserDataType = new UserWithoutPyme(
+      const user: UserWithoutPyme = new UserWithoutPyme(
         { ...defaultUser, photoUrl: imageUrl, pymeId: pyme! },
         firstName,
         lastName,
@@ -87,6 +89,9 @@ const NewUserAccountForm = () => {
       );
 
       console.log(user);
+      //TODO Validate all the fields
+      createUserPointer(user);
+      startOperationPointer();
       // //TODO send request to server
     } else {
       //TODO show this in a modal

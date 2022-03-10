@@ -9,7 +9,7 @@ import CustomButton from "../../../hoc/CustomButton";
 import { range } from "../../../util/RangeGenerator";
 import CustomInputComp from "../../../hoc/custom-input/CustomInputComp";
 import { RootState } from "../../../store/reducers/rootReducer";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 interface StartupTableProps {
   displayContentArray: StartUpBodyRowContent[];

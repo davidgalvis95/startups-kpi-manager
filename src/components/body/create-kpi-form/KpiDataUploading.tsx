@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { newKpiVariablesValues } from "./CreateNewKpi";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/reducers/rootReducer";
+import useKpiAxios from "../../../hooks/useKpiAxios";
 
 interface KpiDataUploadingProps {
   kpis?: Kpi[];
@@ -72,6 +73,9 @@ const KpiDataUploading = () => {
     (state: RootState) => state?.kpiReducer
   );
 
+  const { updateKpiPointer, startOperationPointer } = useKpiAxios();
+
+
   useEffect(() => {
     setKpisForDataUpload(kpis?.allKpisDetailed || []);
   }, [kpis?.allKpisDetailed, kpis]);
@@ -107,6 +111,8 @@ const KpiDataUploading = () => {
     //TODO Validate Data
     //TODO send api request to save data
     console.log(kpiToPersist);
+    updateKpiPointer(kpiToPersist);
+    startOperationPointer();
   };
 
   const recalculateTotals = (

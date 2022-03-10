@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { newKpiVariablesValues } from "./CreateNewKpi";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/reducers/rootReducer";
+import useKpiAxios from "../../../hooks/useKpiAxios";
 
 interface UpdateKpiProps {
   kpis?: Kpi[];
@@ -39,6 +40,8 @@ const UpdateKpi = ({ kpis }: UpdateKpiProps) => {
   const { kpiOperationLoading } = useSelector(
     (state: RootState) => state?.kpiReducer
   );
+
+  const { updateKpiPointer, startOperationPointer } = useKpiAxios();
 
   useEffect(() => {
     const attributesArray: string[] = [];
@@ -72,6 +75,8 @@ const UpdateKpi = ({ kpis }: UpdateKpiProps) => {
     //TODO Validate all the fields
     //TODO Handle the API request to save the KPI
     console.log(kpiDataCopy);
+    updateKpiPointer(kpiDataCopy);
+    startOperationPointer();
   };
 
   const attributeNameChangeHandler = (e: any, index: number) => {

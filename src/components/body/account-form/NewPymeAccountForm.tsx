@@ -10,6 +10,7 @@ import useFileUploadAxios from "../../../hooks/useFileUploadAxios";
 import { StartUp } from "../../../types/StartUp";
 import AddButtonComp from "../../../hoc/add-button/AddButtonComp";
 import RemoveButtonComp from "../../../hoc/remove-button/RemoveButtonComp";
+import usePymeAxios from "../../../hooks/usePymeAxios";
 
 const defaultPyme: StartUpType = {
   pymeId: "",
@@ -41,6 +42,7 @@ const NewPymeAccountForm = () => {
   );
 
   const { uploadImagePointer } = useFileUploadAxios();
+  const { createPymePointer, startOperationPointer } = usePymeAxios();
 
   const uploadPhoto = (files: FileList | null): void => {
     if (files) {
@@ -60,7 +62,9 @@ const NewPymeAccountForm = () => {
       phone
     );
     console.log(startup);
-    //TODO send request to server
+    //TODO Validate all the fields
+    createPymePointer(startup);
+    startOperationPointer();
   };
 
   const exitHandler = (): void => {

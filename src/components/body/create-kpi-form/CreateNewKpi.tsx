@@ -10,6 +10,7 @@ import React, { useState } from "react";
 import { Kpi, KpiAttribute } from "../../../types/Kpi";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/reducers/rootReducer";
+import useKpiAxios from "../../../hooks/useKpiAxios";
 
 const defaultKpi: Kpi = {
   name: "",
@@ -32,10 +33,14 @@ export const newKpiVariablesValues = [
 const CreateNewKpi = (props: any) => {
   const [attributes, setAttributes] = useState<string[]>([]);
   const [kpiData, setKpiData] = useState<Kpi>(defaultKpi);
+  
 
   const { kpiOperationLoading } = useSelector(
     (state: RootState) => state?.kpiReducer
   );
+
+  const { createKpiPointer, startOperationPointer } = useKpiAxios();
+
 
   const saveInfoHandler = () => {
     const kpiDataCopy: Kpi = {
@@ -45,8 +50,9 @@ const CreateNewKpi = (props: any) => {
       }),
     };
     //TODO Validate all the fields
-    //TODO Handle the API request to save the KPI
     console.log(kpiDataCopy);
+    createKpiPointer(kpiDataCopy);
+    startOperationPointer();
   };
 
   const changeNameAttributeHandler = (e: any): void =>

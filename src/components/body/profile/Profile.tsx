@@ -10,6 +10,8 @@ import useFileUploadAxios from "../../../hooks/useFileUploadAxios";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/reducers/rootReducer";
 import RemoveButtonComp from "../../../hoc/remove-button/RemoveButtonComp";
+import useUserAxios from "../../../hooks/useUserAxios";
+import User from "../../../types/User";
 
 interface ProfileProps {
   user: UserDataType;
@@ -50,10 +52,13 @@ const Profile = () => {
   );
 
   const { uploadImagePointer } = useFileUploadAxios();
+  const { updateUserPointer, startOperationPointer } = useUserAxios();
+
 
   useEffect(() => {
-    const newUser = { ...user, photoUrl: imageUrl };
-    // TODO: send api request to save image
+    const newUser = { ...user, photoUrl: imageUrl } as User;
+    updateUserPointer(newUser);
+    startOperationPointer();
   }, [imageUrl]);
 
   const uploadPhoto = (files: FileList | null): void => {

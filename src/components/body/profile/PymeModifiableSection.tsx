@@ -10,6 +10,7 @@ import { BiEdit } from "react-icons/bi";
 import AddButtonComp from "../../../hoc/add-button/AddButtonComp";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/reducers/rootReducer";
+import usePymeAxios from "../../../hooks/usePymeAxios";
 
 interface PymeModifiableSectionProps {
   pymeData: StartUpType;
@@ -34,6 +35,8 @@ const PymeModifiableSection = ({
     (state: RootState) => state?.pymeReducer
   );
 
+  const { updatePymePointer, startOperationPointer } = usePymeAxios();
+
   const handleEdition = (): void => {
     setIsInEditableMode(!isInEditableMode);
   };
@@ -48,10 +51,11 @@ const PymeModifiableSection = ({
       emailAddress,
       phone
     );
+    //TODO validate data
     console.log(startup);
+    updatePymePointer(startup);
+    startOperationPointer();
     handleEdition();
-
-    //TODO send request to server
   };
 
   return (
@@ -150,7 +154,7 @@ const PymeModifiableSection = ({
           </div>
         </Grid>
       </Grid>
-      {!isInEditableMode ? (
+      {!isInEditableMode && !pymeOperationLoading ? (
         <div className={classes.imageUploadCont}>
           {pymeOperationLoading ? (
             <div className={classes.ldsSpinnerSmall}></div>
