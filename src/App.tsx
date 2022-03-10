@@ -17,18 +17,41 @@ import sideNavBarStatus from "./store/actions/sideNavBarStatus";
 import Dashboard from "./components/body/dashboard/DashBoard";
 import CreateNewKpi from "./components/body/create-kpi-form/CreateNewKpi";
 import KpiDataUploading from "./components/body/create-kpi-form/KpiDataUploading";
-import { sampleDataSet } from "./assets/sample-data/BarLineChartDataset"
+import { sampleDataSet } from "./assets/sample-data/BarLineChartDataset";
 import UpdateKpi from "./components/body/create-kpi-form/UpdateKpi";
-import {SampleUser} from "./assets/sample-data/SamplePymeAndUserData"
-import {SamplePymes} from "./assets/sample-data/SamplePymeAndUserData"
+import { SampleUser } from "./assets/sample-data/SamplePymeAndUserData";
+import { SamplePymes } from "./assets/sample-data/SamplePymeAndUserData";
 import NewUserAccountForm from "./components/body/account-form/NewUserAccountForm";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+} from "react-router-dom";
+import Login from "./components/login/Login";
 
 function App() {
   const sideNavBarStatus = useSelector(
     (state: RootState) => state?.sideNavBarStatusReducer
   );
 
+
+
   useEffect(() => {}, [sideNavBarStatus]);
+
+  const routes = (
+    <Routes>
+      {/* <Route exact path='/login' component={Login} /> */}
+      <Route path="/create-kpi" element={<CreateNewKpi />} />
+      <Route path="/update-kpi" element={<UpdateKpi />} />
+      <Route
+        path="/update-kpi/upload-kpi-data"
+        element={<KpiDataUploading />}
+      />
+      <Route path="/start-up-table" element={<StartupTable />} />
+      <Route path="/profile" element={<Profile />} />
+      <Route path="/dashboard/:id" element={<Dashboard />} />
+    </Routes>
+  );
 
   const kpis = sampleDataSet.allKpisDetailed;
 
@@ -64,31 +87,35 @@ function App() {
     url: "/",
   };
 
-  return (
-    <div>
-      {/* <header> */}
-      <SideBarMenu items={items} card={card} />
-      <div
-        className={
-          sideNavBarStatus.isOpen
-            ? `${classes.bodyApp} ${classes.bodyAppCollapsed}`
-            : `${classes.bodyApp} ${classes.bodyAppExpanded}`
-        }
-      >
-        <TopNavBarMenu photoUrl={card.photoUrl} />
-        {/* <Profile card={card} user={SampleUser}/> */}
-        {/* <StartupTable displayContentArray={startupsContent}/> */}
-        {/* <NewPymeAccountForm /> */}
-        {/* <NewUserAccountForm pymes={SamplePymes}/> */}
-        {/* <Dashboard/> */}
-        {/* <CreateNewKpi/> */}
-        {/* <UpdateKpi kpis={kpis}/> */}
-        {/* <KpiDataUploading kpis={kpis}/> */}
-      </div>
+  // return (
+  //   <div>
+  //     {/* <header> */}
+  //     <SideBarMenu items={items} card={card} />
+  //     <div
+  //       className={
+  //         sideNavBarStatus.isOpen
+  //           ? `${classes.bodyApp} ${classes.bodyAppCollapsed}`
+  //           : `${classes.bodyApp} ${classes.bodyAppExpanded}`
+  //       }
+  //     >
+  //       <TopNavBarMenu photoUrl={card.photoUrl} />
+  //       {/* <Profile card={card} user={SampleUser}/> */}
+  //       {/* <StartupTable displayContentArray={startupsContent}/> */}
+  //       {/* <NewPymeAccountForm /> */}
+  //       {/* <NewUserAccountForm pymes={SamplePymes}/> */}
+  //       {/* <Dashboard/> */}
+  //       {/* <CreateNewKpi/> */}
+  //       {/* <UpdateKpi kpis={kpis}/> */}
+  //       {/* <KpiDataUploading kpis={kpis}/> */}
+  //     </div>
 
-      {/* </header> */}
-    </div>
-  );
+  //     {/* </header> */}
+  //   </div>
+  // );
+
+  return (
+    <Login/>
+  )
 }
 
 export default App;
