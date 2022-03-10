@@ -42,7 +42,7 @@ const NewPymeAccountForm = () => {
   );
 
   const { uploadImagePointer } = useFileUploadAxios();
-  const { createPymePointer, startOperationPointer } = usePymeAxios();
+  const { createPymePointer, startPymeOperationPointer: startOperationPointer } = usePymeAxios();
 
   const uploadPhoto = (files: FileList | null): void => {
     if (files) {

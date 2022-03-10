@@ -8,7 +8,6 @@ $transitionEasing: cubic-bezier(.36,1,.62,.98);
 $background1: #2c3e50;
 $background2: #2c3e50;
 
-// $yellow: #FF6542;
 $yellow: #ED6A5E;
 
 @mixin box-shadow($props...) {
@@ -151,12 +150,44 @@ body {
         }
     }
 }
+
 .profile{
     border-radius: 50%;
     padding: 10px;
     box-sizing: border-box;
     max-width: 300px;
 }
+
+.ldsSpinnerContainer{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.ldsSpinner {
+    border: 16px solid #353b48;
+    border-top: 16px solid #74b9ff;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 0.5s linear infinite;
+    z-index: 10;
+  }
+
+  .ldsSpinnerSmall {
+    border: 7px solid #353b48;
+    border-top: 7px solid #74b9ff;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    animation: spin 0.5s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
 
 @for $i from 1 through 4 {
     .form-group__input:nth-of-type(#{$i}) {
@@ -228,19 +259,19 @@ input[type="checkbox"] {
     }
 }
 
-::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+::-webkit-input-placeholder {
     font-weight: 300;
     color: rgba(255, 2505, 255, .5);
 }
-::-moz-placeholder { /* Firefox 19+ */
+::-moz-placeholder {
     font-weight: 300;
     color: rgba(255, 255, 255, .5);
 }
-:-ms-input-placeholder { /* IE 10+ */
+:-ms-input-placeholder {
     font-weight: 300;
     color: rgba(255, 255, 255, .5);
 }
-:-moz-placeholder { /* Firefox 18- */
+:-moz-placeholder {
     font-weight: 300;
     color: rgba(255, 255, 255, .5);
 }

@@ -52,7 +52,7 @@ const Profile = () => {
   );
 
   const { uploadImagePointer } = useFileUploadAxios();
-  const { updateUserPointer, startOperationPointer } = useUserAxios();
+  const { updateUserPointer, startUserOperationPointer: startOperationPointer } = useUserAxios();
 
 
   useEffect(() => {

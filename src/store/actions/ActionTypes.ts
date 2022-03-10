@@ -34,3 +34,9 @@ export enum FileUploadActions {
     UPLOADED = "UPLOADED", 
     UPLOADING = "UPLOADING",
 }
+
+export enum LoginActions {
+    ACCEPTED = "ACCEPTED", 
+    DECLINED = "DECLINED",
+    ATTEMPT = "ATTEMPT",
+}

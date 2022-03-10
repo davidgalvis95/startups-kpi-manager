@@ -24,3 +24,14 @@ export interface UserDataType {
   pymeId: string;
   pyme?: StartUp;
 }
+
+export interface UserLogin {
+  email: string;
+  password: string;
+}
+
+export interface UserLoginResponse {
+  email: string;
+  userId?: string;
+  valid: boolean;
+}

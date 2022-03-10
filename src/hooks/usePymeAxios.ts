@@ -68,6 +68,28 @@ const usePymeAxios = () => {
     []
   );
 
+  const getPymeBySystemId = useCallback(
+    async (pymeNationalId: string, pymeId: string) => {
+      try {
+        //   const result = await kpiStartUpManagerAxios.get(`/pyme`, { 'headers' : {'X-pymeNationalId':`${pymeNationalId}`, 'X-pymeId':`${pymeId}`}});
+        const result = await getFakePyme(pymeNationalId, pymeId);
+        dispatch(
+          pymeActions.gotPyme(
+            new PymeRelatedRequestImpl(
+              PymeActions.PYME_FETCHED,
+              result.data,
+              undefined,
+              undefined
+            )
+          )
+        );
+      } catch (error: any) {
+        handleError(error);
+      }
+    },
+    []
+  );
+
   const getAllPymes = useCallback(async () => {
     try {
       //   const result = await kpiStartUpManagerAxios.get(`/pymes`);
@@ -126,7 +148,7 @@ const usePymeAxios = () => {
   }, []);
 
   const getFakePyme = (
-    pymeNationalId: string,
+    pymeNationalId?: string,
     pymeId?: string
   ): Promise<PymeContainerObject> => {
     return new Promise((resolve, reject) => {
@@ -162,10 +184,11 @@ const usePymeAxios = () => {
 
   return {
     getPymePointer: getPyme,
+    getPymeBySystemIdPointer: getPymeBySystemId,
     getPymesPointer: getAllPymes,
     createPymePointer: createPyme,
     updatePymePointer: updatePyme,
-    startOperationPointer: startOperation,
+    startPymeOperationPointer: startOperation,
   };
 };
 

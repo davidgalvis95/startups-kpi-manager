@@ -51,7 +51,7 @@ const NewUserAccountForm = () => {
   );
 
   const { uploadImagePointer } = useFileUploadAxios();
-  const { createUserPointer, startOperationPointer } = useUserAxios();
+  const { createUserPointer, startUserOperationPointer: startOperationPointer } = useUserAxios();
 
   useEffect(() => {
     setPymesToDisplay(pymes ? pymes.map((pyme) => pyme.name) : []);

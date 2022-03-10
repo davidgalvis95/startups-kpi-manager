@@ -71,6 +71,7 @@ const Dashboard = () => {
   const { kpi, kpis } = useSelector((state: RootState) => state?.kpiReducer);
   const [importantKpis, setImportantKpis] = useState<ImportantKpi[]>([]);
   const [kpisDetails, setKpisDetails] = useState<Kpi[]>([]);
+  // const [externalCallOperation, setExternalCallOperation] = 
 
   useEffect(() => {
     setKpisDetails(kpis?.allKpisDetailed || []);

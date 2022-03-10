@@ -24,7 +24,7 @@ const LoginComponent = (props) => {
           />
           <div className="form-block__toggle-block">
             <span>
-              {mode === "login" ? "Aun no" : "Ya"} eres parte, da click aqui
+              {mode === "login" ? "Aun no" : "Ya"} eres parte?, da click aqui
               &#8594;
             </span>
             <input id="form-toggler" type="checkbox" onClick={toggleMode} />

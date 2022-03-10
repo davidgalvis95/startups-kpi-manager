@@ -73,8 +73,10 @@ const KpiDataUploading = () => {
     (state: RootState) => state?.kpiReducer
   );
 
-  const { updateKpiPointer, startOperationPointer } = useKpiAxios();
+  const { user } = useSelector((state: RootState) => state?.userReducer);
 
+  const { updateKpiPointer, startKpiOperationPointer: startOperationPointer } =
+    useKpiAxios();
 
   useEffect(() => {
     setKpisForDataUpload(kpis?.allKpisDetailed || []);
@@ -111,7 +113,7 @@ const KpiDataUploading = () => {
     //TODO Validate Data
     //TODO send api request to save data
     console.log(kpiToPersist);
-    updateKpiPointer(kpiToPersist);
+    updateKpiPointer(kpiToPersist, user!.pymeId);
     startOperationPointer();
   };
 

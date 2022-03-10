@@ -3,6 +3,7 @@ import pictureChangeReducer from './pictureChangeReducer';
 import kpiReducer from './kpiReducer';
 import pymeReducer from './pymeReducer';
 import userReducer from './userReducer';
+import loginReducer from './loginReducer';
 import {combineReducers} from 'redux';
 
 const rootReducer = combineReducers({
@@ -10,7 +11,8 @@ const rootReducer = combineReducers({
     pictureChangeReducer,
     kpiReducer,
     pymeReducer,
-    userReducer
+    userReducer,
+    loginReducer
 })
 
 export default rootReducer;

@@ -33,14 +33,15 @@ export const newKpiVariablesValues = [
 const CreateNewKpi = (props: any) => {
   const [attributes, setAttributes] = useState<string[]>([]);
   const [kpiData, setKpiData] = useState<Kpi>(defaultKpi);
-  
 
   const { kpiOperationLoading } = useSelector(
     (state: RootState) => state?.kpiReducer
   );
 
-  const { createKpiPointer, startOperationPointer } = useKpiAxios();
+  const { user } = useSelector((state: RootState) => state?.userReducer);
 
+  const { createKpiPointer, startKpiOperationPointer: startOperationPointer } =
+    useKpiAxios();
 
   const saveInfoHandler = () => {
     const kpiDataCopy: Kpi = {
@@ -51,7 +52,7 @@ const CreateNewKpi = (props: any) => {
     };
     //TODO Validate all the fields
     console.log(kpiDataCopy);
-    createKpiPointer(kpiDataCopy);
+    createKpiPointer(kpiDataCopy, user!.pymeId);
     startOperationPointer();
   };
 

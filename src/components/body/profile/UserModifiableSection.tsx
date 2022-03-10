@@ -30,7 +30,7 @@ const UserModifiableSection = ({ userData }: UserModifiableSectionProps) => {
     (state: RootState) => state?.userReducer
   );
 
-  const { updateUserPointer, startOperationPointer } = useUserAxios();
+  const { updateUserPointer, startUserOperationPointer: startOperationPointer } = useUserAxios();
 
   const saveData = (): void => {
     const newUser: User = new User(

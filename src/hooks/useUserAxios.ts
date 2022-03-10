@@ -133,7 +133,7 @@ const useUserAxios = () => {
     getUserPointer: getUser,
     createUserPointer: createUser,
     updateUserPointer: updateUser,
-    startOperationPointer: startOperation,
+    startUserOperationPointer: startOperation,
   };
 };
 

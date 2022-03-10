@@ -3,6 +3,7 @@ import pictureChangeActions from "./pictureChangeActions";
 import userActions from "./userActions";
 import pymeActions from "./pymeActions";
 import kpiActions from "./kpiActions";
+import loginActions from "./loginActions";
 
 const allActions = {
   sendSetSideBarStatus,
@@ -10,6 +11,7 @@ const allActions = {
   userActions,
   pymeActions,
   kpiActions,
+  loginActions
 };
 
 export default allActions;

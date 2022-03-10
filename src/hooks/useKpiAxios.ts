@@ -47,10 +47,10 @@ const useKpiAxios = () => {
   };
 
   const getKpi = useCallback(
-    async (kpiId: string) => {
+    async (kpiId: string, pymeId: string) => {
       try {
         //   const result = await kpiStartUpManagerAxios.get(`/kpis`, { 'headers' : {'X-kpiId':`${kpiId}`}});
-        const result = await getFakeKpi(kpiId);
+        const result = await getFakeKpi(kpiId, pymeId);
         dispatch(
           pymeActions.gotKpi(
             new KpiRelatedRequestImpl(
@@ -68,10 +68,10 @@ const useKpiAxios = () => {
     []
   );
 
-  const getAllKpis = useCallback(async () => {
+  const getAllKpis = useCallback(async (pymeId: string) => {
     try {
       //   const result = await kpiStartUpManagerAxios.get(`/kpis`);
-      const result = await getAllFakeKpis();
+      const result = await getAllFakeKpis(pymeId);
       dispatch(
         pymeActions.gotKpis(
           new KpiRelatedRequestImpl(
@@ -87,10 +87,10 @@ const useKpiAxios = () => {
     }
   }, []);
 
-  const createKpi = useCallback(async (kpi: Kpi) => {
+  const createKpi = useCallback(async (kpi: Kpi, pymeId: string) => {
     try {
       //   const result = await kpiStartUpManagerAxios.post('/kpis', pyme);
-      const result = await createFakeKpi(kpi);
+      const result = await createFakeKpi(kpi, pymeId);
       dispatch(
         pymeActions.kpiCreated(
           new KpiRelatedRequestImpl(
@@ -106,10 +106,10 @@ const useKpiAxios = () => {
     }
   }, []);
 
-  const updateKpi = useCallback(async (kpi: Kpi) => {
+  const updateKpi = useCallback(async (kpi: Kpi, pymeId: string) => {
     try {
       //   const result = await kpiStartUpManagerAxios.put('/pyme', pyme);
-      const result = await updateFakeKpi(kpi);
+      const result = await updateFakeKpi(kpi, pymeId);
       dispatch(
         pymeActions.updatedKpi(
           new KpiRelatedRequestImpl(
@@ -126,7 +126,7 @@ const useKpiAxios = () => {
   }, []);
 
   const getFakeKpi = (
-    kpiId: string
+    kpiId: string, pymeId: string
   ): Promise<KpiContainerObject> => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
@@ -135,7 +135,7 @@ const useKpiAxios = () => {
     });
   };
 
-  const getAllFakeKpis = (): Promise<KpisContainerObject> => {
+  const getAllFakeKpis = (pymeId: string): Promise<KpisContainerObject> => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve({ data: SampleKpis });
@@ -143,7 +143,7 @@ const useKpiAxios = () => {
     });
   };
 
-  const updateFakeKpi = (kpi: Kpi): Promise<KpiContainerObject> => {
+  const updateFakeKpi = (kpi: Kpi, pymeId: string): Promise<KpiContainerObject> => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve({ data: kpi });
@@ -151,7 +151,7 @@ const useKpiAxios = () => {
     });
   };
 
-  const createFakeKpi = (kpi: Kpi): Promise<KpiContainerObject> => {
+  const createFakeKpi = (kpi: Kpi, pymeId: string): Promise<KpiContainerObject> => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve({ data: kpi });
@@ -164,7 +164,7 @@ const useKpiAxios = () => {
     getKpisPointer: getAllKpis,
     createKpiPointer: createKpi,
     updateKpiPointer: updateKpi,
-    startOperationPointer: startOperation,
+    startKpiOperationPointer: startOperation,
   };
 };
 

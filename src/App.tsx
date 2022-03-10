@@ -40,7 +40,7 @@ function App() {
 
   const routes = (
     <Routes>
-      {/* <Route exact path='/login' component={Login} /> */}
+      <Route path='/cube/login' element={<Login/>} />
       <Route path="/create-kpi" element={<CreateNewKpi />} />
       <Route path="/update-kpi" element={<UpdateKpi />} />
       <Route

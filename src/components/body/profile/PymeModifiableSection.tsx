@@ -35,7 +35,7 @@ const PymeModifiableSection = ({
     (state: RootState) => state?.pymeReducer
   );
 
-  const { updatePymePointer, startOperationPointer } = usePymeAxios();
+  const { updatePymePointer, startPymeOperationPointer: startOperationPointer } = usePymeAxios();
 
   const handleEdition = (): void => {
     setIsInEditableMode(!isInEditableMode);

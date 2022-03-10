@@ -41,7 +41,10 @@ const UpdateKpi = ({ kpis }: UpdateKpiProps) => {
     (state: RootState) => state?.kpiReducer
   );
 
-  const { updateKpiPointer, startOperationPointer } = useKpiAxios();
+  const { user } = useSelector((state: RootState) => state?.userReducer);
+
+  const { updateKpiPointer, startKpiOperationPointer: startOperationPointer } =
+    useKpiAxios();
 
   useEffect(() => {
     const attributesArray: string[] = [];
@@ -75,7 +78,7 @@ const UpdateKpi = ({ kpis }: UpdateKpiProps) => {
     //TODO Validate all the fields
     //TODO Handle the API request to save the KPI
     console.log(kpiDataCopy);
-    updateKpiPointer(kpiDataCopy);
+    updateKpiPointer(kpiDataCopy, user!.pymeId);
     startOperationPointer();
   };
 
