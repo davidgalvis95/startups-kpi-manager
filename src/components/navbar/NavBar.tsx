@@ -122,26 +122,28 @@ const NavBar = (props: NavBarProps) => {
   useEffect(() => {
     if (user) {
       if (user.rights === "ADMIN") {
+          console.log(user);
         setCard(cubeCard);
         setItems(itemsForAdmin);
       } else {
+        console.log(user);
         setCard({
           ...defaultCard,
           id: user.pymeId,
           displayName: user.pyme?.name || defaultCard.displayName,
           photoUrl: user.pyme?.photoUrl || defaultCard.photoUrl,
         });
+        setUserPhotoUrl(user.photoUrl || defaultUserPhotoUrl);
+        const newItems = [...itemsForUser];
+        const dashboardItem = newItems[1];
+        const newDashBoardItem = {
+          ...dashboardItem,
+          url: `/cube/platform/dashboard/${encrypt(user.pymeId)}`,
+        };
+  
+        newItems[1] = newDashBoardItem;
+        setItems(newItems);
       }
-      setUserPhotoUrl(user.photoUrl || defaultUserPhotoUrl);
-      const newItems = [...itemsForUser];
-      const dashboardItem = newItems[1];
-      const newDashBoardItem = {
-        ...dashboardItem,
-        url: `/cube/platform/dashboard/${encrypt(user.pymeId)}`,
-      };
-
-      newItems[1] = newDashBoardItem;
-      setItems(newItems);
     }
   }, [user]);
 

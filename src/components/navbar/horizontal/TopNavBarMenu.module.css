@@ -1,3 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&display=swap');
+
 .Navbar {
     background: #282c34;
     height: 50px;
@@ -72,4 +76,56 @@
     transition: all 0.2s ease-in-out;
     background: #05c46b;
     color: #fff;
+}
+
+.LogoutScreen {
+    background-color:#282c34;
+    opacity: 0.9;
+    min-width: 220px;
+    min-height: 80px;
+    position:absolute;
+    right: 0px;
+    /* margin-left: 86%; */
+    top:68px;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    border-radius:5px;
+    z-index: 10;
+}
+
+.LogoutScreen-display {
+    background-color:#487eb0;
+    min-width: 200px;
+    min-height: 200px;
+    position:absolute;
+    margin-right: 0px;
+    margin-left: 86%;
+    margin-top:0px;
+}
+
+
+.listContainer{
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    background-color:black;
+    margin-top:5px;
+    margin-bottom:2px;
+    margin-left:2px;
+    margin-right:3px;
+    border-radius:8px;
+    display:flex;
+    flex-direction: row;
+    justify-content:center;
+    cursor: pointer;
+}
+
+
+.listContainer:hover{
+    background-color: #54a0ff;
+    color: #fff;
+}
+
+.listContainer p {
+    margin: 7px;
 }

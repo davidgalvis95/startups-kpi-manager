@@ -13,7 +13,6 @@ import AddButtonComp from "../../../hoc/add-button/AddButtonComp";
 import RemoveButtonComp from "../../../hoc/remove-button/RemoveButtonComp";
 import useUserAxios from "../../../hooks/useUserAxios";
 
-
 const defaultUser: UserDataType = {
   id: "",
   firstName: "",
@@ -22,7 +21,7 @@ const defaultUser: UserDataType = {
   countryOfResicence: "",
   address: "",
   //This was needed since the component is now nested
-  photoUrl: "../../assets/images/profile.png",
+  photoUrl: "../../../assets/images/profile.png",
   phone: "",
   emailAddress: "",
   rights: "",
@@ -56,7 +55,10 @@ const NewUserAccountForm = () => {
   );
 
   const { uploadImagePointer } = useFileUploadAxios();
-  const { createUserPointer, startUserOperationPointer: startOperationPointer } = useUserAxios();
+  const {
+    createUserPointer,
+    startUserOperationPointer: startOperationPointer,
+  } = useUserAxios();
 
   const { isLoading, imageUrl } = useSelector(
     (state: RootState) => state?.pictureChangeReducer
@@ -82,7 +84,11 @@ const NewUserAccountForm = () => {
   const saveData = (): void => {
     if (password === passwordConfirmation && pattern.test(password)) {
       const user: UserWithoutPyme = new UserWithoutPyme(
-        { ...defaultUser, photoUrl: imageUrl || defaultUser.photoUrl, pymeId: pyme! },
+        {
+          ...defaultUser,
+          photoUrl: imageUrl || defaultUser.photoUrl,
+          pymeId: pyme!,
+        },
         firstName,
         lastName,
         "",
@@ -131,7 +137,7 @@ const NewUserAccountForm = () => {
               ) : (
                 <img
                   className={classes.profileImage}
-                  src={imageUrl === "" ? pymeImageUrl : imageUrl}
+                  src={!imageUrl ? pymeImageUrl : imageUrl}
                   width="100%"
                 />
               )}
@@ -205,7 +211,9 @@ const NewUserAccountForm = () => {
         <div style={{ display: "flex", justifyContent: "center" }}>
           <RemoveButtonComp name={"Salir"} click={exitHandler} />
           {userOperationLoading ? (
-            <div className={classes.ldsSpinnerSmall}></div>
+            <div className={classes.spinnerContainer}>
+              <div className={classes.ldsSpinnerSmall}></div>
+            </div>
           ) : (
             <AddButtonComp name={"Guardar Datos"} click={saveData} />
           )}

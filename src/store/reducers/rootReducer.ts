@@ -5,6 +5,7 @@ import pymeReducer from './pymeReducer';
 import userReducer from './userReducer';
 import loginReducer from './loginReducer';
 import {combineReducers} from 'redux';
+import logoutReducer from './logoutReducer';
 
 const rootReducer = combineReducers({
     sideNavBarStatusReducer,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
     kpiReducer,
     pymeReducer,
     userReducer,
-    loginReducer
+    loginReducer,
+    logoutReducer,
 })
 
 export default rootReducer;

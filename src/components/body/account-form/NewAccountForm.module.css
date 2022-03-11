@@ -53,6 +53,13 @@
     animation: spin 0.5s linear infinite;
   }
 
+  .spinnerContainer{
+    display:flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-left: 25px;
+  }
+
   .ldsSpinnerSmall {
     border: 7px solid #353b48; /* Light grey */
     border-top: 7px solid #74b9ff; /* Blue */

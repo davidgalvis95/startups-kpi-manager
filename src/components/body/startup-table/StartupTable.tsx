@@ -10,6 +10,9 @@ import { range } from "../../../util/RangeGenerator";
 import CustomInputComp from "../../../hoc/custom-input/CustomInputComp";
 import { RootState } from "../../../store/reducers/rootReducer";
 import { useSelector } from "react-redux";
+import useKpiAxios from "../../../hooks/useKpiAxios";
+import { useNavigate } from "react-router-dom";
+import { encrypt } from "../../../util/Encryptor";
 
 interface StartupTableProps {
   displayContentArray: StartUpBodyRowContent[];
@@ -19,6 +22,8 @@ const numberOfElementsPerPage: number = 13;
 
 const StartupTable = () => {
   const { pymes } = useSelector((state: RootState) => state?.pymeReducer);
+  const { kpis } = useSelector((state: RootState) => state?.kpiReducer);
+
   const [displayContentArray, setDisplayContentArray] = useState<
     StartUpBodyRowContent[]
   >([]);
@@ -30,8 +35,23 @@ const StartupTable = () => {
     StartUpBodyRowContent[]
   >(contentArray.filter((el, i) => i < numberOfElementsPerPage));
   const [seeKpis, setSeeKpis] = useState<boolean>(false);
+  const [currentPymeId, setCurrentPymeId] = useState<string>('');
+
+  const { getKpisPointer, startKpiOperationPointer } = useKpiAxios();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
+    setContentArray(displayContentArray)
+  }, [displayContentArray])
+
+  useEffect(() => {
+    console.log(contentArray)
+  }, [contentArray])
+
+
+  useEffect(() => {
+    console.log(pymes);
     const newContent: StartUpBodyRowContent[] =
       pymes?.map((pyme): StartUpBodyRowContent => {
         return {
@@ -47,7 +67,15 @@ const StartupTable = () => {
       }) || [];
 
     setDisplayContentArray(newContent);
+    // setContentArray()
   }, [pymes]);
+
+  useEffect(() => {
+    if(kpis && kpis?.allKpisDetailed && kpis?.importantKpis){
+      const dashboardUrl = `/cube/platform/dashboard/${encrypt(currentPymeId)}`;
+      navigate(dashboardUrl);
+    }
+  }, [kpis, kpis?.allKpisDetailed, kpis?.importantKpis])
 
   useEffect(() => {
     setSeeKpis(false);
@@ -56,7 +84,7 @@ const StartupTable = () => {
   useEffect(() => {
     pages();
     switchPageHandler(1);
-  }, [contentArray.length]);
+  }, [contentArray.length, displayContentArray.length]);
 
   const pages = (): void => {
     const numberOfPages = Math.ceil(
@@ -92,11 +120,14 @@ const StartupTable = () => {
     setContentArray(newArray);
   };
 
-  const handleCreateAccount = () => {};
+  const handleCreateAccount = () => {
+    navigate("/cube/platform/new-pyme")
+  };
 
   const handleClickToViewKpis = (id: string) => {
-    //Send a request to get the KPIs from DB
-    // dispatch(allActions.sendSetSideBarStatus.sendSetSideBarStatus({type:isOpen ? "COLLAPSE" : "OPEN"}));
+    setCurrentPymeId(id);
+    startKpiOperationPointer();
+    getKpisPointer(id);
     setSeeKpis(true);
   };
   return (

@@ -11,12 +11,14 @@ import NavBar from "../navbar/NavBar";
 import { RootState } from "../../store/reducers/rootReducer";
 import { useSelector } from "react-redux";
 import Login from "../login/Login";
+import Logout from "../logout/Logout";
 
 const Layout = () => {
   const loginStatus = useSelector((state: RootState) => state?.loginReducer);
+  const logoutStatus = useSelector((state: RootState) => state?.logoutReducer);
+
   const { user } = useSelector((state: RootState) => state?.userReducer);
   const { kpis } = useSelector((state: RootState) => state?.kpiReducer);
-
 
   const loginRoutes = (
     <Routes>
@@ -24,9 +26,17 @@ const Layout = () => {
     </Routes>
   );
 
+  const logoutRoutes = (
+    <Routes>
+      <Route path="/cube/logout" element={<Logout />} />
+    </Routes>
+  );
+
   const defaultRoute = (
     <Routes>
       <Route path="/cube/platform/profile" element={<Profile />} />
+      {/* <Route path="/cube/logout" element={<Logout />} /> */}
+
     </Routes>
   );
 
@@ -34,12 +44,17 @@ const Layout = () => {
     <Routes>
       <Route path="/cube/platform/profile" element={<Profile />} />
       <Route path="/cube/platform/new-kpi" element={<CreateNewKpi />} />
-      <Route path="/cube/platform/update-kpi" element={<UpdateKpi kpis={kpis?.allKpisDetailed}/>} />
+      <Route
+        path="/cube/platform/update-kpi"
+        element={<UpdateKpi kpis={kpis?.allKpisDetailed} />}
+      />
       <Route
         path="/cube/platform/update-kpi/upload-kpi-data"
         element={<KpiDataUploading />}
       />
       <Route path="/cube/platform/dashboard/:id" element={<Dashboard />} />
+      {/* <Route path="/cube/logout" element={<Logout />} /> */}
+
       <Route
         index // <-- "/"
         element={<div>Default Page Content</div>}
@@ -54,6 +69,7 @@ const Layout = () => {
       <Route path="/cube/platform/new-pyme" element={<NewPymeAccountForm />} />
       <Route path="/cube/platform/startup-table" element={<StartupTable />} />
       <Route path="/cube/platform/dashboard/:id" element={<Dashboard />} />
+      {/* <Route path="/cube/logout" element={<Logout />} /> */}
       <Route
         index // <-- "/"
         element={<div>Default Page Content</div>}
@@ -71,12 +87,15 @@ const Layout = () => {
     <div>
       {!loginStatus.accepted || !loginStatus.finishedOk ? (
         loginRoutes
+      ) : logoutStatus.logguedOut ? (
+        logoutRoutes
       ) : (
         <NavBar>{routes}</NavBar>
       )}
-{/* 
-      {loginRoutes}
-      <NavBar>{defaultRoute}</NavBar> */}
+      
+      {/* {loginRoutes}
+      {logoutRoutes}
+      <NavBar>{adminRoutes}</NavBar> */}
     </div>
   );
 };

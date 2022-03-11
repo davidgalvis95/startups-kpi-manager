@@ -84,6 +84,7 @@ const Login = () => {
     if (pymes) {
       setLoginLoading(false);
       finishLoginGracefullyPointer();
+      navigate("/cube/platform/startup-table")
       //redirect to the StartUpTable component
     } else {
       if (errorOnPymeOperation) {
@@ -100,10 +101,6 @@ const Login = () => {
   useEffect(() => {
     if (kpis) {
       finishLoginGracefullyPointer();
-      // const encrypterUrl = CryptoJS.AES.encrypt(
-      //   CryptoJS.enc.Utf8.parse(user.pymeId),
-      //   "mypassphrase"
-      // ).toString().replace('+','xMl3Jk').replace('/','Por21Ld').replace('=','Ml32');
       const dashboardUrl = `/cube/platform/dashboard/${encrypt(user.pymeId)}`;
       setLoginLoading(false);
       //redirect to the Dashboard component

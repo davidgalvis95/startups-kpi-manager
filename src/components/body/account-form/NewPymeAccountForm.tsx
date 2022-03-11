@@ -41,12 +41,10 @@ const NewPymeAccountForm = () => {
     (state: RootState) => state?.pymeReducer
   );
 
-  const { user } = useSelector(
-    (state: RootState) => state?.userReducer
-  );
+  const { user } = useSelector((state: RootState) => state?.userReducer);
 
   const { uploadImagePointer } = useFileUploadAxios();
-  const { createPymePointer, startPymeOperationPointer: startOperationPointer } = usePymeAxios();
+  const { createPymePointer, startPymeOperationPointer } = usePymeAxios();
 
   const uploadPhoto = (files: FileList | null): void => {
     if (files) {
@@ -57,7 +55,7 @@ const NewPymeAccountForm = () => {
   const saveData = (): void => {
     const startup: StartUpType = new StartUp(
       //The id is set by the backend
-      { ...defaultPyme, photoUrl: imageUrl},
+      { ...defaultPyme, photoUrl: imageUrl },
       name,
       "",
       "",
@@ -67,9 +65,9 @@ const NewPymeAccountForm = () => {
     );
     console.log(startup);
     //TODO Validate all the fields
-    if(user){
+    if (user) {
+      startPymeOperationPointer();
       createPymePointer(startup, user.id);
-      startOperationPointer();
     }
   };
 
@@ -100,7 +98,7 @@ const NewPymeAccountForm = () => {
               ) : (
                 <img
                   className={classes.profileImage}
-                  src={imageUrl ? imageUrl :pymeImageUrl}
+                  src={imageUrl ? imageUrl : pymeImageUrl}
                   width="100%"
                 />
               )}
@@ -155,7 +153,9 @@ const NewPymeAccountForm = () => {
         <div style={{ display: "flex", justifyContent: "center" }}>
           <RemoveButtonComp name={"Salir"} click={exitHandler} />
           {pymeOperationLoading ? (
-            <div className={classes.ldsSpinnerSmall}></div>
+            <div className={classes.spinnerContainer}>
+              <div className={classes.ldsSpinnerSmall}></div>
+            </div>
           ) : (
             <AddButtonComp name={"Guardar Datos"} click={saveData} />
           )}
