@@ -56,9 +56,7 @@ export function sortLabels(labels) {
   const reversedAsString = [...x].map((y) => {
     const year = y.substring(0, 4);
     const z = parseInt(y.substring(4, 6), 10);
-    console.log(year, z);
     const month = getMonthFromNumber(z);
-    console.log(month);
 
     return month + "-" + year;
   });

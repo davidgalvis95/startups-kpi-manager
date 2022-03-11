@@ -14,14 +14,23 @@ export class SideBarStatusRequestImpl implements SideBarStatusRequest {
   }
 }
 
-const sendSetSideBarStatus: Function = (
-    request: SideBarStatusRequest
-  ): SideBarStatusRequest => {
-      return {
-          type: request.type
-      }
+const clear: Function = (
+  request: SideBarStatusRequest
+): SideBarStatusRequest => {
+  return {
+    type: request.type,
   };
+};
 
-export default{
-    sendSetSideBarStatus
-}
+const sendSetSideBarStatus: Function = (
+  request: SideBarStatusRequest
+): SideBarStatusRequest => {
+  return {
+    type: request.type,
+  };
+};
+
+export default {
+  sendSetSideBarStatus,
+  clear
+};

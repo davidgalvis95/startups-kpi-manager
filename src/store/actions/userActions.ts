@@ -1,7 +1,6 @@
 import { UserDataType } from "../../types/userPymeTypes";
 import { UserActions } from "./ActionTypes";
 
-
 export interface UserRelatedRequest {
   type: UserActions;
   user?: UserDataType;
@@ -27,6 +26,12 @@ export class UserRelatedRequestImpl implements UserRelatedRequest {
     return this.type;
   }
 }
+
+const clear: Function = (request: UserRelatedRequest): UserRelatedRequest => {
+  return {
+    type: request.type,
+  };
+};
 
 const loadingUserOperation: Function = (
   request: UserRelatedRequest
@@ -75,5 +80,6 @@ export default {
   userCreated,
   gotUser,
   updatedUser,
-  errorOnUserOperation
+  errorOnUserOperation,
+  clear
 };

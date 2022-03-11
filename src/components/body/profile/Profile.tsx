@@ -75,11 +75,9 @@ const Profile = () => {
 
 
   useEffect(() => {
-    console.log(state);
   },[])
 
   useEffect(() => {
-    console.log(imageUrl)
     if(imageUrl){
       const newUser = { ...user, photoUrl: imageUrl } as User;
       updateUserPointer(newUser);

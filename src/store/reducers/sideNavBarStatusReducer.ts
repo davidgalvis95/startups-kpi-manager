@@ -1,6 +1,6 @@
 import { SideBarStatusRequest } from "../actions/sideNavBarStatus";
 
-interface SideBarStatus {
+export interface SideBarStatus {
   isOpen: boolean;
 }
 
@@ -20,19 +20,21 @@ class SideBarStatusImpl implements SideBarStatus {
   }
 }
 
-const defaultState: SideBarStatus = {
+export const defaultaNavbarState: SideBarStatus = {
   isOpen: false,
 };
 
 const sideNavBarStatusReducer = (
-  state = defaultState,
+  state = defaultaNavbarState,
   action: SideBarStatusRequest
-):SideBarStatus => {
+): SideBarStatus => {
   switch (action.type) {
     case "OPEN":
       return new SideBarStatusImpl(true);
     case "COLLAPSE":
       return new SideBarStatusImpl(false);
+    case "CLEAR":
+      return defaultaNavbarState;
     default:
       return state;
   }

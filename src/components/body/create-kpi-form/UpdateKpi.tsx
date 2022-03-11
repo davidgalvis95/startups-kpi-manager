@@ -78,7 +78,7 @@ const UpdateKpi = ({ kpis }: UpdateKpiProps) => {
     };
     //TODO Validate all the fields
     //TODO Handle the API request to save the KPI
-    console.log(kpiDataCopy);
+    // console.log(kpiDataCopy);
     updateKpiPointer(kpiDataCopy, user!.pymeId);
     startOperationPointer();
   };
@@ -101,7 +101,7 @@ const UpdateKpi = ({ kpis }: UpdateKpiProps) => {
       ...currentKpi,
       labelType: e.target.value,
       attributes: [...attributeNames].map((attribute, index) => {
-        console.log(currentKpi);
+        // console.log(currentKpi);
         return {
           name: attribute,
           values: [],

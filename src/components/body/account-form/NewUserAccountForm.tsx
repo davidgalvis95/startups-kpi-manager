@@ -99,7 +99,6 @@ const NewUserAccountForm = () => {
         password
       );
 
-      console.log(user);
       //TODO Validate all the fields
       createUserPointer(user);
       startOperationPointer();

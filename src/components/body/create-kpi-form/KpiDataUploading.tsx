@@ -110,7 +110,7 @@ const KpiDataUploading = () => {
         ...currentKpi,
         total: recalculateTotals(labelsCopy, currentKpi.attributes),
       };
-      console.log(kpiToPersist);
+      // console.log(kpiToPersist);
     }
     //TODO Validate Data
     //TODO send api request to save data
@@ -134,7 +134,7 @@ const KpiDataUploading = () => {
   const addNewComparativeVariable = (e: any) => {
     const newVars = [...currentVariables];
     newVars[newVars.length - 1] = e.target.value;
-    console.log(newVars);
+    // console.log(newVars);
     setNewVariableValue(e.target.value);
     setCurrentVariables(newVars);
   };

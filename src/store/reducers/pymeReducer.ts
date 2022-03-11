@@ -2,7 +2,7 @@ import { StartUpType } from "../../types/userPymeTypes";
 import { PymeRelatedRequest } from "../actions/pymeActions";
 import { PymeActions } from "../actions/ActionTypes";
 
-interface PymeStatus {
+export interface PymeStatus {
   pymeOperationLoading: boolean;
   pyme?: StartUpType;
   pymes?: StartUpType[];
@@ -28,7 +28,7 @@ class PymeStatusImpl implements PymeStatus {
   }
 }
 
-const defaultState: PymeStatus = {
+export const defaultPymeState: PymeStatus = {
   pymeOperationLoading: false,
   pyme: undefined,
   pymes: undefined,
@@ -68,7 +68,7 @@ const updatePymeDetailOnExistentPymes = (
 };
 
 const pictureChangeReducer = (
-  state = defaultState,
+  state = defaultPymeState,
   action: PymeRelatedRequest
 ): PymeStatus => {
   const pyme = state.pyme || undefined;
@@ -107,6 +107,8 @@ const pictureChangeReducer = (
         undefined,
         action.errorOnPymeOp
       );
+    case PymeActions.CLEAR:
+      return defaultPymeState;
     default:
       return state;
   }

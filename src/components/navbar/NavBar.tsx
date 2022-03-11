@@ -122,11 +122,11 @@ const NavBar = (props: NavBarProps) => {
   useEffect(() => {
     if (user) {
       if (user.rights === "ADMIN") {
-          console.log(user);
+          // console.log(user);
         setCard(cubeCard);
         setItems(itemsForAdmin);
       } else {
-        console.log(user);
+        // console.log(user);
         setCard({
           ...defaultCard,
           id: user.pymeId,

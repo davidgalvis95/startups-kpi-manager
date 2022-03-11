@@ -45,10 +45,6 @@ const StartupTable = () => {
     setContentArray(displayContentArray)
   }, [displayContentArray])
 
-  useEffect(() => {
-    console.log(contentArray)
-  }, [contentArray])
-
 
   useEffect(() => {
     console.log(pymes);

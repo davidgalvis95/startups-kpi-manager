@@ -11,7 +11,7 @@ const RemoveButtonComp = ({
   name,
   index = -1,
   click = (e: any, index: number) =>
-    console.log("Cannot execute function: undefined"),
+    console.error("Cannot execute function: undefined"),
   marginTop = "1.9rem",
 }: RemoveButtonCompProps) => {
   const RemoveButton = styled(Button)({

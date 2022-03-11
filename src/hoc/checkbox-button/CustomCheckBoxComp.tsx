@@ -16,7 +16,7 @@ const CustomCheckBoxComp = ({
   renderFromParent,
   checked,
   click = () =>
-    console.log("The operation could not be completed: 'click' is undefined"),
+    console.error("The operation could not be completed: 'click' is undefined"),
 }: CustomCheckBoxCompProps) => {
   const [chekcedBox, setCheckedBox] = useState<boolean>(false);
 

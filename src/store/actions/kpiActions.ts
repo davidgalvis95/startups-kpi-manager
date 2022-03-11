@@ -31,6 +31,12 @@ export class KpiRelatedRequestImpl implements KpiRelatedRequest {
   }
 }
 
+const clear: Function = (request: KpiRelatedRequest): KpiRelatedRequest => {
+  return {
+    type: request.type,
+  };
+};
+
 const loadingKpisOperation: Function = (
   request: KpiRelatedRequest
 ): KpiRelatedRequest => {
@@ -87,4 +93,5 @@ export default {
   gotKpis,
   updatedKpi,
   errorOnKpiOperation,
+  clear
 };

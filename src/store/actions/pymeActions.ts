@@ -35,6 +35,12 @@ export class PymeRelatedRequestImpl implements PymeRelatedRequest {
   }
 }
 
+const clear: Function = (request: PymeRelatedRequest): PymeRelatedRequest => {
+  return {
+    type: request.type,
+  };
+};
+
 const loadingPymesOperation: Function = (
   request: PymeRelatedRequest
 ): PymeRelatedRequest => {
@@ -97,4 +103,5 @@ export default {
   gotPymes,
   updatedPyme,
   errorOnPymeOperation,
+  clear
 };

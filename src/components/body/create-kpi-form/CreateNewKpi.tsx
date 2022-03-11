@@ -52,8 +52,8 @@ const CreateNewKpi = (props: any) => {
       }),
     };
     //TODO Validate all the fields
-    console.log(kpiDataCopy);
-    console.log(user!.pymeId)
+    // console.log(kpiDataCopy);
+    // console.log(user!.pymeId)
     createKpiPointer(kpiDataCopy, user!.pymeId);
     startOperationPointer();
   };

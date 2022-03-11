@@ -2,8 +2,7 @@ import { UserDataType } from "../../types/userPymeTypes";
 import { UserRelatedRequest } from "../actions/userActions";
 import { UserActions } from "../actions/ActionTypes";
 
-
-interface UserStatus {
+export interface UserStatus {
   userOperationLoading: boolean;
   user?: UserDataType;
   errorOnUserOperation?: Error;
@@ -25,14 +24,14 @@ class UserStatusImpl implements UserStatus {
   }
 }
 
-const defaultState: UserStatus = {
+export const defaultUserState: UserStatus = {
   userOperationLoading: false,
   user: undefined,
   errorOnUserOperation: undefined,
 };
 
 const pictureChangeReducer = (
-  state = defaultState,
+  state = defaultUserState,
   action: UserRelatedRequest
 ): UserStatus => {
   switch (action.type) {
@@ -48,6 +47,8 @@ const pictureChangeReducer = (
       return new UserStatusImpl(false, action.user, undefined);
     case UserActions.USER_ERROR:
       return new UserStatusImpl(false, undefined, action.errorOnUserOp);
+    case UserActions.CLEAR:
+      return defaultUserState;
     default:
       return state;
   }

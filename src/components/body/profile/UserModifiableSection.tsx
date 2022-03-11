@@ -43,7 +43,7 @@ const UserModifiableSection = ({ userData }: UserModifiableSectionProps) => {
       phone
     );
     //TODO validate data
-    console.log(newUser);
+    // console.log(newUser);
     updateUserPointer(newUser);
     startUserOperationPointer();
     handleEdition();

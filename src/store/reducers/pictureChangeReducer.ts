@@ -1,7 +1,6 @@
 import { PictureChangeState } from "../actions/pictureChangeActions";
 
-
-interface PictureUploadStatus {
+export interface PictureUploadStatus {
   isLoading: boolean;
   imageUrl?: string;
 }
@@ -16,13 +15,13 @@ class PictureUploadStatusImpl implements PictureUploadStatus {
   }
 }
 
-const defaultState: PictureUploadStatus = {
+export const defaultPictureState: PictureUploadStatus = {
   isLoading: false,
   imageUrl: undefined,
 };
 
 const pictureChangeReducer = (
-  state = defaultState,
+  state = defaultPictureState,
   action: PictureChangeState
 ): PictureUploadStatus => {
   switch (action.type) {
@@ -30,6 +29,8 @@ const pictureChangeReducer = (
       return new PictureUploadStatusImpl(true, "");
     case "UPLOADED":
       return new PictureUploadStatusImpl(false, action.url);
+    case "CLEAR":
+      return defaultPictureState;
     default:
       return state;
   }

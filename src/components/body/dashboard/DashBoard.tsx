@@ -82,7 +82,7 @@ const Dashboard = () => {
       const newKpis = { ...kpis }?.allKpisDetailed?.map((kpi) => {
         const oldLabels = [...kpi.labels];
         const sortedLabels: string[] = sortLabels({...kpi}.labels);
-        console.log(oldLabels)
+        // console.log(oldLabels)
         const newAttributesWithSortedValues = {...kpi}.attributes.map(
           (attribute, index) => {
             const mapper: Map<number, number> =

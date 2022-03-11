@@ -12,13 +12,10 @@ const useFileUploadAxios = () => {
   const dispatch = useDispatch();
 
   const uploadImage = useCallback(async (file: File) => {
-    console.log(file);
     const upLoadImageActions = allActions.pictureChangeActions;
-    console.log(file);
     dispatch(
       upLoadImageActions.uploadPictureAction({ type: "UPLOADING", url: "" })
     );
-    console.log(file);
 
     const formData = new FormData();
     formData.append(FORM_DATA_FILE_NAME_PREFIX, file);

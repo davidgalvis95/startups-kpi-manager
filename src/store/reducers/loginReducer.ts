@@ -2,7 +2,7 @@ import { UserLoginResponse } from "../../types/userPymeTypes";
 import { LoginActions } from "../actions/ActionTypes";
 import { LoginRequest } from "../actions/loginActions";
 
-interface LoginStatus {
+export interface LoginStatus {
   loginAttemptLoading: boolean;
   accepted: boolean;
   finishedOk: boolean;
@@ -32,7 +32,7 @@ class LoginStatusImpl implements LoginStatus {
   }
 }
 
-const defaultState: LoginStatus = {
+export const defaultLoginState: LoginStatus = {
   loginAttemptLoading: false,
   accepted: false,
   finishedOk: false,
@@ -41,7 +41,7 @@ const defaultState: LoginStatus = {
 };
 
 const loginReducer = (
-  state = defaultState,
+  state = defaultLoginState,
   action: LoginRequest
 ): LoginStatus => {
   switch (action.type) {
@@ -71,6 +71,8 @@ const loginReducer = (
         state.response,
         state.loginError
       );
+    case LoginActions.CLEAR:
+      return defaultLoginState;
     default:
       return state;
   }

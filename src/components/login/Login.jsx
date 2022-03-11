@@ -8,15 +8,19 @@ import useKpiAxios from "../../hooks/useKpiAxios";
 import { useNavigate } from "react-router-dom";
 import "./Login.scss";
 import {encrypt} from "../../util/Encryptor"
+import { useDispatch } from "react-redux";
+import allActions from "../../store/actions/allActions";
+
+
 const CryptoJS = require("crypto-js");
 
 const Login = () => {
   const [mode, setMode] = useState("login");
   const [loginLoading, setLoginLoading] = useState(false);
   const [user1, setUser] = useState(undefined);
-  // const [kpis, setUser] = useState(undefined);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const state = useSelector(
     (state) => state
@@ -37,6 +41,8 @@ const Login = () => {
     (state) => state?.kpiReducer
   );
 
+  const logoutActions = allActions.logoutActions;
+
   const {
     requestLoginPointer,
     finishLoginGracefullyPointer,
@@ -48,7 +54,6 @@ const Login = () => {
 
   useEffect(() => {
     if (accepted) {
-      console.log(state);
       startUserOperationPointer();
       getUserPointer(response.email);
     } else {
@@ -85,6 +90,7 @@ const Login = () => {
       setLoginLoading(false);
       finishLoginGracefullyPointer();
       navigate("/cube/platform/startup-table")
+      dispatch(logoutActions.loggedOut({ type: "NOT_LOGGED_OUT" }));
       //redirect to the StartUpTable component
     } else {
       if (errorOnPymeOperation) {
@@ -105,6 +111,8 @@ const Login = () => {
       setLoginLoading(false);
       //redirect to the Dashboard component
       navigate(dashboardUrl);
+      dispatch(logoutActions.loggedOut({ type: "NOT_LOGGED_OUT" }));
+
     } else {
       if (errorOnKpiOperation) {
         console.log(errorOnKpiOperation);

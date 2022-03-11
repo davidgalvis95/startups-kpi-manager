@@ -62,7 +62,6 @@ class KpiChartLogicHandler {
     kpi: Kpi
   ): ElementsToChar<string, string, ElementsToCharData> {
     let elementToChar: ElementsToChar<string, string, ElementsToCharData>;
-    console.log(kpi.attributes.length);
     if (kpi?.attributes?.length === 0) {
       elementToChar = {
         labels: kpi?.labels,

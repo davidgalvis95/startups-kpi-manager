@@ -2,7 +2,7 @@ import { Kpi, PymeKpiWrapper } from "../../types/Kpi";
 import { KpiRelatedRequest } from "../actions/kpiActions";
 import { KpiActions } from "../actions/ActionTypes";
 
-interface KpiStatus {
+export interface KpiStatus {
   kpiOperationLoading: boolean;
   kpi?: Kpi;
   kpis?: PymeKpiWrapper;
@@ -28,7 +28,7 @@ class KpiStatusImpl implements KpiStatus {
   }
 }
 
-const defaultState: KpiStatus = {
+export const defaultKpiState: KpiStatus = {
   kpiOperationLoading: false,
   kpi: undefined,
   kpis: undefined,
@@ -77,7 +77,7 @@ const updateKpiDetailOnExistentKpis = (
 };
 
 const pictureChangeReducer = (
-  state = defaultState,
+  state = defaultKpiState,
   action: KpiRelatedRequest
 ): KpiStatus => {
   const kpi = state.kpi || undefined;
@@ -95,10 +95,7 @@ const pictureChangeReducer = (
     case KpiActions.KPIS_FETCHED:
       return new KpiStatusImpl(false, kpi, action.kpis, undefined);
     case KpiActions.KPI_UPDATED:
-      const newUpdatedKpis = updateKpiDetailOnExistentKpis(
-        kpis!,
-        action.kpi
-      );
+      const newUpdatedKpis = updateKpiDetailOnExistentKpis(kpis!, action.kpi);
       return new KpiStatusImpl(false, action.kpi, newUpdatedKpis, undefined);
     case KpiActions.KPI_ERROR:
       return new KpiStatusImpl(
@@ -107,6 +104,8 @@ const pictureChangeReducer = (
         undefined,
         action.errorOnKpiOp
       );
+    case KpiActions.CLEAR:
+      return defaultKpiState;
     default:
       return state;
   }

@@ -34,7 +34,7 @@ const CustomInputComp = React.memo(
     placeholder,
     value,
     disabled = false,
-    change = () => console.log(""),
+    change = () => console.error("The operation could not be completer, Change event is undefined"),
     index = -1,
     valueNotReferencedFromParent = false,
     width,

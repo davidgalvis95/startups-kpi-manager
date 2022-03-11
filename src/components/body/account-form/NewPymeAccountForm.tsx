@@ -63,7 +63,6 @@ const NewPymeAccountForm = () => {
       email,
       phone
     );
-    console.log(startup);
     //TODO Validate all the fields
     if (user) {
       startPymeOperationPointer();

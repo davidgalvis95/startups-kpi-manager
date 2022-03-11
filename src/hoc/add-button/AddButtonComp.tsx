@@ -8,7 +8,7 @@ interface AddButtonCompProps {
 const AddButtonComp = ({
   name,
   click = () =>
-    console.log("The operation could not be completed: 'click' is undefined"),
+    console.error("The operation could not be completed: 'click' is undefined"),
 }: AddButtonCompProps) => {
   const AddButton = styled(Button)({
     boxShadow: "none",
