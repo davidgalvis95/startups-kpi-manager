@@ -32,9 +32,18 @@ export interface LoginRequest {
       loginError: request.loginError,
     };
   };
+
+  const loginFinishedOk: Function = (
+    request: LoginRequest
+  ): LoginRequest => {
+    return {
+      type: request.type,
+    };
+  };
   
   export default {
     attemptLogin,
     loginAccepted,
-    loginDeclined
+    loginDeclined,
+    loginFinishedOk
   };

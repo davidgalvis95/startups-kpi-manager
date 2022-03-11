@@ -31,7 +31,7 @@ const pictureChangeReducer = (
     case "UPLOADED":
       return new PictureUploadStatusImpl(false, action.url);
     default:
-      return defaultState;
+      return state;
   }
 };
 

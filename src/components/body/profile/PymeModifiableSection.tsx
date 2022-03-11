@@ -13,13 +13,25 @@ import { RootState } from "../../../store/reducers/rootReducer";
 import usePymeAxios from "../../../hooks/usePymeAxios";
 
 interface PymeModifiableSectionProps {
-  pymeData: StartUpType;
-  accessRights: string;
+  pymeData?: StartUpType;
+  accessRights?: string;
+}
+
+const defaultPymeData = { 
+  pymeId: "",
+  active: false,
+  name: "",
+  city: "",
+  country: "",
+  address: "",
+  emailAddress: "",
+  photoUrl: "",
+  phone: "",
 }
 
 const PymeModifiableSection = ({
-  pymeData,
-  accessRights,
+  pymeData = defaultPymeData,
+  accessRights = "USER",
 }: PymeModifiableSectionProps) => {
   const [isInEditableMode, setIsInEditableMode] = useState<boolean>(true);
   const [name, setName] = useState<string>(pymeData?.name || "");

@@ -46,9 +46,9 @@ const pictureChangeReducer = (
     case KpiActions.KPI_CREATED:
       return new KpiStatusImpl(false, action.kpi, undefined, undefined);
     case KpiActions.KPI_FETCHED:
-      return new KpiStatusImpl(false, undefined, action.kpis, undefined);
-    case KpiActions.KPIS_FETCHED:
       return new KpiStatusImpl(false, action.kpi, undefined, undefined);
+    case KpiActions.KPIS_FETCHED:
+      return new KpiStatusImpl(false, undefined, action.kpis, undefined);
     case KpiActions.KPI_UPDATED:
       return new KpiStatusImpl(false, action.kpi, undefined, undefined);
     case KpiActions.KPI_ERROR:
@@ -59,7 +59,7 @@ const pictureChangeReducer = (
         action.errorOnKpiOp
       );
     default:
-      return defaultState;
+      return state;
   }
 };
 

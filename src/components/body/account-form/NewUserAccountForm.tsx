@@ -12,6 +12,8 @@ import UserWithoutPyme from "../../../types/UserWithoutPyme";
 import AddButtonComp from "../../../hoc/add-button/AddButtonComp";
 import RemoveButtonComp from "../../../hoc/remove-button/RemoveButtonComp";
 import useUserAxios from "../../../hooks/useUserAxios";
+import defaultUserImageUrl from "../../../assets/images/profile.png"
+
 
 const defaultUser: UserDataType = {
   id: "",
@@ -20,7 +22,8 @@ const defaultUser: UserDataType = {
   cityOfResidence: "",
   countryOfResicence: "",
   address: "",
-  photoUrl: "./assets/images/profile.png",
+  //This was needed since the component is now nested
+  photoUrl: "../../assets/images/profile.png",
   phone: "",
   emailAddress: "",
   rights: "",

@@ -2,7 +2,6 @@ import { StartUpType } from "../../types/userPymeTypes";
 import { PymeRelatedRequest } from "../actions/pymeActions";
 import { PymeActions } from "../actions/ActionTypes";
 
-
 interface PymeStatus {
   pymeOperationLoading: boolean;
   pyme?: StartUpType;
@@ -46,9 +45,9 @@ const pictureChangeReducer = (
     case PymeActions.PYME_CREATED:
       return new PymeStatusImpl(false, action.pyme, undefined, undefined);
     case PymeActions.PYME_FETCHED:
-      return new PymeStatusImpl(false, undefined, action.pymes, undefined);
-    case PymeActions.PYMES_FETCHED:
       return new PymeStatusImpl(false, action.pyme, undefined, undefined);
+    case PymeActions.PYMES_FETCHED:
+      return new PymeStatusImpl(false, undefined, action.pymes, undefined);
     case PymeActions.PYME_UPDATED:
       return new PymeStatusImpl(false, action.pyme, undefined, undefined);
     case PymeActions.PYME_ERROR:
@@ -59,7 +58,7 @@ const pictureChangeReducer = (
         action.errorOnPymeOp
       );
     default:
-      return defaultState;
+      return state;
   }
 };
 

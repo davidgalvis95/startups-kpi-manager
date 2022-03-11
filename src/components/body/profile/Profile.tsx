@@ -13,8 +13,21 @@ import RemoveButtonComp from "../../../hoc/remove-button/RemoveButtonComp";
 import useUserAxios from "../../../hooks/useUserAxios";
 import User from "../../../types/User";
 
+
 interface ProfileProps {
   user: UserDataType;
+}
+
+const defaultPymeData = { 
+  pymeId: "",
+  active: false,
+  name: "",
+  city: "",
+  country: "",
+  address: "",
+  emailAddress: "",
+  photoUrl: "",
+  phone: "",
 }
 
 const defualtUser: UserDataType = {
@@ -24,7 +37,7 @@ const defualtUser: UserDataType = {
   cityOfResidence: "",
   countryOfResicence: "",
   address: "",
-  photoUrl: "./assets/images/profile.png",
+  photoUrl: "../../assets/images/profile.png",
   phone: "",
   emailAddress: "",
   rights: "",
@@ -56,6 +69,7 @@ const Profile = () => {
 
 
   useEffect(() => {
+    console.log(imageUrl)
     const newUser = { ...user, photoUrl: imageUrl } as User;
     updateUserPointer(newUser);
     startOperationPointer();
@@ -74,7 +88,7 @@ const Profile = () => {
   const outputComponent = (
     <Grid container>
       <Grid item xs={12} sm={12} md={6}>
-        <Grid xs={12}>
+        <Grid item xs={12}>
           <Card width={80} padding={"1rem"}>
             <div>
               <div className={classes.photoContainer}>
@@ -117,8 +131,8 @@ const Profile = () => {
         <div>
           <Card width={80} padding={"1rem"}>
             <PymeModifiableSection
-              pymeData={user!.pyme}
-              accessRights={user!.rights}
+              pymeData={user? user.pyme : defaultPymeData}
+              accessRights={user? user.rights : "USER"}
             />
           </Card>
         </div>
@@ -140,7 +154,7 @@ const Profile = () => {
         </Card>
 
       <div>
-        <div>{outputComponent}</div>
+        <div>{user?outputComponent:null}</div>
       </div>
     </div>
   );

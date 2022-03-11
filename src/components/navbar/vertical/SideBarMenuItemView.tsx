@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import { SideBarMenuItem } from "../../../types/types";
 import { classNames } from "../../../util/classes";
 import "./SideBarMenuItemView.scss";
@@ -11,9 +12,9 @@ export default function SideBarMenuItemView({
   item,
   isOpen,
 }: SideBarMenuItemViewProps) {
-  const profileStyle = { color: "#fc5c65"};
-  const dashboardStyle = { color: "#78e08f"};
-  const tableStyle = { color: "#eccc68"};
+  const profileStyle = { color: "#fc5c65" };
+  const dashboardStyle = { color: "#78e08f" };
+  const tableStyle = { color: "#eccc68" };
 
   return (
     <div className="SideBarMenuItemView">
@@ -26,6 +27,7 @@ export default function SideBarMenuItemView({
           </div>
           <span className="label">{item.label}</span>
         </div>
+        {/* {!isOpen ? <div className="tooltip">{item.label}</div> : ""} */}
       </a>
       {!isOpen ? <div className="tooltip">{item.label}</div> : ""}
     </div>

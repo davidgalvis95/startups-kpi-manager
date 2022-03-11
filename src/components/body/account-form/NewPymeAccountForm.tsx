@@ -20,7 +20,7 @@ const defaultPyme: StartUpType = {
   country: "",
   address: "",
   emailAddress: "",
-  photoUrl: "./assets/images/factory.jpeg",
+  photoUrl: "../../assets/images/factory.jpeg",
   phone: "",
 };
 

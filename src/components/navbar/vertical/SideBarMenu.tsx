@@ -42,7 +42,7 @@ export function SideBarMenu({ items, card }: SideBarMenuProps) {
       </div>
       <SideBarMenuCardView card={card} isOpen={isOpen} />
       {items.map((item) => (
-        <SideBarMenuItemView key={item.id} item={item} isOpen={isOpen} />
+        <SideBarMenuItemView key={item.id} item={item} isOpen={isOpen}/>
       ))}
     </div>
   );

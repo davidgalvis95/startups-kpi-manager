@@ -34,7 +34,7 @@ const sideNavBarStatusReducer = (
     case "COLLAPSE":
       return new SideBarStatusImpl(false);
     default:
-      return defaultState;
+      return state;
   }
 };
 

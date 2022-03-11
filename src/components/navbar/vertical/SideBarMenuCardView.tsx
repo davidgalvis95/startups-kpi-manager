@@ -13,7 +13,7 @@ export default function SideBarMenuCardView({
 }: SideBarMenuCardViewProps) {
   return (
     <div className="SideBarMenuCardView">
-      <img className="profile" src={card.photoUrl} width="100%"/>
+      <img className={`${isOpen ?"profile":"profileCollapsed"}`} src={card.photoUrl} width="100%"/>
       <div className={classNames("profileInfo", isOpen ? "" : "collapsed")}>
         <div className="name">{card.displayName}</div>
         <div className="title">{card.title}</div>

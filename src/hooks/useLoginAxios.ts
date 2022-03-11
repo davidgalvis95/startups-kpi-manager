@@ -22,6 +22,14 @@ const useLoginAxios = () => {
     );
   };
 
+  const finishLoginGracefully = useCallback(async () => {
+    dispatch(
+      loginActions.loginAccepted({
+        type: LoginActions.FINISHED_OK,
+      })
+    );
+  }, []);
+
   const requestLogin = useCallback(async (userRequest: UserLogin) => {
     try {
       // const result = await kpiStartUpManagerAxios.post(`/login`, userRequest);
@@ -70,6 +78,7 @@ const useLoginAxios = () => {
 
   return {
     requestLoginPointer: requestLogin,
+    finishLoginGracefullyPointer: finishLoginGracefully,
     startLoginOperationPointer: startOperation,
   };
 };

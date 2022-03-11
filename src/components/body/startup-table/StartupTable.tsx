@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 interface StartupTableProps {
   displayContentArray: StartUpBodyRowContent[];
 }
-
+const defaultPymePhoto = "../../assets/images/factory.jpeg";
 const numberOfElementsPerPage: number = 13;
 
 const StartupTable = () => {
@@ -36,7 +36,7 @@ const StartupTable = () => {
       pymes?.map((pyme): StartUpBodyRowContent => {
         return {
           id: pyme.pymeId,
-          photoUrl: pyme.photoUrl,
+          photoUrl: pyme.photoUrl || defaultPymePhoto,
           name: pyme.name,
           status: pyme.active.toString(),
           address: pyme.address,

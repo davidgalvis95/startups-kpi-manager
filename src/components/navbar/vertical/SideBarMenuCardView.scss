@@ -10,6 +10,15 @@
         padding: 10px;
         box-sizing: border-box;
         max-width: 128px;
+        height: 128px;
+    }
+
+    .profileCollapsed{
+        border-radius: 50%;
+        padding: 10px;
+        box-sizing: border-box;
+        max-width: 68px;
+        height: 68px;
     }
 
     .profileInfo{

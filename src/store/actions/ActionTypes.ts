@@ -39,4 +39,5 @@ export enum LoginActions {
     ACCEPTED = "ACCEPTED", 
     DECLINED = "DECLINED",
     ATTEMPT = "ATTEMPT",
+    FINISHED_OK = "FINISHED_OK",
 }

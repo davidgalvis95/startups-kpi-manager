@@ -22,101 +22,14 @@ import UpdateKpi from "./components/body/create-kpi-form/UpdateKpi";
 import { SampleUser } from "./assets/sample-data/SamplePymeAndUserData";
 import { SamplePymes } from "./assets/sample-data/SamplePymeAndUserData";
 import NewUserAccountForm from "./components/body/account-form/NewUserAccountForm";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./components/login/Login";
+import React from "react";
+import NavBar from "./components/navbar/NavBar";
+import Layout from "./components/layout/Layout";
 
 function App() {
-  const sideNavBarStatus = useSelector(
-    (state: RootState) => state?.sideNavBarStatusReducer
-  );
-
-
-
-  useEffect(() => {}, [sideNavBarStatus]);
-
-  const routes = (
-    <Routes>
-      <Route path='/cube/login' element={<Login/>} />
-      <Route path="/create-kpi" element={<CreateNewKpi />} />
-      <Route path="/update-kpi" element={<UpdateKpi />} />
-      <Route
-        path="/update-kpi/upload-kpi-data"
-        element={<KpiDataUploading />}
-      />
-      <Route path="/start-up-table" element={<StartupTable />} />
-      <Route path="/profile" element={<Profile />} />
-      <Route path="/dashboard/:id" element={<Dashboard />} />
-    </Routes>
-  );
-
-  const kpis = sampleDataSet.allKpisDetailed;
-
-  const startupsContent: StartUpBodyRowContent[] = buildSampleRowContent();
-
-  const items: SideBarMenuItem[] = [
-    {
-      id: "1",
-      label: "Perfil",
-      icon: BsFillPersonFill,
-      url: "/",
-    },
-    {
-      id: "2",
-      label: "Dashboard",
-      icon: GoGraph,
-      url: "/",
-    },
-    {
-      id: "3",
-      label: "Listado de Startups",
-      icon: BsGrid1X2Fill,
-      url: "/",
-    },
-  ];
-
-  const card: SideBarMenuCard = {
-    id: "",
-    displayName: "CUBE VENTURES",
-    // TODO quitar de componentes hijos y de los css
-    title: "",
-    photoUrl: "./assets/images/cube_logo.jpg",
-    url: "/",
-  };
-
-  // return (
-  //   <div>
-  //     {/* <header> */}
-  //     <SideBarMenu items={items} card={card} />
-  //     <div
-  //       className={
-  //         sideNavBarStatus.isOpen
-  //           ? `${classes.bodyApp} ${classes.bodyAppCollapsed}`
-  //           : `${classes.bodyApp} ${classes.bodyAppExpanded}`
-  //       }
-  //     >
-  //       <TopNavBarMenu photoUrl={card.photoUrl} />
-  //       {/* <Profile card={card} user={SampleUser}/> */}
-  //       {/* <StartupTable displayContentArray={startupsContent}/> */}
-  //       {/* <NewPymeAccountForm /> */}
-  //       {/* <NewUserAccountForm pymes={SamplePymes}/> */}
-  //       {/* <Dashboard/> */}
-  //       {/* <CreateNewKpi/> */}
-  //       {/* <UpdateKpi kpis={kpis}/> */}
-  //       {/* <KpiDataUploading kpis={kpis}/> */}
-  //     </div>
-
-  //     {/* </header> */}
-  //   </div>
-  // );
-
-  return (
-    <Login/>
-  )
+  return <Layout />;
 }
 
 export default App;
-// yiqjdpmj

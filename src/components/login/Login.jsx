@@ -5,13 +5,24 @@ import useLoginAxios from "../../hooks/useLoginAxios";
 import useUserAxios from "../../hooks/useUserAxios";
 import usePymeAxios from "../../hooks/usePymeAxios";
 import useKpiAxios from "../../hooks/useKpiAxios";
+import { useNavigate } from "react-router-dom";
 import "./Login.scss";
+import {encrypt} from "../../util/Encryptor"
+const CryptoJS = require("crypto-js");
 
 const Login = () => {
   const [mode, setMode] = useState("login");
   const [loginLoading, setLoginLoading] = useState(false);
+  const [user1, setUser] = useState(undefined);
+  // const [kpis, setUser] = useState(undefined);
 
-  const { accepted, response, loginError } = useSelector(
+  const navigate = useNavigate();
+
+  const state = useSelector(
+    (state) => state
+  ); 
+
+  const { accepted, finishedOk, response, loginError } = useSelector(
     (state) => state?.loginReducer
   );
   const { user, errorOnUserOperation } = useSelector(
@@ -26,13 +37,18 @@ const Login = () => {
     (state) => state?.kpiReducer
   );
 
-  const { requestLoginPointer, startLoginOperationPointer } = useLoginAxios();
+  const {
+    requestLoginPointer,
+    finishLoginGracefullyPointer,
+    startLoginOperationPointer,
+  } = useLoginAxios();
   const { getUserPointer, startUserOperationPointer } = useUserAxios();
   const { getPymesPointer, startPymeOperationPointer } = usePymeAxios();
   const { getKpisPointer, startKpiOperationPointer } = useKpiAxios();
 
   useEffect(() => {
     if (accepted) {
+      console.log(state);
       startUserOperationPointer();
       getUserPointer(response.email);
     } else {
@@ -67,7 +83,7 @@ const Login = () => {
   useEffect(() => {
     if (pymes) {
       setLoginLoading(false);
-
+      finishLoginGracefullyPointer();
       //redirect to the StartUpTable component
     } else {
       if (errorOnPymeOperation) {
@@ -83,9 +99,15 @@ const Login = () => {
 
   useEffect(() => {
     if (kpis) {
+      finishLoginGracefullyPointer();
+      // const encrypterUrl = CryptoJS.AES.encrypt(
+      //   CryptoJS.enc.Utf8.parse(user.pymeId),
+      //   "mypassphrase"
+      // ).toString().replace('+','xMl3Jk').replace('/','Por21Ld').replace('=','Ml32');
+      const dashboardUrl = `/cube/platform/dashboard/${encrypt(user.pymeId)}`;
       setLoginLoading(false);
-
       //redirect to the Dashboard component
+      navigate(dashboardUrl);
     } else {
       if (errorOnKpiOperation) {
         console.log(errorOnKpiOperation);

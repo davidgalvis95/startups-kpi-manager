@@ -47,7 +47,7 @@ const pictureChangeReducer = (
     case UserActions.USER_ERROR:
       return new UserStatusImpl(false, undefined, action.errorOnUserOp);
     default:
-      return defaultState;
+      return state;
   }
 };
 

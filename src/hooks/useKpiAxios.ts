@@ -69,6 +69,7 @@ const useKpiAxios = () => {
   );
 
   const getAllKpis = useCallback(async (pymeId: string) => {
+
     try {
       //   const result = await kpiStartUpManagerAxios.get(`/kpis`);
       const result = await getAllFakeKpis(pymeId);
