@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Grid } from "@mui/material";
 import Card from "../../../hoc/Card";
-import { SideBarMenuCard } from "../../../types/types";
 import classes from "./Profile.module.css";
 import UserModifiableSection from "./UserModifiableSection";
 import PymeModifiableSection from "./PymeModifiableSection";
@@ -26,7 +25,7 @@ const defaultPymeData = {
   country: "",
   address: "",
   emailAddress: "",
-  photoUrl: "",
+  photoUrl: "CBVCBVCB",
   phone: "",
 }
 
@@ -56,8 +55,15 @@ const defualtUser: UserDataType = {
 };
 
 const Profile = () => {
+
+  // const [currentUser, setCurrentUser] = useState<>(defualtUser)
+
   const { isLoading, imageUrl } = useSelector(
     (state: RootState) => state?.pictureChangeReducer
+  );
+
+  const state = useSelector(
+    (state: RootState) => state
   );
 
   const { user } = useSelector(
@@ -65,14 +71,20 @@ const Profile = () => {
   );
 
   const { uploadImagePointer } = useFileUploadAxios();
-  const { updateUserPointer, startUserOperationPointer: startOperationPointer } = useUserAxios();
+  const { updateUserPointer, startUserOperationPointer } = useUserAxios();
 
 
   useEffect(() => {
+    console.log(state);
+  },[])
+
+  useEffect(() => {
     console.log(imageUrl)
-    const newUser = { ...user, photoUrl: imageUrl } as User;
-    updateUserPointer(newUser);
-    startOperationPointer();
+    if(imageUrl){
+      const newUser = { ...user, photoUrl: imageUrl } as User;
+      updateUserPointer(newUser);
+      startUserOperationPointer();
+    }
   }, [imageUrl]);
 
   const uploadPhoto = (files: FileList | null): void => {
@@ -97,7 +109,7 @@ const Profile = () => {
                 ) : (
                   <img
                     className={classes.profileImage}
-                    src={imageUrl === "" ? defualtUser.photoUrl : imageUrl}
+                    src={imageUrl || (user ? user.photoUrl : defualtUser.photoUrl)}
                     width="100%"
                   />
                 )}
@@ -133,6 +145,7 @@ const Profile = () => {
             <PymeModifiableSection
               pymeData={user? user.pyme : defaultPymeData}
               accessRights={user? user.rights : "USER"}
+              userId={user?.id}
             />
           </Card>
         </div>
@@ -148,13 +161,13 @@ const Profile = () => {
           {/* TODO set this to be dynamic */}
           <label>Formulario Para Actualizacion de Informacion de Usuario y Start-up</label>
         </div>
-        <RemoveButtonComp name={"Salir"} click={exitHandler} marginTop={"0rem"}/>
+        {/* <RemoveButtonComp name={"Salir"} click={exitHandler} marginTop={"0rem"}/> */}
         </div>
 
         </Card>
 
       <div>
-        <div>{user?outputComponent:null}</div>
+        <div>{outputComponent}</div>
       </div>
     </div>
   );

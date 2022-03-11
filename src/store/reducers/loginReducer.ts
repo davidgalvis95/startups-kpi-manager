@@ -44,6 +44,7 @@ const loginReducer = (
   state = defaultState,
   action: LoginRequest
 ): LoginStatus => {
+  console.log(action)
   switch (action.type) {
     case LoginActions.ATTEMPT:
       return new LoginStatusImpl(true, false, false, undefined, undefined);

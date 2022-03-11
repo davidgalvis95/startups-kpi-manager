@@ -12,7 +12,6 @@ import UserWithoutPyme from "../../../types/UserWithoutPyme";
 import AddButtonComp from "../../../hoc/add-button/AddButtonComp";
 import RemoveButtonComp from "../../../hoc/remove-button/RemoveButtonComp";
 import useUserAxios from "../../../hooks/useUserAxios";
-import defaultUserImageUrl from "../../../assets/images/profile.png"
 
 
 const defaultUser: UserDataType = {
@@ -45,6 +44,9 @@ const NewUserAccountForm = () => {
   const [pymeImageUrl, setPymeImageUrl] = useState<string>(
     defaultUser.photoUrl
   );
+  const [userImageUrl, setUserImageUrl] = useState<string>(
+    defaultUser.photoUrl
+  );
   const [pymesToDisplay, setPymesToDisplay] = useState<string[]>([]);
   const [pyme, setPyme] = useState<string>();
   var pattern = /^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;
@@ -56,13 +58,13 @@ const NewUserAccountForm = () => {
   const { uploadImagePointer } = useFileUploadAxios();
   const { createUserPointer, startUserOperationPointer: startOperationPointer } = useUserAxios();
 
-  useEffect(() => {
-    setPymesToDisplay(pymes ? pymes.map((pyme) => pyme.name) : []);
-  }, []);
-
   const { isLoading, imageUrl } = useSelector(
     (state: RootState) => state?.pictureChangeReducer
   );
+
+  useEffect(() => {
+    setPymesToDisplay(pymes ? pymes.map((pyme) => pyme.name) : []);
+  }, []);
 
   const uploadPhoto = (files: FileList | null): void => {
     if (files) {
@@ -80,7 +82,7 @@ const NewUserAccountForm = () => {
   const saveData = (): void => {
     if (password === passwordConfirmation && pattern.test(password)) {
       const user: UserWithoutPyme = new UserWithoutPyme(
-        { ...defaultUser, photoUrl: imageUrl, pymeId: pyme! },
+        { ...defaultUser, photoUrl: imageUrl || defaultUser.photoUrl, pymeId: pyme! },
         firstName,
         lastName,
         "",

@@ -15,7 +15,7 @@ interface UserModifiableSectionProps {
 }
 
 const UserModifiableSection = ({ userData }: UserModifiableSectionProps) => {
-  const [isInEditableMode, setIsInEditableMode] = useState<boolean>(true);
+  const [isInEditableMode, setIsInEditableMode] = useState<boolean>(false);
   const [firstName, setFirstName] = useState<string>(userData?.firstName || "");
   const [lastName, setLastName] = useState<string>(userData?.lastName || "");
   const [cityOfResidence, setCityOfResidence] = useState<string>(
@@ -30,7 +30,7 @@ const UserModifiableSection = ({ userData }: UserModifiableSectionProps) => {
     (state: RootState) => state?.userReducer
   );
 
-  const { updateUserPointer, startUserOperationPointer: startOperationPointer } = useUserAxios();
+  const { updateUserPointer, startUserOperationPointer } = useUserAxios();
 
   const saveData = (): void => {
     const newUser: User = new User(
@@ -45,7 +45,7 @@ const UserModifiableSection = ({ userData }: UserModifiableSectionProps) => {
     //TODO validate data
     console.log(newUser);
     updateUserPointer(newUser);
-    startOperationPointer();
+    startUserOperationPointer();
     handleEdition();
   };
 
@@ -61,7 +61,7 @@ const UserModifiableSection = ({ userData }: UserModifiableSectionProps) => {
           <label>Informacion del Usuario</label>
         </div>
         <div className={classes.title}>
-          {isInEditableMode ? (
+          {!isInEditableMode ? (
             <div onClick={() => handleEdition()}>
               <BiEdit cursor={"pointer"} />
             </div>
@@ -76,7 +76,7 @@ const UserModifiableSection = ({ userData }: UserModifiableSectionProps) => {
               placeholder={"Nombre"}
               value={firstName}
               change={(e: any) => setFirstName(e.target.value)}
-              disabled={isInEditableMode}
+              disabled={!isInEditableMode}
             />
           </div>
         </Grid>
@@ -87,7 +87,7 @@ const UserModifiableSection = ({ userData }: UserModifiableSectionProps) => {
               placeholder={"Apellido"}
               value={lastName}
               change={(e: any) => setLastName(e.target.value)}
-              disabled={isInEditableMode}
+              disabled={!isInEditableMode}
             />
           </div>
         </Grid>
@@ -98,7 +98,7 @@ const UserModifiableSection = ({ userData }: UserModifiableSectionProps) => {
               placeholder={"Nombre del usuario"}
               value={cityOfResidence}
               change={(e: any) => setCityOfResidence(e.target.value)}
-              disabled={isInEditableMode}
+              disabled={!isInEditableMode}
             />
           </div>
         </Grid>
@@ -109,7 +109,7 @@ const UserModifiableSection = ({ userData }: UserModifiableSectionProps) => {
               placeholder={"Direccion"}
               value={address}
               change={(e: any) => setAddress(e.target.value)}
-              disabled={isInEditableMode}
+              disabled={!isInEditableMode}
             />
           </div>
         </Grid>
@@ -120,7 +120,7 @@ const UserModifiableSection = ({ userData }: UserModifiableSectionProps) => {
               placeholder={"Telefono"}
               value={phone}
               change={(e: any) => setPhone(e.target.value)}
-              disabled={isInEditableMode}
+              disabled={!isInEditableMode}
             />
           </div>
         </Grid>
@@ -131,12 +131,12 @@ const UserModifiableSection = ({ userData }: UserModifiableSectionProps) => {
               placeholder={"Pais de Residencia"}
               value={countryOfResicence}
               change={(e: any) => setcountryOfResidence(e.target.value)}
-              disabled={isInEditableMode}
+              disabled={!isInEditableMode}
             />
           </div>
         </Grid>
       </Grid>
-      {!isInEditableMode && !userOperationLoading ? (
+      {isInEditableMode || userOperationLoading ? (
         <div className={classes.imageUploadCont}>
           {userOperationLoading ? (
             <div className={classes.ldsSpinnerSmall}></div>

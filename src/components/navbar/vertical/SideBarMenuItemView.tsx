@@ -18,7 +18,7 @@ export default function SideBarMenuItemView({
 
   return (
     <div className="SideBarMenuItemView">
-      <a href={item.url}>
+      <NavLink className="NavLink" to={item.url} replace>
         <div className={classNames("ItemContent", isOpen ? "" : "collapsed")}>
           <div className="icon">
             {item.label==="Perfil"?<item.icon size="30" style={profileStyle}></item.icon>:
@@ -28,7 +28,7 @@ export default function SideBarMenuItemView({
           <span className="label">{item.label}</span>
         </div>
         {/* {!isOpen ? <div className="tooltip">{item.label}</div> : ""} */}
-      </a>
+      </NavLink>
       {!isOpen ? <div className="tooltip">{item.label}</div> : ""}
     </div>
   );

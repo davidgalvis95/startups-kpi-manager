@@ -30,7 +30,7 @@ const NewPymeAccountForm = () => {
   const [email, setEmail] = useState<string>(defaultPyme.emailAddress);
   const [phone, setPhone] = useState<string>(defaultPyme.phone);
   const [pymeImageUrl, setPymeImageUrl] = useState<string>(
-    defaultPyme.photoUrl
+    defaultPyme.photoUrl!
   );
 
   const { isLoading, imageUrl } = useSelector(
@@ -39,6 +39,10 @@ const NewPymeAccountForm = () => {
 
   const { pymeOperationLoading } = useSelector(
     (state: RootState) => state?.pymeReducer
+  );
+
+  const { user } = useSelector(
+    (state: RootState) => state?.userReducer
   );
 
   const { uploadImagePointer } = useFileUploadAxios();
@@ -53,7 +57,7 @@ const NewPymeAccountForm = () => {
   const saveData = (): void => {
     const startup: StartUpType = new StartUp(
       //The id is set by the backend
-      { ...defaultPyme, photoUrl: imageUrl },
+      { ...defaultPyme, photoUrl: imageUrl},
       name,
       "",
       "",
@@ -63,8 +67,10 @@ const NewPymeAccountForm = () => {
     );
     console.log(startup);
     //TODO Validate all the fields
-    createPymePointer(startup);
-    startOperationPointer();
+    if(user){
+      createPymePointer(startup, user.id);
+      startOperationPointer();
+    }
   };
 
   const exitHandler = (): void => {
@@ -94,7 +100,7 @@ const NewPymeAccountForm = () => {
               ) : (
                 <img
                   className={classes.profileImage}
-                  src={imageUrl === "" ? pymeImageUrl : imageUrl}
+                  src={imageUrl ? imageUrl :pymeImageUrl}
                   width="100%"
                 />
               )}

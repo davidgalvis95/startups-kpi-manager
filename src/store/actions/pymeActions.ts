@@ -5,6 +5,7 @@ export interface PymeRelatedRequest {
   type: PymeActions;
   pyme?: StartUpType;
   pymes?: StartUpType[];
+  userRights?: string;
   errorOnPymeOp?: Error;
 }
 
@@ -12,17 +13,20 @@ export class PymeRelatedRequestImpl implements PymeRelatedRequest {
   type: PymeActions;
   pyme?: StartUpType;
   pymes?: StartUpType[];
+  userRights?: string;
   errorOnPymeOp?: Error;
 
   constructor(
     public typeOfAction: PymeActions,
     public incomingPyme: StartUpType | undefined,
     public incomingPymes: StartUpType[] | undefined,
+    public userRights1: string | undefined,
     public errorData: Error | undefined
   ) {
     this.type = typeOfAction;
     this.pyme = incomingPyme;
     this.pymes = incomingPymes;
+    this.userRights = userRights1;
     this.errorOnPymeOp = errorData;
   }
 
@@ -45,6 +49,7 @@ const updatedPyme: Function = (
   return {
     type: request.type,
     pyme: request.pyme,
+    userRights: request.userRights,
   };
 };
 
@@ -52,6 +57,7 @@ const gotPyme: Function = (request: PymeRelatedRequest): PymeRelatedRequest => {
   return {
     type: request.type,
     pyme: request.pyme,
+    userRights: request.userRights,
   };
 };
 
@@ -61,6 +67,7 @@ const gotPymes: Function = (
   return {
     type: request.type,
     pymes: request.pymes,
+    userRights: request.userRights,
   };
 };
 
@@ -70,6 +77,7 @@ const pymeCreated: Function = (
   return {
     type: request.type,
     pyme: request.pyme,
+    userRights: request.userRights,
   };
 };
 

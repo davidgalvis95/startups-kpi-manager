@@ -3,14 +3,14 @@ import { PictureChangeState } from "../actions/pictureChangeActions";
 
 interface PictureUploadStatus {
   isLoading: boolean;
-  imageUrl: string;
+  imageUrl?: string;
 }
 
 class PictureUploadStatusImpl implements PictureUploadStatus {
   isLoading: boolean;
-  imageUrl: string;
+  imageUrl?: string;
 
-  constructor(public loading: boolean, public url: string) {
+  constructor(public loading: boolean, public url: string | undefined) {
     this.isLoading = loading;
     this.imageUrl = url;
   }
@@ -18,7 +18,7 @@ class PictureUploadStatusImpl implements PictureUploadStatus {
 
 const defaultState: PictureUploadStatus = {
   isLoading: false,
-  imageUrl: "",
+  imageUrl: undefined,
 };
 
 const pictureChangeReducer = (

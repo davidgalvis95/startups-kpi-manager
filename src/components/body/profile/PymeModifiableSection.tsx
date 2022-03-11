@@ -15,9 +15,10 @@ import usePymeAxios from "../../../hooks/usePymeAxios";
 interface PymeModifiableSectionProps {
   pymeData?: StartUpType;
   accessRights?: string;
+  userId?: string;
 }
 
-const defaultPymeData = { 
+const defaultPymeData = {
   pymeId: "",
   active: false,
   name: "",
@@ -27,13 +28,14 @@ const defaultPymeData = {
   emailAddress: "",
   photoUrl: "",
   phone: "",
-}
+};
 
 const PymeModifiableSection = ({
   pymeData = defaultPymeData,
   accessRights = "USER",
+  userId,
 }: PymeModifiableSectionProps) => {
-  const [isInEditableMode, setIsInEditableMode] = useState<boolean>(true);
+  const [isInEditableMode, setIsInEditableMode] = useState<boolean>(false);
   const [name, setName] = useState<string>(pymeData?.name || "");
   const [active, setActive] = useState<boolean | undefined>(pymeData?.active);
   const [emailAddress, setEmailAddress] = useState<string>(
@@ -47,7 +49,10 @@ const PymeModifiableSection = ({
     (state: RootState) => state?.pymeReducer
   );
 
-  const { updatePymePointer, startPymeOperationPointer: startOperationPointer } = usePymeAxios();
+  const {
+    updatePymePointer,
+    startPymeOperationPointer: startOperationPointer,
+  } = usePymeAxios();
 
   const handleEdition = (): void => {
     setIsInEditableMode(!isInEditableMode);
@@ -65,8 +70,11 @@ const PymeModifiableSection = ({
     );
     //TODO validate data
     console.log(startup);
-    updatePymePointer(startup);
-    startOperationPointer();
+    if (userId) {
+      updatePymePointer(startup, userId);
+      startOperationPointer();
+    }
+
     handleEdition();
   };
 
@@ -78,7 +86,7 @@ const PymeModifiableSection = ({
           <label>Informacion de la Start-Up</label>
         </div>
         <div className={classes.title}>
-          {isInEditableMode ? (
+          {!isInEditableMode ? (
             <div onClick={() => handleEdition()}>
               <BiEdit cursor={"pointer"} />
             </div>
@@ -93,7 +101,7 @@ const PymeModifiableSection = ({
               placeholder={"Nombre de la Empresa"}
               value={name}
               change={(e: any) => setName(e.target.value)}
-              disabled={isInEditableMode}
+              disabled={!isInEditableMode}
             />
           </div>
         </Grid>
@@ -117,7 +125,7 @@ const PymeModifiableSection = ({
               placeholder={"Ciudad"}
               value={city}
               change={(e: any) => setCity(e.target.value)}
-              disabled={isInEditableMode}
+              disabled={!isInEditableMode}
             />
           </div>
         </Grid>
@@ -128,7 +136,7 @@ const PymeModifiableSection = ({
               placeholder={"Direccion"}
               value={address}
               change={(e: any) => setAddress(e.target.value)}
-              disabled={isInEditableMode}
+              disabled={!isInEditableMode}
             />
           </div>
         </Grid>
@@ -139,7 +147,7 @@ const PymeModifiableSection = ({
               placeholder={"Correo Electronico"}
               value={emailAddress}
               change={(e: any) => setEmailAddress(e.target.value)}
-              disabled={isInEditableMode}
+              disabled={!isInEditableMode}
             />
           </div>
         </Grid>
@@ -150,7 +158,7 @@ const PymeModifiableSection = ({
               placeholder={"Pais de Origen"}
               value={country}
               change={(e: any) => setCountry(e.target.value)}
-              disabled={isInEditableMode}
+              disabled={!isInEditableMode}
             />
           </div>
         </Grid>
@@ -161,12 +169,12 @@ const PymeModifiableSection = ({
               placeholder={"telefono de la Empresa"}
               value={phone}
               change={(e: any) => setPhone(e.target.value)}
-              disabled={isInEditableMode}
+              disabled={!isInEditableMode}
             />
           </div>
         </Grid>
       </Grid>
-      {!isInEditableMode && !pymeOperationLoading ? (
+      {isInEditableMode || pymeOperationLoading ? (
         <div className={classes.imageUploadCont}>
           {pymeOperationLoading ? (
             <div className={classes.ldsSpinnerSmall}></div>

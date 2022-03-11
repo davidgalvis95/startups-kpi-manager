@@ -15,6 +15,8 @@ import Login from "../login/Login";
 const Layout = () => {
   const loginStatus = useSelector((state: RootState) => state?.loginReducer);
   const { user } = useSelector((state: RootState) => state?.userReducer);
+  const { kpis } = useSelector((state: RootState) => state?.kpiReducer);
+
 
   const loginRoutes = (
     <Routes>
@@ -26,7 +28,7 @@ const Layout = () => {
     <Routes>
       <Route path="/cube/platform/profile" element={<Profile />} />
       <Route path="/cube/platform/new-kpi" element={<CreateNewKpi />} />
-      <Route path="/cube/platform/update-kpi" element={<UpdateKpi />} />
+      <Route path="/cube/platform/update-kpi" element={<UpdateKpi kpis={kpis?.allKpisDetailed}/>} />
       <Route
         path="/cube/platform/update-kpi/upload-kpi-data"
         element={<KpiDataUploading />}
@@ -47,7 +49,7 @@ const Layout = () => {
     <Routes>
       <Route path="/cube/platform/profile" element={<Profile />} />
       <Route path="/cube/platform/new-kpi" element={<CreateNewKpi />} />
-      <Route path="/cube/platform/update-kpi" element={<UpdateKpi />} />
+      <Route path="/cube/platform/update-kpi" element={<UpdateKpi kpis={kpis?.allKpisDetailed}/>} />
       <Route
         path="/cube/platform/update-kpi/upload-kpi-data"
         element={<KpiDataUploading />}
@@ -74,14 +76,14 @@ const Layout = () => {
 
   return (
     <div>
-      {loginStatus.accepted || loginStatus.finishedOk ? (
+      {/* {!loginStatus.accepted || !loginStatus.finishedOk ? (
         loginRoutes
       ) : (
         <NavBar>{routes}</NavBar>
-      )}
+      )} */}
 
-      {/* {loginRoutes}
-      <NavBar>{defaultRoute}</NavBar> */}
+      {loginRoutes}
+      <NavBar>{defaultRoute}</NavBar>
     </div>
   );
 };

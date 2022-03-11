@@ -13,6 +13,7 @@ import { SideBarMenuCard, SideBarMenuItem } from "../../types/types";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/reducers/rootReducer";
 import classes from "./NavBar.module.css";
+import { encrypt } from "../../util/Encryptor";
 
 const CryptoJS = require("crypto-js");
 
@@ -136,10 +137,7 @@ const NavBar = (props: NavBarProps) => {
       const dashboardItem = newItems[1];
       const newDashBoardItem = {
         ...dashboardItem,
-        url: `/cube/platform/dashboard/${CryptoJS.AES.encrypt(
-          CryptoJS.enc.Utf8.parse(user.pymeId),
-          "mypassphrase"
-        )}`,
+        url: `/cube/platform/dashboard/${encrypt(user.pymeId)}`,
       };
 
       newItems[1] = newDashBoardItem;

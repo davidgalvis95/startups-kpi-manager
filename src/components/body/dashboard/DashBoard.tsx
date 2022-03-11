@@ -9,6 +9,7 @@ import ChartTypes from "./charts/ChartTypes";
 import { ImportantKpi, Kpi } from "../../../types/Kpi";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/reducers/rootReducer";
+import { useNavigate } from "react-router-dom";
 
 const drawKpiChartsWrapper = (
   chartTypes: string[],
@@ -71,6 +72,7 @@ const Dashboard = () => {
   const { kpi, kpis } = useSelector((state: RootState) => state?.kpiReducer);
   const [importantKpis, setImportantKpis] = useState<ImportantKpi[]>([]);
   const [kpisDetails, setKpisDetails] = useState<Kpi[]>([]);
+  const navigate = useNavigate();
   // const [externalCallOperation, setExternalCallOperation] = 
 
   useEffect(() => {
@@ -85,7 +87,9 @@ const Dashboard = () => {
   // const kpis: Kpi[] = sampleDataSet.allKpisDetailed;
   //TODO use reducer to get data from company
 
-  const createKpiHandler = () => {};
+  const createKpiHandler = () => {
+    navigate("/cube/platform/new-kpi");
+  };
 
   return (
     <div>

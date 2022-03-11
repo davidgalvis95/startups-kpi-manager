@@ -8,7 +8,7 @@ export class StartUp implements StartUpType {
   country: string;
   address: string;
   emailAddress: string;
-  photoUrl: string;
+  photoUrl?: string;
   phone: string;
 
   constructor(

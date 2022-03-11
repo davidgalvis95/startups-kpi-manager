@@ -3,21 +3,27 @@ import { PymeKpiWrapper } from "../../types/Kpi";
 export const SampleKpis: PymeKpiWrapper = {
   importantKpis: [
     {
+      id: "30a97c3f-81ec-41bd-822e-a43eb63f60d6",
       name: "Ventas",
       value: 500000,
       und: "USD",
     },
     {
+      id: "30a97c3f-81ec-41bd-822e-a43eb63f60d6",
+
       name: "Empleados",
       value: 200000,
       und: "USD",
     },
     {
+      id: "30a97c3f-81ec-41bd-822e-a43eb63f60d6",
+
       name: "Ventas Por Redes Sociales",
       value: 300000,
       und: "USD",
     },
     {
+      id: "30a97c3f-81ec-41bd-822e-a43eb63f60d6",
       name: "Margen",
       value: -5000,
       und: "USD",
@@ -25,6 +31,7 @@ export const SampleKpis: PymeKpiWrapper = {
   ],
   allKpisDetailed: [
     {
+      id: "30a97c3f-81ec-41bd-822e-a43eb63f60d6",
       name: "Ventas",
       und: "USD",
       total: [
@@ -73,6 +80,7 @@ export const SampleKpis: PymeKpiWrapper = {
       mainKpi: true,
     },
     {
+      id: "30a97c3f-81ec-41bd-822e-a43eb63f60d6",
       name: "Empleados por Contrato",
       und: "USD",
       total: [300, 305, 310, 315, 300, 280, 290, 310, 295, 320, 305],

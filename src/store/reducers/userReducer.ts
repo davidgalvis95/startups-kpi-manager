@@ -37,8 +37,10 @@ const pictureChangeReducer = (
 ): UserStatus => {
   switch (action.type) {
     case UserActions.LOADING_USER_CREATION_OR_FETCHING:
-      return new UserStatusImpl(true, undefined, undefined);
+      const user = state.user || undefined;
+      return new UserStatusImpl(true, user, undefined);
     case UserActions.USER_CREATED:
+      //In the api this should add to the existent users
       return new UserStatusImpl(false, action.user, undefined);
     case UserActions.USER_FETCHED:
       return new UserStatusImpl(false, action.user, undefined);

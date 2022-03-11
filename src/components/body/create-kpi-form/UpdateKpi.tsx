@@ -18,6 +18,7 @@ interface UpdateKpiProps {
 }
 
 const defaultKpi: Kpi = {
+  id: "",
   name: "",
   und: "",
   labelType: "",

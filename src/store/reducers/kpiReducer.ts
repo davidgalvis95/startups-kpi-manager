@@ -2,7 +2,6 @@ import { Kpi, PymeKpiWrapper } from "../../types/Kpi";
 import { KpiRelatedRequest } from "../actions/kpiActions";
 import { KpiActions } from "../actions/ActionTypes";
 
-
 interface KpiStatus {
   kpiOperationLoading: boolean;
   kpi?: Kpi;
@@ -36,21 +35,71 @@ const defaultState: KpiStatus = {
   errorOnKpiOperation: undefined,
 };
 
+const addNewKpiDetailToNonExistentKpis = (
+  kpi?: Kpi
+): PymeKpiWrapper | undefined => {
+  if (!kpi) {
+    return undefined;
+  }
+  return {
+    importantKpis: [],
+    allKpisDetailed: [kpi],
+  };
+};
+
+const addNewKpiDetailToExistentKpis = (
+  kpis: PymeKpiWrapper,
+  kpi?: Kpi
+): PymeKpiWrapper => {
+  if (!kpi) return kpis;
+  const newKpisDetailed = { ...kpis }.allKpisDetailed;
+  newKpisDetailed.push(kpi);
+  return {
+    ...kpis,
+    allKpisDetailed: newKpisDetailed,
+  };
+};
+
+const updateKpiDetailOnExistentKpis = (
+  kpis: PymeKpiWrapper,
+  kpi?: Kpi
+): PymeKpiWrapper => {
+  if (!kpi) return kpis;
+  const newKpisDetailed: Kpi[] = { ...kpis }.allKpisDetailed;
+  const index: number = newKpisDetailed.indexOf(
+    newKpisDetailed.filter((oldKpi) => oldKpi.id === kpi.id)[0]
+  );
+  newKpisDetailed[index] = kpi;
+  return {
+    ...kpis,
+    allKpisDetailed: newKpisDetailed,
+  };
+};
+
 const pictureChangeReducer = (
   state = defaultState,
   action: KpiRelatedRequest
 ): KpiStatus => {
+  const kpi = state.kpi || undefined;
+  const kpis = state.kpis || undefined;
   switch (action.type) {
     case KpiActions.LOADING_KPI_CREATION_OR_FETCHING:
-      return new KpiStatusImpl(true, undefined, undefined, undefined);
+      return new KpiStatusImpl(true, kpi, kpis, undefined);
     case KpiActions.KPI_CREATED:
-      return new KpiStatusImpl(false, action.kpi, undefined, undefined);
+      const newKpis = action.kpis
+        ? addNewKpiDetailToExistentKpis(action.kpis, action.kpi)
+        : addNewKpiDetailToNonExistentKpis(action.kpi);
+      return new KpiStatusImpl(false, action.kpi, newKpis, undefined);
     case KpiActions.KPI_FETCHED:
-      return new KpiStatusImpl(false, action.kpi, undefined, undefined);
+      return new KpiStatusImpl(false, action.kpi, kpis, undefined);
     case KpiActions.KPIS_FETCHED:
-      return new KpiStatusImpl(false, undefined, action.kpis, undefined);
+      return new KpiStatusImpl(false, kpi, action.kpis, undefined);
     case KpiActions.KPI_UPDATED:
-      return new KpiStatusImpl(false, action.kpi, undefined, undefined);
+      const newUpdatedKpis = updateKpiDetailOnExistentKpis(
+        action.kpis!,
+        action.kpi
+      );
+      return new KpiStatusImpl(false, action.kpi, newUpdatedKpis, undefined);
     case KpiActions.KPI_ERROR:
       return new KpiStatusImpl(
         false,

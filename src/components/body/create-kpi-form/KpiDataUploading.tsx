@@ -40,6 +40,7 @@ const setRagneOfYears = (): string[] => {
 };
 
 const defaultKpi: Kpi = {
+  id:"",
   name: "",
   und: "",
   labelType: "",

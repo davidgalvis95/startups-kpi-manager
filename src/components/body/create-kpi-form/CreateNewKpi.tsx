@@ -13,6 +13,7 @@ import { RootState } from "../../../store/reducers/rootReducer";
 import useKpiAxios from "../../../hooks/useKpiAxios";
 
 const defaultKpi: Kpi = {
+  id: "",
   name: "",
   und: "",
   labelType: "",
@@ -52,6 +53,7 @@ const CreateNewKpi = (props: any) => {
     };
     //TODO Validate all the fields
     console.log(kpiDataCopy);
+    console.log(user!.pymeId)
     createKpiPointer(kpiDataCopy, user!.pymeId);
     startOperationPointer();
   };
@@ -229,10 +231,7 @@ const CreateNewKpi = (props: any) => {
           ) : null}
           {/* Create attribute component */}
           <div className={classes.saveButtonWrapper}>
-            <AddButtonComp
-              name={"Guardar Datos"}
-              click={(e: any) => saveInfoHandler()}
-            />
+
             {kpiOperationLoading ? (
               <div className={classes.ldsSpinnerSmall}></div>
             ) : (

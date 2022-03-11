@@ -35,21 +35,71 @@ const defaultState: PymeStatus = {
   errorOnPymeOperation: undefined,
 };
 
+const addNewPymeDetailToNonExistentPymes = (
+  pyme?: StartUpType
+): StartUpType[] | undefined => {
+  if (!pyme) {
+    return undefined;
+  }
+  return [pyme];
+};
+
+const addNewPymeDetailToExistentPymes = (
+  pymes: StartUpType[],
+  pyme?: StartUpType
+): StartUpType[] => {
+  if (!pyme) return pymes;
+  const newPymes = [...pymes];
+  newPymes.push(pyme);
+  return newPymes;
+};
+
+const updatePymeDetailOnExistentPymes = (
+  pymes: StartUpType[],
+  pyme?: StartUpType
+): StartUpType[] => {
+  if (!pyme) return pymes;
+  const newPymes: StartUpType[] = [...pymes];
+  const index: number = newPymes.indexOf(
+    newPymes.filter((oldPyme) => oldPyme.pymeId === oldPyme.pymeId)[0]
+  );
+  newPymes[index] = pyme;
+  return newPymes;
+};
+
 const pictureChangeReducer = (
   state = defaultState,
   action: PymeRelatedRequest
 ): PymeStatus => {
+  const pyme = state.pyme || undefined;
+  const pymes = state.pymes || undefined;
   switch (action.type) {
     case PymeActions.LOADING_PYME_CREATION_OR_FETCHING:
-      return new PymeStatusImpl(true, undefined, undefined, undefined);
+      return new PymeStatusImpl(true, pyme, pymes, undefined);
     case PymeActions.PYME_CREATED:
-      return new PymeStatusImpl(false, action.pyme, undefined, undefined);
+      const newPymes = pymes
+        ? addNewPymeDetailToExistentPymes(pymes, action.pyme)
+        : addNewPymeDetailToNonExistentPymes(action.pyme);
+      return new PymeStatusImpl(false, action.pyme, newPymes, undefined);
     case PymeActions.PYME_FETCHED:
-      return new PymeStatusImpl(false, action.pyme, undefined, undefined);
+      return new PymeStatusImpl(false, action.pyme, pymes, undefined);
     case PymeActions.PYMES_FETCHED:
-      return new PymeStatusImpl(false, undefined, action.pymes, undefined);
+      return new PymeStatusImpl(false, pyme, action.pymes, undefined);
     case PymeActions.PYME_UPDATED:
-      return new PymeStatusImpl(false, action.pyme, undefined, undefined);
+      if (action.userRights === "ADMIN") {
+        const newUpdatedPymes = updatePymeDetailOnExistentPymes(
+          action.pymes!,
+          action.pyme
+        );
+        return new PymeStatusImpl(
+          false,
+          action.pyme,
+          newUpdatedPymes,
+          undefined
+        );
+      } else {
+        return new PymeStatusImpl(false, action.pyme, pymes, undefined);
+      }
     case PymeActions.PYME_ERROR:
       return new PymeStatusImpl(
         false,
