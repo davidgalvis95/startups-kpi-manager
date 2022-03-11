@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
-import { sampleDataSet } from "../../../../../assets/sample-data/BarLineChartDataset";
 import ColorSelection from "../ColorSelection";
 import { ElementsToChar, ElementsToCharData } from "../../../../../types/types";
 import { KpiChartWrapperContext } from "../KpiChartWrapper";

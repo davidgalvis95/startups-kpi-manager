@@ -10,7 +10,6 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import ColorSelection from "../ColorSelection";
-import { sampleDataSet } from "../../../../../assets/sample-data/BarLineChartDataset";
 import { KpiChartWrapperContext } from "../KpiChartWrapper";
 import { ElementsToChar, ElementsToCharData } from "../../../../../types/types";
 

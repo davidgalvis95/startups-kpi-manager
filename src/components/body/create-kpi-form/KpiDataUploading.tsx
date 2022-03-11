@@ -29,6 +29,7 @@ const months = [
   "Sep",
   "Oct",
   "Nov",
+  "Dic",
 ];
 
 const setRagneOfYears = (): string[] => {
@@ -40,7 +41,7 @@ const setRagneOfYears = (): string[] => {
 };
 
 const defaultKpi: Kpi = {
-  id:"",
+  id: "",
   name: "",
   und: "",
   labelType: "",
@@ -55,6 +56,7 @@ const defaultKpi: Kpi = {
 const KpiDataUploading = () => {
   const { kpis } = useSelector((state: RootState) => state?.kpiReducer);
 
+  const [indexOfLabelExists, setIndexOfLabelExists] = useState<boolean>(false);
   const [currentKpi, setCurrentKpi] = useState<Kpi>(defaultKpi);
   const [currentYear, setCurrentYear] = useState<string>("");
   const [currentMonth, setCurrentMonth] = useState<string>("");
@@ -102,18 +104,17 @@ const KpiDataUploading = () => {
         labels: currentVariables,
         total: recalculateTotals(currentVariables, currentKpi.attributes),
       };
+      console.log(kpiToPersist);
     } else {
-      const newLabels: string[] = { ...currentKpi }.labels;
-      newLabels.push(currentMonth + "-" + currentYear);
+      const labelsCopy: string[] = { ...currentKpi }.labels;
       kpiToPersist = {
         ...currentKpi,
-        labels: newLabels,
-        total: recalculateTotals(newLabels, currentKpi.attributes),
+        total: recalculateTotals(labelsCopy, currentKpi.attributes),
       };
+      console.log(kpiToPersist);
     }
     //TODO Validate Data
     //TODO send api request to save data
-    console.log(kpiToPersist);
     updateKpiPointer(kpiToPersist, user!.pymeId);
     startOperationPointer();
   };
@@ -123,9 +124,9 @@ const KpiDataUploading = () => {
     attributes: KpiAttribute[]
   ): number[] => {
     return labels.map((label, labIndex) => {
-      const tolatValueForLabelIndex = 0;
+      let tolatValueForLabelIndex = 0;
       attributes.forEach(
-        (attribute) => tolatValueForLabelIndex + attribute.values[labIndex]
+        (attribute) => tolatValueForLabelIndex += attribute.values[labIndex]
       );
       return tolatValueForLabelIndex;
     });
@@ -177,35 +178,50 @@ const KpiDataUploading = () => {
     );
   };
 
+  const createNewLabelIfDoesNotExistonLabelsWhenDates = () => {
+    const labelsCopy = { ...currentKpi }.labels;
+    const indexOfSelectedDate = labelsCopy.indexOf(
+      currentMonth + "-" + currentYear
+    );
+    if (indexOfSelectedDate === -1) {
+      console.log("dsfdgfdgfdgdfg");
+      labelsCopy.push(currentMonth + "-" + currentYear);
+    }
+    setCurrentKpi({ ...currentKpi, labels: labelsCopy });
+  };
+
   const setAttributeValue = (e: any, index: number) => {
-    const newKpi: Kpi = {
-      ...currentKpi,
-      attributes: { ...currentKpi }.attributes.map(
-        (attribute: KpiAttribute, aIndex: number): KpiAttribute => {
-          if (aIndex === index) {
-            const val: number[] = { ...attribute }.values;
-            console.log(selectedValueIndex);
-            const indexOfCurrentVariableLabel = kpiLabelsOfDateType
-              ? { ...currentKpi }.labels.indexOf(
-                  currentMonth + "-" + currentYear
-                )
-              : selectedValueIndex;
-            if (indexOfCurrentVariableLabel !== -1) {
-              val[indexOfCurrentVariableLabel] = +e.target.value;
+    if (currentYear && currentMonth) {
+      createNewLabelIfDoesNotExistonLabelsWhenDates();
+      const newKpi: Kpi = {
+        ...currentKpi,
+        attributes: { ...currentKpi }.attributes.map(
+          (attribute: KpiAttribute, aIndex: number): KpiAttribute => {
+            if (aIndex === index) {
+              const val: number[] = { ...attribute }.values;
+              console.log(val);
+              const indexOfCurrentVariableLabel = kpiLabelsOfDateType
+                ? { ...currentKpi }.labels.indexOf(
+                    currentMonth + "-" + currentYear
+                  )
+                : selectedValueIndex;
+              if (indexOfCurrentVariableLabel > val.length - 1) {
+                val.push(+e.target.value);
+              } else {
+                val[indexOfCurrentVariableLabel] = +e.target.value;
+              }
+              return {
+                ...attribute,
+                values: val,
+              };
             } else {
-              val.push(+e.target.value);
+              return { ...attribute };
             }
-            return {
-              ...attribute,
-              values: val,
-            };
-          } else {
-            return { ...attribute };
           }
-        }
-      ),
-    };
-    setCurrentKpi(newKpi);
+        ),
+      };
+      setCurrentKpi(newKpi);
+    }
   };
 
   const changeMonthHandler = (e: any): void =>

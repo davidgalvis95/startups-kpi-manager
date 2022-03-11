@@ -86,8 +86,8 @@ const pictureChangeReducer = (
     case KpiActions.LOADING_KPI_CREATION_OR_FETCHING:
       return new KpiStatusImpl(true, kpi, kpis, undefined);
     case KpiActions.KPI_CREATED:
-      const newKpis = action.kpis
-        ? addNewKpiDetailToExistentKpis(action.kpis, action.kpi)
+      const newKpis = kpis
+        ? addNewKpiDetailToExistentKpis(kpis, action.kpi)
         : addNewKpiDetailToNonExistentKpis(action.kpi);
       return new KpiStatusImpl(false, action.kpi, newKpis, undefined);
     case KpiActions.KPI_FETCHED:
@@ -96,7 +96,7 @@ const pictureChangeReducer = (
       return new KpiStatusImpl(false, kpi, action.kpis, undefined);
     case KpiActions.KPI_UPDATED:
       const newUpdatedKpis = updateKpiDetailOnExistentKpis(
-        action.kpis!,
+        kpis!,
         action.kpi
       );
       return new KpiStatusImpl(false, action.kpi, newUpdatedKpis, undefined);
