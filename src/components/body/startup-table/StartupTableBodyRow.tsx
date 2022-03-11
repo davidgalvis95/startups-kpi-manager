@@ -10,7 +10,7 @@ interface StartupTableBodyRowProps {
 
 const StartupTableBodyRow = ({ cellsContent, click }: StartupTableBodyRowProps) => {
   const dotStyle = {
-    color: cellsContent.status === "Activa" ? "#33d9b2" : "#ff5252",
+    color: cellsContent.status === "true" ? "#33d9b2" : "#ff5252",
     marginRight: "5px",
   };
 
@@ -32,7 +32,7 @@ const StartupTableBodyRow = ({ cellsContent, click }: StartupTableBodyRowProps) 
           <div>
             <FaDotCircle style={dotStyle} />
           </div>
-          {cellsContent.status}
+          {cellsContent.status=="true"?"Activa":"Inactiva"}
         </div>
       </td>
       <td className={classes.column4}>{cellsContent.address}</td>

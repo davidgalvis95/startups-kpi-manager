@@ -11,7 +11,7 @@ export const SampleUsers: UserDataType[] = [
     photoUrl: "../../../assets/images/cube_logo.jpg",
     phone: "123456789",
     emailAddress: "mpaula456@hotmail.com",
-    rights: "USER",
+    rights: "ADMIN",
     pymeId: "daf2b76e-7a47-4c40-9ca6-bab74676aedf",
     pyme: {
       pymeId: "daf2b76e-7a47-4c40-9ca6-bab74676aedf",
@@ -35,7 +35,7 @@ export const SampleUsers: UserDataType[] = [
     photoUrl: "../../../assets/images/cube_logo.jpg",
     phone: "123456789",
     emailAddress: "mpaula456@hotmail.com",
-    rights: "USER",
+    rights: "ADMIN",
     pymeId: "daf2b76e-7a47-4c40-9ca6-bab74676aedf",
     pyme: {
       pymeId: "daf2b76e-7a47-4c40-9ca6-bab74676aedf",
@@ -59,7 +59,7 @@ export const SampleUsers: UserDataType[] = [
     photoUrl: "../../../assets/images/cube_logo.jpg",
     phone: "123456789",
     emailAddress: "mpaula456@hotmail.com",
-    rights: "USER",
+    rights: "ADMIN",
     pymeId: "daf2b76e-7a47-4c40-9ca6-bab74676aedf",
     pyme: {
       pymeId: "daf2b76e-7a47-4c40-9ca6-bab74676aedf",
