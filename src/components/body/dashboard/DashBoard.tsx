@@ -4,12 +4,13 @@ import Card from "../../../hoc/Card";
 import CustomButton from "../../../hoc/CustomButton";
 import KpiLineChartWrapper from "./charts/KpiChartWrapper";
 import classes from "./Dashboard.module.css";
-import { SampleKpis as sampleDataSet } from "../../../assets/sample-data/SampleKpis";
 import ChartTypes from "./charts/ChartTypes";
 import { ImportantKpi, Kpi } from "../../../types/Kpi";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/reducers/rootReducer";
 import { useNavigate } from "react-router-dom";
+import KpiChartLogicHandler from "./charts/KpiChartLogicHandler";
+import { sortLabels } from "./DateComparator";
 
 const drawKpiChartsWrapper = (
   chartTypes: string[],
@@ -68,15 +69,43 @@ const drawImportantKpis = (kpis: ImportantKpi[]): JSX.Element[] => {
   });
 };
 
+const logicHadler: KpiChartLogicHandler = KpiChartLogicHandler.getInstance();
+
 const Dashboard = () => {
   const { kpi, kpis } = useSelector((state: RootState) => state?.kpiReducer);
   const [importantKpis, setImportantKpis] = useState<ImportantKpi[]>([]);
   const [kpisDetails, setKpisDetails] = useState<Kpi[]>([]);
   const navigate = useNavigate();
-  // const [externalCallOperation, setExternalCallOperation] = 
 
   useEffect(() => {
-    setKpisDetails(kpis?.allKpisDetailed || []);
+    if (kpis && kpis.allKpisDetailed) {
+      const newKpis = { ...kpis }?.allKpisDetailed?.map((kpi) => {
+        const oldLabels = [...kpi.labels];
+        const sortedLabels: string[] = sortLabels({...kpi}.labels);
+        console.log(oldLabels)
+        const newAttributesWithSortedValues = {...kpi}.attributes.map(
+          (attribute, index) => {
+            const mapper: Map<number, number> =
+              logicHadler.createFromIndexToIndexMapper(
+                oldLabels,
+                sortedLabels
+              );
+            const orderedValues: number[] =
+              logicHadler.orderTheValuesAccordingToMapper(
+                mapper,
+                {...attribute}.values
+              );
+            return { ...attribute, values: orderedValues };
+          }
+        );
+        return {
+          ...kpi,
+          labels: sortedLabels,
+          attributes: newAttributesWithSortedValues,
+        };
+      });
+      setKpisDetails(newKpis);
+    }
   }, [kpis?.importantKpis, kpis]);
 
   useEffect(() => {

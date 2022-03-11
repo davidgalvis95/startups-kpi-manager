@@ -9,6 +9,8 @@ import KpiRingChart from "./ring-chart/KpiRingChart";
 import KpiStackedBarChart from "./stacked-bar-chart/KpiStackedBarChart";
 
 class KpiChartLogicHandler {
+
+
   private static charts: Map<string, JSX.Element> = new Map<
     ChartTypes,
     JSX.Element
@@ -114,6 +116,28 @@ class KpiChartLogicHandler {
       (label: string, index: number) =>
         index >= this.findIndexOfElement(selectedEl, selectorLabels)
     );
+  }
+
+  createFromIndexToIndexMapper(
+    oldDateLabels: string[],
+    newDateSortedLabels: string[]
+  ): Map<number, number> {
+    const mapper = new Map<number, number>();
+    oldDateLabels.forEach((label, index) => {
+      mapper.set(index, newDateSortedLabels.indexOf(label));
+    });
+    return mapper;
+  }
+
+  orderTheValuesAccordingToMapper(
+    mapper: Map<number, number>,
+    unsortedValues: number[]
+  ): number[] {
+    const sortedValues: number[] = Array(unsortedValues.length);
+    unsortedValues.forEach((value, index) => {
+      sortedValues[mapper.get(index)!] = value;
+    });
+    return sortedValues;
   }
 }
 

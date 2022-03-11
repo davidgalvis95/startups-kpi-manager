@@ -27,21 +27,6 @@ const Layout = () => {
   const defaultRoute = (
     <Routes>
       <Route path="/cube/platform/profile" element={<Profile />} />
-      <Route path="/cube/platform/new-kpi" element={<CreateNewKpi />} />
-      <Route path="/cube/platform/update-kpi" element={<UpdateKpi kpis={kpis?.allKpisDetailed}/>} />
-      <Route
-        path="/cube/platform/update-kpi/upload-kpi-data"
-        element={<KpiDataUploading />}
-      />
-      <Route path="/cube/platform/profile" element={<Profile />} />
-      <Route path="/cube/platform/new-user" element={<NewUserAccountForm />} />
-      <Route path="/cube/platform/new-pyme" element={<NewPymeAccountForm />} />
-      <Route path="/cube/platform/startup-table" element={<StartupTable />} />
-      <Route path="/cube/platform/dashboard/:id" element={<Dashboard />} />
-      <Route
-        index // <-- "/"
-        element={<div>Default Page Content</div>}
-      />
     </Routes>
   );
 
@@ -55,6 +40,10 @@ const Layout = () => {
         element={<KpiDataUploading />}
       />
       <Route path="/cube/platform/dashboard/:id" element={<Dashboard />} />
+      <Route
+        index // <-- "/"
+        element={<div>Default Page Content</div>}
+      />
     </Routes>
   );
 
@@ -65,6 +54,10 @@ const Layout = () => {
       <Route path="/cube/platform/new-pyme" element={<NewPymeAccountForm />} />
       <Route path="/cube/platform/startup-table" element={<StartupTable />} />
       <Route path="/cube/platform/dashboard/:id" element={<Dashboard />} />
+      <Route
+        index // <-- "/"
+        element={<div>Default Page Content</div>}
+      />
     </Routes>
   );
 
@@ -76,14 +69,14 @@ const Layout = () => {
 
   return (
     <div>
-      {/* {!loginStatus.accepted || !loginStatus.finishedOk ? (
+      {!loginStatus.accepted || !loginStatus.finishedOk ? (
         loginRoutes
       ) : (
         <NavBar>{routes}</NavBar>
-      )} */}
-
+      )}
+{/* 
       {loginRoutes}
-      <NavBar>{defaultRoute}</NavBar>
+      <NavBar>{defaultRoute}</NavBar> */}
     </div>
   );
 };

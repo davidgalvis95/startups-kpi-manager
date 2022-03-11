@@ -104,7 +104,6 @@ const KpiDataUploading = () => {
         labels: currentVariables,
         total: recalculateTotals(currentVariables, currentKpi.attributes),
       };
-      console.log(kpiToPersist);
     } else {
       const labelsCopy: string[] = { ...currentKpi }.labels;
       kpiToPersist = {
@@ -147,7 +146,6 @@ const KpiDataUploading = () => {
       setSelectedValueIndex(-1);
     } else {
       const newVars = [...currentVariables];
-      console.log(newVars);
       newVars.push("");
       setCurrentVariables(newVars);
       const newKpi: Kpi = {
@@ -184,7 +182,6 @@ const KpiDataUploading = () => {
       currentMonth + "-" + currentYear
     );
     if (indexOfSelectedDate === -1) {
-      console.log("dsfdgfdgfdgdfg");
       labelsCopy.push(currentMonth + "-" + currentYear);
     }
     setCurrentKpi({ ...currentKpi, labels: labelsCopy });
@@ -199,7 +196,6 @@ const KpiDataUploading = () => {
           (attribute: KpiAttribute, aIndex: number): KpiAttribute => {
             if (aIndex === index) {
               const val: number[] = { ...attribute }.values;
-              console.log(val);
               const indexOfCurrentVariableLabel = kpiLabelsOfDateType
                 ? { ...currentKpi }.labels.indexOf(
                     currentMonth + "-" + currentYear
