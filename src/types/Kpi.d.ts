@@ -27,3 +27,46 @@ export interface KpiAttribute {
   name: string;
   values: number[];
 }
+
+export interface Kpi {
+  id: string;
+  name: string;
+  und: string;
+  labelType: string;
+  total: number[];
+  labels: string[];
+  chartTypes: string[];
+  attributesGroupName: string;
+  attributes: KpiAttribute[];
+  mainKpi: boolean;
+}
+
+export interface Kpi1 {
+  id?: string;
+  name: string;
+  und: string;
+  value?: number;
+  date?: string;
+  chartTypes?: string[];
+}
+
+export interface KpiFetching {
+  id: string;
+  name: string;
+  und: string;
+  values: KpiDataFetching[];
+  chartTypes: string[];
+}
+
+export interface KpiDataFetching {
+  label: string;
+  values: number;
+}
+
+export interface KpiWrapper {
+  kpis: Kpi1[];
+}
+
+export interface KpiFetchingWrapper {
+  kpis: KpiFetching[];
+}

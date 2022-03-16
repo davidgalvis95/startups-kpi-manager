@@ -1,9 +1,7 @@
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
-import CreateNewKpi from "../body/create-kpi-form/CreateNewKpi";
+import CreateNewKpi from "../body/create-kpi-form/UpdateKpiData";
 import NewUserAccountForm from "../body/account-form/NewUserAccountForm";
 import NewPymeAccountForm from "../body/account-form/NewPymeAccountForm";
-import UpdateKpi from "../body/create-kpi-form/UpdateKpi";
-import KpiDataUploading from "../body/create-kpi-form/KpiDataUploading";
 import Profile from "../body/profile/Profile";
 import StartupTable from "../body/startup-table/StartupTable";
 import Dashboard from "../body/dashboard/DashBoard";
@@ -13,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Login from "../login/Login";
 import Logout from "../logout/Logout";
 import allActions from "../../store/actions/allActions";
+import UpdateKpiData from "../body/create-kpi-form/UpdateKpiData";
 
 const Layout = () => {
   const loginStatus = useSelector((state: RootState) => state?.loginReducer);
@@ -57,14 +56,16 @@ const Layout = () => {
     <Routes>
       <Route path="/cube/platform/profile" element={<Profile />} />
       <Route path="/cube/platform/new-kpi" element={<CreateNewKpi />} />
-      <Route
+      <Route path="/cube/platform/create-or-update-kpi" element={<UpdateKpiData />} />
+
+      {/* <Route
         path="/cube/platform/update-kpi"
         element={<UpdateKpi kpis={kpis?.allKpisDetailed} />}
       />
       <Route
         path="/cube/platform/update-kpi/upload-kpi-data"
         element={<KpiDataUploading />}
-      />
+      /> */}
       <Route path="/cube/platform/dashboard/:id" element={<Dashboard />} />
       <Route path="/cube/logout" element={() => <Logout />} />
       {/* <Route path="/cube/login" element={() => (<Navigate to="/cube/platform/dashboard/:id" />)} /> */}
@@ -101,17 +102,17 @@ const Layout = () => {
 
   return (
     <div>
-      {!loginStatus.accepted ||
+      {/* {!loginStatus.accepted ||
       !loginStatus.finishedOk ||
       logoutStatus.logguedOut ? (
         defaultRoutes
       ) : (
         <NavBar>{routes}</NavBar>
-      )} 
+      )}  */}
 
-       {/* {loginRoutes}
-      {logoutRoutes}
-      <NavBar>{adminRoutes}</NavBar>  */}
+       {defaultRoutes}
+      {/* {logoutRoutes} */}
+      <NavBar>{userRoutes}</NavBar> 
     </div>
   );
 };

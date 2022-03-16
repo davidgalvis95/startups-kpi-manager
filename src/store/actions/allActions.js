@@ -3,6 +3,7 @@ import pictureChangeActions from "./pictureChangeActions";
 import userActions from "./userActions";
 import pymeActions from "./pymeActions";
 import kpiActions from "./kpiActions";
+import kpiActionsNew from "./kpiActionsNew";
 import loginActions from "./loginActions";
 import logoutActions from "./logoutActions";
 
@@ -12,6 +13,7 @@ const allActions = {
   userActions,
   pymeActions,
   kpiActions,
+  kpiActionsNew,
   loginActions, 
   logoutActions
 };

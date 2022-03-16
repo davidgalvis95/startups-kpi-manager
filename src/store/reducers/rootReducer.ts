@@ -1,6 +1,7 @@
 import sideNavBarStatusReducer from './sideNavBarStatusReducer';
 import pictureChangeReducer from './pictureChangeReducer';
 import kpiReducer from './kpiReducer';
+import kpiReducerNew from './kpiReducerNew';
 import pymeReducer from './pymeReducer';
 import userReducer from './userReducer';
 import loginReducer from './loginReducer';
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
     sideNavBarStatusReducer,
     pictureChangeReducer,
     kpiReducer,
+    kpiReducerNew,
     pymeReducer,
     userReducer,
     loginReducer,

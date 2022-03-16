@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 
 interface CustomInputCompProps {
   label: string;
-  placeholder: string;
+  placeholder?: string;
   value?: string | undefined;
   disabled?: boolean;
   change?: Function;

@@ -1,4 +1,5 @@
 import { defaultKpiState, KpiStatus } from "../../store/reducers/kpiReducer";
+import { defaultKpiStateNew, KpiStatusNew } from "../../store/reducers/kpiReducerNew";
 import {
   defaultLoginState,
   LoginStatus,
@@ -24,6 +25,7 @@ export class SessionStorageManager {
     sideNavBarStatusReducer: defaultaNavbarState,
     pictureChangeReducer: defaultPictureState,
     kpiReducer: defaultKpiState,
+    kpiReducerNew: defaultKpiStateNew,
     pymeReducer: defaultPymeState,
     userReducer: defaultUserState,
     loginReducer: defaultLoginState,
@@ -35,6 +37,7 @@ export class SessionStorageManager {
     sideNavBarState: SideBarStatus,
     pictureState: PictureUploadStatus,
     kpiState: KpiStatus,
+    kpiStateNew: KpiStatusNew,
     pymeState: PymeStatus,
     userState: UserStatus,
     loginState: LoginStatus,
@@ -44,6 +47,7 @@ export class SessionStorageManager {
       sideNavBarStatusReducer: sideNavBarState,
       pictureChangeReducer: pictureState,
       kpiReducer: kpiState,
+      kpiReducerNew: kpiStateNew,
       pymeReducer: pymeState,
       userReducer: userState,
       loginReducer: loginState,

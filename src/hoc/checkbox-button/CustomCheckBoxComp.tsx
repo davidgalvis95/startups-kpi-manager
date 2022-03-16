@@ -31,8 +31,10 @@ const CustomCheckBoxComp = ({
             style={{
               color: "#00a8ff",
             }}
-            onClick={(e) => {
+            onChange={(e) => {
+              console.log(e)
               setCheckedBox(!chekcedBox);
+              console.log(name)
               click(e, name);
             }}
           />
