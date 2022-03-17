@@ -67,22 +67,10 @@ const itemsForUser: SideBarMenuItem[] = [
     url: "/cube/platform/dashboard/uyGVSUYVKVuyvXxdXG",
   },
   {
-    id: "newKpi",
-    label: "Crear Nuevo Kpi",
-    icon: MdScatterPlot,
-    url: "/cube/platform/new-kpi",
-  },
-  {
-    id: "updateKpi",
-    label: "Actualizar Kpi",
-    icon: MdOutlineScatterPlot,
-    url: "/cube/platform/update-kpi",
-  },
-  {
     id: "uploadKpiData",
     label: "Actualizar Datos de Kpi",
     icon: BsFileEarmarkBarGraph,
-    url: "/cube/platform/update-kpi/upload-kpi-data",
+    url: "/cube/platform/update-kpi/create-or-update-kpi",
   },
 ];
 

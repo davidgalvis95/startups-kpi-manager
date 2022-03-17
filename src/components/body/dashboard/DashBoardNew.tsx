@@ -2,23 +2,23 @@ import { Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Card from "../../../hoc/Card";
 import CustomButton from "../../../hoc/CustomButton";
-import KpiLineChartWrapper from "./charts/KpiChartWrapper";
 import classes from "./Dashboard.module.css";
 import ChartTypes from "./charts/ChartTypes";
-import { ImportantKpi, Kpi } from "../../../types/Kpi";
+import { ImportantKpi, KpiDataFetching, KpiFetching } from "../../../types/Kpi";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/reducers/rootReducer";
 import { useNavigate } from "react-router-dom";
 import KpiChartLogicHandler from "./charts/KpiChartLogicHandler";
-import { sortLabels } from "./DateComparator";
+import { sortValuesArray } from "./DateComparator";
+import KpiChartWrapperNew from "./charts/KpiChartWrapperNew";
 
 const drawKpiChartsWrapper = (
   chartTypes: string[],
-  kpi: Kpi
+  kpi: KpiFetching
 ): JSX.Element[] => {
   return chartTypes.map((chartType: string): JSX.Element => {
     return (
-      <KpiLineChartWrapper
+      <KpiChartWrapperNew
         key={chartType}
         kpi={kpi}
         chartType={chartType as ChartTypes}
@@ -27,7 +27,7 @@ const drawKpiChartsWrapper = (
   });
 };
 
-const drawKpisAsCharts = (kpis: Kpi[]): JSX.Element[] => {
+const drawKpisAsCharts = (kpis: KpiFetching[]): JSX.Element[] => {
   return kpis.map((kpi) => {
     return (
       <div key={kpi.name}>
@@ -69,55 +69,58 @@ const drawImportantKpis = (kpis: ImportantKpi[]): JSX.Element[] => {
   });
 };
 
-const logicHadler: KpiChartLogicHandler = KpiChartLogicHandler.getInstance();
+// const logicHadler: KpiChartLogicHandler = KpiChartLogicHandler.getInstance();
 
-const Dashboard = () => {
-  const { kpi, kpis } = useSelector((state: RootState) => state?.kpiReducer);
+const DashboardNew = () => {
+  const { kpisFetched } = useSelector(
+    (state: RootState) => state?.kpiReducerNew
+  );
   const [importantKpis, setImportantKpis] = useState<ImportantKpi[]>([]);
-  const [kpisDetails, setKpisDetails] = useState<Kpi[]>([]);
+  const [kpisDetails, setKpisDetails] = useState<KpiFetching[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (kpis && kpis.allKpisDetailed) {
-      const newKpis = { ...kpis }?.allKpisDetailed?.map((kpi) => {
-        const oldLabels = [...kpi.labels];
-        const sortedLabels: string[] = sortLabels({...kpi}.labels);
-        // console.log(oldLabels)
-        const newAttributesWithSortedValues = {...kpi}.attributes.map(
-          (attribute, index) => {
-            const mapper: Map<number, number> =
-              logicHadler.createFromIndexToIndexMapper(
-                oldLabels,
-                sortedLabels
-              );
-            const orderedValues: number[] =
-              logicHadler.orderTheValuesAccordingToMapper(
-                mapper,
-                {...attribute}.values
-              );
-            return { ...attribute, values: orderedValues };
-          }
+    console.log(kpisFetched);
+    if (kpisFetched) {
+      const newKpis = { ...kpisFetched }.kpis?.map((kpi) => {
+        const sortedKpiValues: KpiDataFetching[] = sortValuesArray(
+          { ...kpi }.values
         );
         return {
           ...kpi,
-          labels: sortedLabels,
-          attributes: newAttributesWithSortedValues,
+          values: sortedKpiValues,
         };
       });
       setKpisDetails(newKpis);
     }
-  }, [kpis?.importantKpis, kpis]);
+  }, [kpisFetched, kpisFetched?.kpis]);
 
   useEffect(() => {
-    setImportantKpis(kpis?.importantKpis || []);
-  }, [kpis?.allKpisDetailed, kpis]);
+    if (kpisFetched) {
+      //This needs to be calculated based on a month controller
+      const importantKpis: ImportantKpi[] = { ...kpisFetched }.kpis
+        ?.filter((kpi: KpiFetching) => kpi.important)
+        .map((kpi: KpiFetching) => {
+          const kpiSumOfvalues: number = kpi.values
+            .map((value: KpiDataFetching) => value.value)
+            .reduce((prev: number, next: number) => prev + next, 0);
+          return {
+            id: kpi.id,
+            name: kpi.name,
+            value: kpiSumOfvalues,
+            und: kpi.und,
+          };
+        });
+      setImportantKpis(importantKpis || []);
+    }
+  }, [kpisFetched, kpisFetched?.kpis]);
 
   // const importantKpis: ImportantKpi[] = sampleDataSet.importantKpis;
   // const kpis: Kpi[] = sampleDataSet.allKpisDetailed;
   //TODO use reducer to get data from company
 
   const createKpiHandler = () => {
-    navigate("/cube/platform/new-kpi");
+    navigate("/cube/platform/create-or-update-kpi");
   };
 
   return (
@@ -130,9 +133,9 @@ const Dashboard = () => {
         <div className={classes.buttonWrapper}>
           <CustomButton
             clickHandler={() => createKpiHandler()}
-            text={"Crear KPI"}
+            text={"Cargar Datos de KPI"}
             padding={"8px"}
-            width={"120px"}
+            width={"200px"}
             fontSize={"16px"}
           />
         </div>
@@ -147,4 +150,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardNew;

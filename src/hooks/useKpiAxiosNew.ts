@@ -2,15 +2,12 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import allActions from "../store/actions/allActions";
 import { KpiActions } from "../store/actions/ActionTypes";
-import { Kpi, KpiFetchingWrapper, KpiWrapper, PymeKpiWrapper } from "../types/Kpi";
+import { KpiFetchingWrapper, KpiWrapper } from "../types/Kpi";
 import { KpiRelatedRequestImpl } from "../store/actions/kpiActionsNew";
+import { sampleKpisResponse } from "../assets/sample-data/SampleKpisNew";
 
 interface KpisContainerObject {
   data: KpiFetchingWrapper;
-}
-
-interface KpiContainerObject {
-  data: Kpi;
 }
 
 const useKpiAxiosNew = () => {
@@ -83,7 +80,7 @@ const useKpiAxiosNew = () => {
   const getAllFakeKpis = (pymeId: string): Promise<KpisContainerObject> => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve({ data: {} });
+        resolve({ data: sampleKpisResponse });
       }, 3000);
     });
   };
@@ -91,7 +88,7 @@ const useKpiAxiosNew = () => {
   const updateFakeKpis = (kpis: KpiWrapper, pymeId: string): Promise<KpisContainerObject> => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve({ data: {} });
+        resolve({ data: sampleKpisResponse });
       }, 3000);
     });
   };

@@ -53,6 +53,7 @@ export interface Kpi1 {
 export interface KpiFetching {
   id: string;
   name: string;
+  important?: boolean;
   und: string;
   values: KpiDataFetching[];
   chartTypes: string[];
@@ -60,7 +61,7 @@ export interface KpiFetching {
 
 export interface KpiDataFetching {
   label: string;
-  values: number;
+  value: number;
 }
 
 export interface KpiWrapper {

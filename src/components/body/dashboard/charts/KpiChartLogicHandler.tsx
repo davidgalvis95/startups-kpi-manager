@@ -1,4 +1,8 @@
-import { KpiAttribute } from "../../../../types/Kpi";
+import {
+  KpiAttribute,
+  KpiDataFetching,
+  KpiFetching,
+} from "../../../../types/Kpi";
 import { ElementsToChar, ElementsToCharData } from "../../../../types/types";
 import { Kpi } from "../../../../types/Kpi";
 import KpiBarChart from "./bar-chart/KpiBarChart";
@@ -9,8 +13,6 @@ import KpiRingChart from "./ring-chart/KpiRingChart";
 import KpiStackedBarChart from "./stacked-bar-chart/KpiStackedBarChart";
 
 class KpiChartLogicHandler {
-
-
   private static charts: Map<string, JSX.Element> = new Map<
     ChartTypes,
     JSX.Element
@@ -80,6 +82,34 @@ class KpiChartLogicHandler {
     return elementToChar;
   }
 
+  buildElementsToCharFromDefinedKpis(
+    kpi: KpiFetching
+  ): ElementsToChar<string, string, ElementsToCharData> {
+    const labels: string[] = kpi.values.map(
+      (value: KpiDataFetching) => value.label
+    );
+    const values: number[] = kpi.values.map(
+      (value: KpiDataFetching) => value.value
+    );
+    const elementToCharData: ElementsToCharData[] = [
+      { name: kpi.name, values: values },
+    ];
+
+    return {
+      labels: labels,
+      und: kpi.und,
+      data: elementToCharData,
+    };
+  }
+
+  buildKpiLabelsFromDefinedKpis(
+    kpi: KpiFetching
+  ): string[] {
+    return kpi.values.map(
+      (value: KpiDataFetching) => value.label
+    );
+  }
+
   filterDataInChart(
     fromIndex: number,
     toIndex: number,
@@ -97,6 +127,18 @@ class KpiChartLogicHandler {
       }),
     };
     return this.buildElementsToChar(newKpi);
+  }
+
+  filterDataInChartWhenDefinedKpi(
+    fromIndex: number,
+    toIndex: number,
+    kpiToFilter: KpiFetching
+  ): ElementsToChar<string, string, ElementsToCharData> {
+    const newKpi: KpiFetching = {
+      ...kpiToFilter,
+      values: kpiToFilter?.values?.slice(fromIndex, toIndex + 1),
+    };
+    return this.buildElementsToCharFromDefinedKpis(newKpi);
   }
 
   findIndexOfElement(selectedEl: string, selectorLabels: string[]): number {
