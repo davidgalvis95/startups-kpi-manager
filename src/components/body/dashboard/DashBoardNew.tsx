@@ -76,14 +76,13 @@ const DashboardNew = () => {
   const { kpisFetched } = useSelector(
     (state: RootState) => state?.kpiReducerNew
   );
+  const { user } = useSelector((state: RootState) => state?.userReducer);
   // const kpisFetched = sampleKpisResponse
   const [importantKpis, setImportantKpis] = useState<ImportantKpi[]>([]);
   const [kpisDetails, setKpisDetails] = useState<KpiFetching[]>([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-
-  },[])
+  useEffect(() => {}, []);
 
   useEffect(() => {
     console.log(kpisFetched);
@@ -114,7 +113,7 @@ const DashboardNew = () => {
             id: kpi.id,
             name: kpi.name,
             value: kpiSumOfvalues,
-            und: kpi.und,
+            und: kpi.und === "Numero de personas" ? "" : kpi.und,
           };
         });
       setImportantKpis(importantKpis || []);
@@ -136,15 +135,17 @@ const DashboardNew = () => {
         <p className={classes.dashboardNameTitle}>
           DASHBOARD: CUBE VENTURES S.A.S
         </p>
-        <div className={classes.buttonWrapper}>
-          <CustomButton
-            clickHandler={() => createKpiHandler()}
-            text={"Cargar Datos de KPI"}
-            padding={"8px"}
-            width={"200px"}
-            fontSize={"16px"}
-          />
-        </div>
+        {user?.rights === "USER" ? (
+          <div className={classes.buttonWrapper}>
+            <CustomButton
+              clickHandler={() => createKpiHandler()}
+              text={"Cargar Datos de KPI"}
+              padding={"8px"}
+              width={"200px"}
+              fontSize={"16px"}
+            />
+          </div>
+        ) : null}
       </div>
       <div className={classes.generalKpiInfoWrapper}>
         <Grid container>{drawImportantKpis(importantKpis)}</Grid>
