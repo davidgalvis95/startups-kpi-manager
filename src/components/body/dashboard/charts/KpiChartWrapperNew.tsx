@@ -85,7 +85,7 @@ const KpiChartWrapperNew = ({ kpi, chartType }: KpiChartWrapperProps) => {
       <Card width={95} padding={"5px"}>
         <div>
           <div className={classes.chartFilterWrapper}>
-            {/* <div className={classes.selectorLabel}>
+            <div className={classes.selectorLabel}>
               <label>De: </label>
             </div>
             <CustomSelectComp
@@ -98,7 +98,7 @@ const KpiChartWrapperNew = ({ kpi, chartType }: KpiChartWrapperProps) => {
             <CustomSelectComp
               items={selector2Labels}
               clickHandler={(el: string) => selector2ClickHandler(el)}
-            /> */}
+            />
           </div>
           <KpiChartWrapperContext.Provider value={elementsToChar}>
             {kpiChartLogicHandler.getChartToPlot(chartType)}

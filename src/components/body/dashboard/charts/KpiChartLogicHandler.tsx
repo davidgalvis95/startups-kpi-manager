@@ -7,7 +7,6 @@ import { ElementsToChar, ElementsToCharData } from "../../../../types/types";
 import { Kpi } from "../../../../types/Kpi";
 import KpiBarChart from "./bar-chart/KpiBarChart";
 import ChartTypes from "./ChartTypes";
-import KpiLineChartWrapper from "./KpiChartWrapper";
 import KpiLineChart from "./line-chart/KpiLineChart";
 import KpiRingChart from "./ring-chart/KpiRingChart";
 import KpiStackedBarChart from "./stacked-bar-chart/KpiStackedBarChart";
@@ -40,17 +39,17 @@ class KpiChartLogicHandler {
     return KpiChartLogicHandler.instance;
   }
 
-  drawChartsFromChartTypesArray(chartTypes: string[], kpi: Kpi): JSX.Element[] {
-    return chartTypes.map((chartType: string): JSX.Element => {
-      return (
-        <KpiLineChartWrapper
-          key={chartType}
-          kpi={kpi}
-          chartType={chartType as ChartTypes}
-        />
-      );
-    });
-  }
+  // drawChartsFromChartTypesArray(chartTypes: string[], kpi: Kpi): JSX.Element[] {
+  //   return chartTypes.map((chartType: string): JSX.Element => {
+  //     return (
+  //       <KpiLineChartWrapper
+  //         key={chartType}
+  //         kpi={kpi}
+  //         chartType={chartType as ChartTypes}
+  //       />
+  //     );
+  //   });
+  // }
 
   getChartToPlot(chartType: ChartTypes): JSX.Element {
     return KpiChartLogicHandler.charts.get(chartType)!;

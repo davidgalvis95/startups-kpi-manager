@@ -11,7 +11,7 @@ import {
 import { Bar } from "react-chartjs-2";
 import ColorSelection from "../ColorSelection";
 import { ElementsToChar, ElementsToCharData } from "../../../../../types/types";
-import { KpiChartWrapperContext } from "../KpiChartWrapper";
+import { KpiChartWrapperContext } from "../KpiChartWrapperNew";
 
 const KpiBarChart = React.memo(() => {
 

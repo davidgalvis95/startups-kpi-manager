@@ -1,10 +1,8 @@
 import { FormControl, Grid } from "@mui/material";
 import Card from "../../../hoc/Card";
 import classes from "./CreateNewKpi.module.css";
-import CustomSelectComp from "../../../hoc/dropdown-form-button/CustomSelectComp";
 import CustomInputComp from "../../../hoc/custom-input/CustomInputComp";
 import CustomCheckBoxComp from "../../../hoc/checkbox-button/CustomCheckBoxComp";
-import RemoveButtonComp from "../../../hoc/remove-button/RemoveButtonComp";
 import AddButtonComp from "../../../hoc/add-button/AddButtonComp";
 import React, { useState } from "react";
 import { Kpi1 } from "../../../types/Kpi";
@@ -116,14 +114,15 @@ const UpdateKpiData = (props: any) => {
   };
 
   return (
-    <div>
+    <div className={classes.updateKpisChartsWrapper}>
       <Card width={90} padding={"1rem"}>
         <React.Fragment>
           <div className={classes.title}>
             <p>Creacion del KPI</p>
           </div>
-          <FormControl>
+          {/* <FormControl> */}
             {kpis.map((kpi: Kpi1, index: number) => {
+              return(
               <Grid key={index} container>
                 <Grid item xs={12} sm={6} md={4}>
                   <CustomInputComp
@@ -149,7 +148,7 @@ const UpdateKpiData = (props: any) => {
                 </Grid>
                 <Grid item xs={12} sm={6} md={12}>
                   <p className={classes.textBoxLabel}>
-                    Seleccione el de graficos que quiere para su KPI *
+                    {`Seleccione el de graficos que quiere para el kpi ${kpi.name} *`}
                   </p>
                   <div className={classes.chackBoxWrapperParent}>
                     <CustomCheckBoxComp
@@ -193,7 +192,7 @@ const UpdateKpiData = (props: any) => {
                     />
                   </div>
                 </Grid>
-              </Grid>;
+              </Grid>)
             })}
             <div className={classes.saveButtonWrapper}>
               {kpiOperationLoading ? (
@@ -202,7 +201,7 @@ const UpdateKpiData = (props: any) => {
                 <AddButtonComp name={"Guardar Datos"} click={saveData} />
               )}
             </div>
-          </FormControl>
+          {/* </FormControl> */}
         </React.Fragment>
       </Card>
     </div>

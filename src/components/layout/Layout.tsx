@@ -92,17 +92,16 @@ const Layout = () => {
 
   return (
     <div>
-      {/* {!loginStatus.accepted ||
+      {!loginStatus.accepted ||
       !loginStatus.finishedOk ||
       logoutStatus.logguedOut ? (
         defaultRoutes
       ) : (
         <NavBar>{routes}</NavBar>
-      )}  */}
+      )} 
 
-       {defaultRoutes}
-      {/* {logoutRoutes} */}
-      <NavBar>{userRoutes}</NavBar> 
+       {/* {defaultRoutes}
+      <NavBar>{userRoutes}</NavBar>  */}
     </div>
   );
 };

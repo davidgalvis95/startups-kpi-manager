@@ -70,7 +70,7 @@ const itemsForUser: SideBarMenuItem[] = [
     id: "uploadKpiData",
     label: "Actualizar Datos de Kpi",
     icon: BsFileEarmarkBarGraph,
-    url: "/cube/platform/update-kpi/create-or-update-kpi",
+    url: "/cube/platform/create-or-update-kpi",
   },
 ];
 

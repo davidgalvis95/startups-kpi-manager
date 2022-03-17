@@ -19,7 +19,7 @@ export const sampleKpisResponse: KpiFetchingWrapper = {
         { label: "Sep-2021", value: 10000 },
         { label: "Oct-2021", value: 5000 },
       ],
-      chartTypes: ["Barra", "Anillo", "Barras Agrupadas", "Linea"],
+      chartTypes: ["Barras", "Anillo", "Barras Agrupadas", "Linea"],
     },
     {
       id: "2317bdb2-8e00-4177-9f3a-7c33b8861eb7",
@@ -38,7 +38,7 @@ export const sampleKpisResponse: KpiFetchingWrapper = {
         { label: "Sep-2021", value: 20000 },
         { label: "Oct-2021", value: 1000 },
       ],
-      chartTypes: ["Barra", "Anillo", "Barras Agrupadas", "Linea"],
+      chartTypes: ["Barras", "Anillo", "Barras Agrupadas", "Linea"],
     },
     {
       id: "3674b6bd-5e7a-48b3-bbaa-706ceb9fe661",
@@ -56,7 +56,7 @@ export const sampleKpisResponse: KpiFetchingWrapper = {
         { label: "Sep-2021", value: 30000 },
         { label: "Oct-2021", value: 4000 },
       ],
-      chartTypes: ["Barra", "Anillo", "Barras Agrupadas", "Linea"],
+      chartTypes: ["Barras", "Anillo", "Barras Agrupadas", "Linea"],
     },
     {
       id: "a0f93731-53f5-4d94-ab05-4124b21f2c3f",
@@ -75,7 +75,7 @@ export const sampleKpisResponse: KpiFetchingWrapper = {
         { label: "Sep-2021", value: 20000 },
         { label: "Oct-2021", value: 1000 },
       ],
-      chartTypes: ["Barra", "Anillo", "Barras Agrupadas", "Linea"],
+      chartTypes: ["Barras", "Anillo", "Barras Agrupadas", "Linea"],
     },
     {
       id: "cf108dac-9729-495a-aa5f-19dae94390e6",
@@ -93,7 +93,7 @@ export const sampleKpisResponse: KpiFetchingWrapper = {
         { label: "Sep-2021", value: 20000 },
         { label: "Oct-2021", value: 1000 },
       ],
-      chartTypes: ["Barra", "Anillo", "Barras Agrupadas", "Linea"],
+      chartTypes: ["Barras", "Anillo", "Barras Agrupadas", "Linea"],
     },
     {
       id: "84a07b10-c631-4e80-8386-a75cc789bc35",
@@ -111,7 +111,7 @@ export const sampleKpisResponse: KpiFetchingWrapper = {
         { label: "Sep-2021", value: 4000 },
         { label: "Oct-2021", value: 1000 },
       ],
-      chartTypes: ["Barra", "Anillo", "Barras Agrupadas", "Linea"],
+      chartTypes: ["Barras", "Anillo", "Barras Agrupadas", "Linea"],
     },
     {
       id: "c0bc627a-c906-471e-8a20-b75bf7ee2671",
@@ -129,7 +129,7 @@ export const sampleKpisResponse: KpiFetchingWrapper = {
         { label: "Sep-2021", value: 20000 },
         { label: "Oct-2021", value: 1000 },
       ],
-      chartTypes: ["Barra", "Anillo", "Barras Agrupadas", "Linea"],
+      chartTypes: ["Barras", "Anillo", "Barras Agrupadas", "Linea"],
     },
     {
       id: "37959da8-6245-4c15-94b4-3a97110ebd5c",
@@ -148,7 +148,7 @@ export const sampleKpisResponse: KpiFetchingWrapper = {
         { label: "Sep-2021", value: 20000 },
         { label: "Oct-2021", value: 1000 },
       ],
-      chartTypes: ["Barra", "Anillo", "Barras Agrupadas", "Linea"],
+      chartTypes: ["Barras", "Anillo", "Barras Agrupadas", "Linea"],
     },
   ],
 };

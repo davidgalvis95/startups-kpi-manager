@@ -58,8 +58,8 @@ export function sortValuesArray(values) {
   const sortedValues = reversedLabelValues.sort(sortValuesDateLabels);
 
   const reversedAsString = [...sortedValues].map((value) => {
-    const year = value.substring(0, 4);
-    const z = parseInt(value.substring(4, 6), 10);
+    const year = value.label.substring(0, 4);
+    const z = parseInt(value.label.substring(4, 6), 10);
     const month = getMonthFromNumber(z);
 
     return { ...value, label: month + "-" + year };

@@ -3,7 +3,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import ColorSelection from "../ColorSelection";
 import { ElementsToChar, ElementsToCharData } from "../../../../../types/types";
-import { KpiChartWrapperContext } from "../KpiChartWrapper";
+import { KpiChartWrapperContext } from "../KpiChartWrapperNew";
 
 const KpiRingChart = React.memo(() => {
   const { labels, und, data } = useContext<

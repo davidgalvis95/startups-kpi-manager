@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import KpiChartLogicHandler from "./charts/KpiChartLogicHandler";
 import { sortValuesArray } from "./DateComparator";
 import KpiChartWrapperNew from "./charts/KpiChartWrapperNew";
+import { sampleKpisResponse } from "../../../assets/sample-data/SampleKpisNew";
 
 const drawKpiChartsWrapper = (
   chartTypes: string[],
@@ -75,9 +76,14 @@ const DashboardNew = () => {
   const { kpisFetched } = useSelector(
     (state: RootState) => state?.kpiReducerNew
   );
+  // const kpisFetched = sampleKpisResponse
   const [importantKpis, setImportantKpis] = useState<ImportantKpi[]>([]);
   const [kpisDetails, setKpisDetails] = useState<KpiFetching[]>([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+
+  },[])
 
   useEffect(() => {
     console.log(kpisFetched);
