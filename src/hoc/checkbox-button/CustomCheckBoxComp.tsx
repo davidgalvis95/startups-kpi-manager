@@ -26,15 +26,13 @@ const CustomCheckBoxComp = ({
         <div className={classes.chackBoxWrapper}>
           <p className={classes.textBoxLabel}>{name}</p>
           <Checkbox
-            checked={renderFromParent ? checked : chekcedBox}
+            checked={checked}
             size="small"
             style={{
               color: "#00a8ff",
             }}
             onClick={(e) => {
-              console.log(e);
-              console.log(name);
-              click(e, name);
+              click(e, name, !checked);
             }}
           />
         </div>

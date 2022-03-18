@@ -112,7 +112,6 @@ const PymeModifiableSection = ({
                 name={"Activa?"}
                 click={(e: any) => setActive(!active)}
                 checked={active}
-                renderFromParent={true}
                 labelBefore={false}
               />
             </div>
