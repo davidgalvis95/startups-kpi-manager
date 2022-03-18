@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import { RootState } from "./store/reducers/rootReducer";
 import { encrypt } from "./util/Encryptor";
-const CryptoJS = require("crypto-js");
 
 function App() {
   const { user } = useSelector((state: RootState) => state?.userReducer);
