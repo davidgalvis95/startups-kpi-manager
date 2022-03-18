@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import KpiChartLogicHandler from "./charts/KpiChartLogicHandler";
 import { sortLabels } from "./DateComparator";
 
+
 const drawKpiChartsWrapper = (
   chartTypes: string[],
   kpi: Kpi
