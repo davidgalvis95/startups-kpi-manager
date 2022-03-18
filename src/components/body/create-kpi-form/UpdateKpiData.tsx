@@ -1,14 +1,15 @@
-import { FormControl, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import Card from "../../../hoc/Card";
 import classes from "./CreateNewKpi.module.css";
 import CustomInputComp from "../../../hoc/custom-input/CustomInputComp";
 import CustomCheckBoxComp from "../../../hoc/checkbox-button/CustomCheckBoxComp";
 import AddButtonComp from "../../../hoc/add-button/AddButtonComp";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Kpi1 } from "../../../types/Kpi";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/reducers/rootReducer";
 import useKpiAxiosNew from "../../../hooks/useKpiAxiosNew";
+import {months} from "../dashboard/DateComparator";
 
 const defaultKpis: Kpi1[] = [
   {
@@ -75,7 +76,7 @@ const UpdateKpiData = (props: any) => {
       name: name,
       und: und,
       value: parseInt(e.target.value),
-      date: now.getMonth() + 1 + "-" + now.getUTCFullYear(),
+      date: months[now.getMonth()] + "-" + now.getUTCFullYear(),
     };
     const newKpis = [...kpis];
     newKpis[index] = newKpi;
@@ -85,19 +86,21 @@ const UpdateKpiData = (props: any) => {
   const changeAttributeChartsHandler = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number,
-    chartName: string
+    chartName: string,
+    checked: boolean
   ) => {
-    if (e.target.checked) {
+    const kpisToUpdate = [...kpis];
+    if (checked) {
       const kpiToModify = [...kpis][index];
       const chartTypes: string[] = { ...kpiToModify }.chartTypes || [];
-      if (chartTypes.indexOf(chartName) !== -1) {
+      if (chartTypes.indexOf(chartName) === -1) {
         chartTypes.push(chartName);
         const newKpi = {
           ...kpiToModify,
           chartTypes: chartTypes,
         };
-        kpis[index] = newKpi;
-        setKpis(kpis);
+        kpisToUpdate[index] = newKpi;
+        setKpis(kpisToUpdate);
       }
     } else {
       const kpiToModify = [...kpis][index];
@@ -108,9 +111,16 @@ const UpdateKpiData = (props: any) => {
         ...kpiToModify,
         chartTypes: chartTypes,
       };
-      kpis[index] = newKpi;
-      setKpis(kpis);
+      kpisToUpdate[index] = newKpi;
+      setKpis(kpisToUpdate);
     }
+  };
+
+  const checkKpisHandler = (index: number, chartName: string) => {
+    if (kpis[index].chartTypes?.indexOf(chartName) !== undefined) {
+      return kpis[index].chartTypes!.indexOf(chartName) >= 0;
+    }
+    return false;
   };
 
   return (
@@ -121,14 +131,11 @@ const UpdateKpiData = (props: any) => {
             <p>Creacion del KPI</p>
           </div>
           {/* <FormControl> */}
-            {kpis.map((kpi: Kpi1, index: number) => {
-              return(
+          {kpis.map((kpi: Kpi1, index: number) => {
+            return (
               <Grid key={index} container>
                 <Grid item xs={12} sm={6} md={4}>
-                  <CustomInputComp
-                    label={"Nombre del Kpi"}
-                    value={kpi.name}
-                  />
+                  <CustomInputComp label={"Nombre del Kpi"} value={kpi.name} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
                   <CustomInputComp
@@ -138,9 +145,8 @@ const UpdateKpiData = (props: any) => {
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
                   <CustomInputComp
-                    label={"Unidad de medicion"}
-                    placeholder={"Unidad de medicion"}
-                    value={kpis[index].value?.toString() || ""}
+                    label={"Valor"}
+                    placeholder={"Valor"}
                     change={(e: any) =>
                       changeValueUndHandler(e, index, kpi.name, kpi.und)
                     }
@@ -153,54 +159,52 @@ const UpdateKpiData = (props: any) => {
                   <div className={classes.chackBoxWrapperParent}>
                     <CustomCheckBoxComp
                       labelBefore={false}
-                      renderFromParent={true}
-                      checked={kpis[index].chartTypes?.indexOf("Barras") !== -1}
                       name={"Barras"}
-                      click={(e: any, name: string) =>
-                        changeAttributeChartsHandler(e, index, name)
+                      renderFromParent={true}
+                      checked={checkKpisHandler(index, "Barras")}
+                      click={(e: any, name: string, checked: boolean) =>
+                        changeAttributeChartsHandler(e, index, name, checked)
                       }
                     />
                     <CustomCheckBoxComp
                       labelBefore={false}
                       name={"Barras Agrupadas"}
                       renderFromParent={true}
-                      checked={
-                        kpis[index].chartTypes?.indexOf("Barras Agrupadas") !==
-                        -1
-                      }
-                      click={(e: any, name: string) =>
-                        changeAttributeChartsHandler(e, index, name)
+                      checked={checkKpisHandler(index, "Barras Agrupadas")}
+                      click={(e: any, name: string, checked: boolean) =>
+                        changeAttributeChartsHandler(e, index, name, checked)
                       }
                     />
                     <CustomCheckBoxComp
                       labelBefore={false}
                       name={"Anillo"}
                       renderFromParent={true}
-                      checked={kpis[index].chartTypes?.indexOf("Anillo") !== -1}
-                      click={(e: any, name: string) =>
-                        changeAttributeChartsHandler(e, index, name)
+                      checked={checkKpisHandler(index, "Anillo")}
+                      click={(e: any, name: string, checked: boolean) =>
+                        changeAttributeChartsHandler(e, index, name, checked)
                       }
                     />
                     <CustomCheckBoxComp
                       labelBefore={false}
                       name={"Linea"}
                       renderFromParent={true}
-                      checked={kpis[index].chartTypes?.indexOf("Linea") !== -1}
-                      click={(e: any, name: string) =>
-                        changeAttributeChartsHandler(e, index, name)
+                      checked={checkKpisHandler(index, "Linea")}
+                      click={(e: any, name: string, checked: boolean) =>
+                        changeAttributeChartsHandler(e, index, name, checked)
                       }
                     />
                   </div>
                 </Grid>
-              </Grid>)
-            })}
-            <div className={classes.saveButtonWrapper}>
-              {kpiOperationLoading ? (
-                <div className={classes.ldsSpinnerSmall}></div>
-              ) : (
-                <AddButtonComp name={"Guardar Datos"} click={saveData} />
-              )}
-            </div>
+              </Grid>
+            );
+          })}
+          <div className={classes.saveButtonWrapper}>
+            {kpiOperationLoading ? (
+              <div className={classes.ldsSpinnerSmall}></div>
+            ) : (
+              <AddButtonComp name={"Guardar Datos"} click={saveData} />
+            )}
+          </div>
           {/* </FormControl> */}
         </React.Fragment>
       </Card>

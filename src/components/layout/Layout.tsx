@@ -1,5 +1,4 @@
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
-import CreateNewKpi from "../body/create-kpi-form/UpdateKpiData";
 import NewUserAccountForm from "../body/account-form/NewUserAccountForm";
 import NewPymeAccountForm from "../body/account-form/NewPymeAccountForm";
 import Profile from "../body/profile/Profile";
@@ -54,7 +53,6 @@ const Layout = () => {
   const userRoutes = (
     <Routes>
       <Route path="/cube/platform/profile" element={<Profile />} />
-      {/* <Route path="/cube/platform/new-kpi" element={<CreateNewKpi />} /> */}
       <Route path="/cube/platform/create-or-update-kpi" element={<UpdateKpiData />} />
       <Route path="/cube/platform/dashboard/:id" element={<DashboardNew />} />
       <Route path="/cube/logout" element={() => <Logout />} />
@@ -92,16 +90,16 @@ const Layout = () => {
 
   return (
     <div>
-      {!loginStatus.accepted ||
+      {/* {!loginStatus.accepted ||
       !loginStatus.finishedOk ||
       logoutStatus.logguedOut ? (
         defaultRoutes
       ) : (
         <NavBar>{routes}</NavBar>
-      )} 
+      )}  */}
 
-       {/* {defaultRoutes}
-      <NavBar>{userRoutes}</NavBar>  */}
+       {defaultRoutes}
+      <NavBar>{userRoutes}</NavBar> 
     </div>
   );
 };

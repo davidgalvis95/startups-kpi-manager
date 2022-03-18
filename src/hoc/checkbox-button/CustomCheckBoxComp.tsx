@@ -31,10 +31,9 @@ const CustomCheckBoxComp = ({
             style={{
               color: "#00a8ff",
             }}
-            onChange={(e) => {
-              console.log(e)
-              setCheckedBox(!chekcedBox);
-              console.log(name)
+            onClick={(e) => {
+              console.log(e);
+              console.log(name);
               click(e, name);
             }}
           />
@@ -42,15 +41,13 @@ const CustomCheckBoxComp = ({
       ) : (
         <div className={classes.chackBoxWrapper}>
           <Checkbox
-            checked={renderFromParent ? checked : chekcedBox}
+            checked={checked}
             size="small"
             style={{
               color: "#00a8ff",
             }}
-            onClick={(e) => {
-              setCheckedBox(!chekcedBox);
-              click(e, name);
-            }}
+            //This checked prop will be passed as negative 
+            onClick={(e) => click(e, name, !checked)}
           />
           <p className={classes.textBoxLabel}>{name}</p>
         </div>
