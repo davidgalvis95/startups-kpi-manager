@@ -52,7 +52,7 @@ const UpdateKpiData = (props: any) => {
   const { user } = useSelector((state: RootState) => state?.userReducer);
 
   const { kpiOperationLoading } = useSelector(
-    (state: RootState) => state?.kpiReducer
+    (state: RootState) => state?.kpiReducerNew
   );
 
   const { createOrUpdateKpisDataPointer, startKpiOperationPointer } =

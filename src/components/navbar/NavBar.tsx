@@ -6,16 +6,12 @@ import { BsFillPersonFill } from "react-icons/bs";
 import { BsGrid1X2Fill } from "react-icons/bs";
 import { FcFactory } from "react-icons/fc";
 import { FaUserPlus } from "react-icons/fa";
-import { MdScatterPlot } from "react-icons/md";
-import { MdOutlineScatterPlot } from "react-icons/md";
 import { BsFileEarmarkBarGraph } from "react-icons/bs";
 import { SideBarMenuCard, SideBarMenuItem } from "../../types/types";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/reducers/rootReducer";
 import classes from "./NavBar.module.css";
 import { encrypt } from "../../util/Encryptor";
-
-const CryptoJS = require("crypto-js");
 
 const defaultItems: SideBarMenuItem[] = [
   {

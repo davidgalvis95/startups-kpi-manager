@@ -10,19 +10,19 @@ function App() {
   const { user } = useSelector((state: RootState) => state?.userReducer);
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (user) {
-  //     if (user.rights === "ADMIN") {
-  //       navigate("/cube/platform/startup-table");
-  //     } else if (user.rights === "USER") {
-  //       navigate(`/cube/platform/dashboard/${encrypt(user.pymeId)}`);
-  //     } else {
-  //       navigate("/cube/platform/profile");
-  //     }
-  //   } else {
-  //     navigate("/cube/login");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (user) {
+      if (user.rights === "ADMIN") {
+        navigate("/cube/platform/startup-table");
+      } else if (user.rights === "USER") {
+        navigate(`/cube/platform/dashboard/${encrypt(user.pymeId)}`);
+      } else {
+        navigate("/cube/platform/startup-table");
+      }
+    } else {
+      navigate("/cube/login");
+    }
+  }, []);
 
   return <Layout />;
 }

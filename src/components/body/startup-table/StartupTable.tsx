@@ -63,15 +63,7 @@ const StartupTable = () => {
       }) || [];
 
     setDisplayContentArray(newContent);
-    // setContentArray()
   }, [pymes]);
-
-  useEffect(() => {
-    if(kpisFetched && kpisFetched?.kpis){
-      const dashboardUrl = `/cube/platform/dashboard/${encrypt(currentPymeId)}`;
-      navigate(dashboardUrl);
-    }
-  }, [kpisFetched, kpisFetched?.kpis])
 
   useEffect(() => {
     setSeeKpis(false);
@@ -125,6 +117,8 @@ const StartupTable = () => {
     startKpiOperationPointer();
     getKpisPointer(id);
     setSeeKpis(true);
+    const dashboardUrl = `/cube/platform/dashboard/${encrypt(currentPymeId)}`;
+    navigate(dashboardUrl, {replace:false});
   };
   return (
     <div>

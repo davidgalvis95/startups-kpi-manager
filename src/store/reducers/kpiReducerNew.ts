@@ -46,6 +46,7 @@ const pictureChangeReducer = (
     case KpiActions.KPIS_FETCHED:
       return new KpiStatusImpl(false, action.kpis, undefined);
     case KpiActions.KPIS_UPDATED:
+      console.log('in kpis updated')
       return new KpiStatusImpl(false, action.kpis, undefined);
     case KpiActions.KPI_ERROR:
       return new KpiStatusImpl(false, undefined, action.errorOnKpiOp);

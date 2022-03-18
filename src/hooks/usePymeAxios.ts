@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import allActions from "../store/actions/allActions";
 import { PymeActions } from "../store/actions/ActionTypes";
 import { StartUpType } from "../types/userPymeTypes";
-import { kpiStartUpManagerAxios } from "../config/axios/KpiStartUpManagerAxios";
 import { SamplePymes } from "../assets/sample-data/SamplePymes";
 import { PymeRelatedRequestImpl } from "../store/actions/pymeActions";
 

@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import NewUserAccountForm from "../body/account-form/NewUserAccountForm";
 import NewPymeAccountForm from "../body/account-form/NewPymeAccountForm";
 import Profile from "../body/profile/Profile";
@@ -90,16 +90,16 @@ const Layout = () => {
 
   return (
     <div>
-      {/* {!loginStatus.accepted ||
+      {!loginStatus.accepted ||
       !loginStatus.finishedOk ||
       logoutStatus.logguedOut ? (
         defaultRoutes
       ) : (
         <NavBar>{routes}</NavBar>
-      )}  */}
-
+      )} 
+{/* 
        {defaultRoutes}
-      <NavBar>{userRoutes}</NavBar> 
+      <NavBar>{userRoutes}</NavBar>  */}
     </div>
   );
 };

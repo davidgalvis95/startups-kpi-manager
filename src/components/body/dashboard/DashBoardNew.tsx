@@ -8,10 +8,9 @@ import { ImportantKpi, KpiDataFetching, KpiFetching } from "../../../types/Kpi";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/reducers/rootReducer";
 import { useNavigate } from "react-router-dom";
-import KpiChartLogicHandler from "./charts/KpiChartLogicHandler";
 import { sortValuesArray } from "./DateComparator";
 import KpiChartWrapperNew from "./charts/KpiChartWrapperNew";
-import { sampleKpisResponse } from "../../../assets/sample-data/SampleKpisNew";
+import Backdrop from "../../../UI/Backdrop";
 
 const drawKpiChartsWrapper = (
   chartTypes: string[],
@@ -29,6 +28,10 @@ const drawKpiChartsWrapper = (
 };
 
 const drawKpisAsCharts = (kpis: KpiFetching[]): JSX.Element[] => {
+  if (!kpis) {
+    return [];
+  }
+
   return kpis.map((kpi) => {
     return (
       <div key={kpi.name}>
@@ -73,7 +76,7 @@ const drawImportantKpis = (kpis: ImportantKpi[]): JSX.Element[] => {
 // const logicHadler: KpiChartLogicHandler = KpiChartLogicHandler.getInstance();
 
 const DashboardNew = () => {
-  const { kpisFetched } = useSelector(
+  const { kpisFetched, kpiOperationLoading } = useSelector(
     (state: RootState) => state?.kpiReducerNew
   );
   const { user } = useSelector((state: RootState) => state?.userReducer);
@@ -130,29 +133,33 @@ const DashboardNew = () => {
 
   return (
     <div>
-      <div className={classes.dashboardGeneral}>
-        {/* TODO add this dinamically */}
-        <p className={classes.dashboardNameTitle}>
-          DASHBOARD: CUBE VENTURES S.A.S
-        </p>
-        {user?.rights === "USER" ? (
-          <div className={classes.buttonWrapper}>
-            <CustomButton
-              clickHandler={() => createKpiHandler()}
-              text={"Cargar Datos de KPI"}
-              padding={"8px"}
-              width={"200px"}
-              fontSize={"16px"}
-            />
+      {!kpiOperationLoading ? (
+        <div>
+          <div className={classes.dashboardGeneral}>
+            {/* TODO add this dinamically */}
+            <p className={classes.dashboardNameTitle}>
+              DASHBOARD: CUBE VENTURES S.A.S
+            </p>
+            {user?.rights === "USER" ? (
+              <div className={classes.buttonWrapper}>
+                <CustomButton
+                  clickHandler={() => createKpiHandler()}
+                  text={"Cargar Datos de KPI"}
+                  padding={"8px"}
+                  width={"200px"}
+                  fontSize={"16px"}
+                />
+              </div>
+            ) : null}
           </div>
-        ) : null}
-      </div>
-      <div className={classes.generalKpiInfoWrapper}>
-        <Grid container>{drawImportantKpis(importantKpis)}</Grid>
-      </div>
-      <div className={classes.dashboardChartsWrapper}>
-        {drawKpisAsCharts(kpisDetails)}
-      </div>
+          <div className={classes.generalKpiInfoWrapper}>
+            <Grid container>{drawImportantKpis(importantKpis)}</Grid>
+          </div>
+          <div className={classes.dashboardChartsWrapper}>
+            {drawKpisAsCharts(kpisDetails)}
+          </div>
+        </div>
+      ) : <Backdrop/>}
     </div>
   );
 };
