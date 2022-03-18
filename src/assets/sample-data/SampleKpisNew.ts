@@ -44,6 +44,7 @@ export const sampleKpisResponse: KpiFetchingWrapper = {
       id: "3674b6bd-5e7a-48b3-bbaa-706ceb9fe661",
       name: "ARR",
       und: "USD",
+      important: false,
       values: [
         { label: "Ene-2021", value: 7000 },
         { label: "Feb-2021", value: 8000 },
@@ -81,6 +82,7 @@ export const sampleKpisResponse: KpiFetchingWrapper = {
       id: "cf108dac-9729-495a-aa5f-19dae94390e6",
       name: "GMV",
       und: "USD",
+      important: false,
       values: [
         { label: "Ene-2021", value: 8000 },
         { label: "Feb-2021", value: 5000 },
@@ -99,6 +101,7 @@ export const sampleKpisResponse: KpiFetchingWrapper = {
       id: "84a07b10-c631-4e80-8386-a75cc789bc35",
       name: "Empleados",
       und: "Numero de personas",
+      important: false,
       values: [
         { label: "Ene-2021", value: 2000 },
         { label: "Feb-2021", value: 1000 },
@@ -117,6 +120,7 @@ export const sampleKpisResponse: KpiFetchingWrapper = {
       id: "c0bc627a-c906-471e-8a20-b75bf7ee2671",
       name: "FundRising",
       und: "USD",
+      important: false,
       values: [
         { label: "Ene-2021", value: 5000 },
         { label: "Feb-2021", value: 22000 },

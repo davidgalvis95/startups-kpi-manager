@@ -1,0 +1,26 @@
+{
+  "data": {
+    "id": "30a97c3f-81ec-41bd-822e-a43eb63f60d6",
+    "firstName": "Maria Paula",
+    "lastName": "Medina",
+    "cityOfResidence": "Bogota",
+    "countryOfResicence": "Colombia",
+    "address": "Cll 28b # 13 -15",
+    "photoUrl": "../../../assets/images/cube_logo.jpg",
+    "phone": "123456789",
+    "emailAddress": "mpaula456@hotmail.com",
+    "rights": "ADMIN",
+    "pymeId": "daf2b76e-7a47-4c40-9ca6-bab74676aedf",
+    "pyme": {
+      "pymeId": "daf2b76e-7a47-4c40-9ca6-bab74676aedf",
+      "active": true,
+      "name": "Cube Ventures S.A.S",
+      "city": "Bogota",
+      "country": "Colombia",
+      "address": "Cll 26 # 68 - 35",
+      "emailAddress": "company@example.com",
+      "photoUrl": "../../../assets/images/cube_logo.jpg",
+      "phone": "123456789"
+    }
+  }
+}

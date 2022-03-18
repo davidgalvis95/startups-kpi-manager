@@ -1,0 +1,16 @@
+{
+  "data": {
+    "pyme": {
+      "pymeId": "3453465465-N1",
+      "active": true,
+      "name": "Cube Ventures S.A.S",
+      "city": "Bogota",
+      "country": "Colombia",
+      "address": "Cll 26 # 68 - 35",
+      "emailAddress": "company@example.com",
+      "photoUrl": "../../../assets/images/cube_logo.jpg",
+      "phone": "123456789"
+    },
+    "userRights": "ADMIN"
+  }
+}

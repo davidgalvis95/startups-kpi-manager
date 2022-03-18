@@ -1,0 +1,304 @@
+{
+  "data": {
+    "pymes": [
+      {
+        "pymeId": "3453465465-N1",
+        "active": true,
+        "name": "Cube Ventures S.A.S",
+        "city": "Bogota",
+        "country": "Colombia",
+        "address": "Cll 26 # 68 - 35",
+        "emailAddress": "company@example.com",
+        "photoUrl": "../../../assets/images/cube_logo.jpg",
+        "phone": "123456789"
+      },
+      {
+        "pymeId": "56575452",
+        "active": true,
+        "name": "Circle Ventures S.A.S",
+        "city": "Bogota",
+        "country": "Colombia",
+        "address": "Cll 26 # 68 - 35",
+        "emailAddress": "company@example.com",
+        "photoUrl": "../../../assets/images/cube_logo.jpg",
+        "phone": "123456789"
+      },
+      {
+        "pymeId": "43535654653",
+        "active": true,
+        "name": "Trinagle Ventures S.A.S",
+        "city": "Bogota",
+        "country": "Colombia",
+        "address": "Cll 26 # 68 - 35",
+        "emailAddress": "company@example.com",
+        "photoUrl": "../../../assets/images/cube_logo.jpg",
+        "phone": "123456789"
+      },
+      {
+        "pymeId": "3453465465-N4",
+        "active": true,
+        "name": "Cube Ventures S.A.S",
+        "city": "Bogota",
+        "country": "Colombia",
+        "address": "Cll 26 # 68 - 35",
+        "emailAddress": "company@example.com",
+        "photoUrl": "../../../assets/images/cube_logo.jpg",
+        "phone": "123456789"
+      },
+      {
+        "pymeId": "56575455",
+        "active": true,
+        "name": "Circle Ventures S.A.S",
+        "city": "Bogota",
+        "country": "Colombia",
+        "address": "Cll 26 # 68 - 35",
+        "emailAddress": "company@example.com",
+        "photoUrl": "../../../assets/images/cube_logo.jpg",
+        "phone": "123456789"
+      },
+      {
+        "pymeId": "43535654656",
+        "active": true,
+        "name": "Trinagle Ventures S.A.S",
+        "city": "Bogota",
+        "country": "Colombia",
+        "address": "Cll 26 # 68 - 35",
+        "emailAddress": "company@example.com",
+        "photoUrl": "../../../assets/images/cube_logo.jpg",
+        "phone": "123456789"
+      },
+      {
+        "pymeId": "3453465465-N7",
+        "active": true,
+        "name": "Cube Ventures S.A.S",
+        "city": "Bogota",
+        "country": "Colombia",
+        "address": "Cll 26 # 68 - 35",
+        "emailAddress": "company@example.com",
+        "photoUrl": "../../../assets/images/cube_logo.jpg",
+        "phone": "123456789"
+      },
+      {
+        "pymeId": "56575458",
+        "active": true,
+        "name": "Circle Ventures S.A.S",
+        "city": "Bogota",
+        "country": "Colombia",
+        "address": "Cll 26 # 68 - 35",
+        "emailAddress": "company@example.com",
+        "photoUrl": "../../../assets/images/cube_logo.jpg",
+        "phone": "123456789"
+      },
+      {
+        "pymeId": "43535654659",
+        "active": true,
+        "name": "Trinagle Ventures S.A.S",
+        "city": "Bogota",
+        "country": "Colombia",
+        "address": "Cll 26 # 68 - 35",
+        "emailAddress": "company@example.com",
+        "photoUrl": "../../../assets/images/cube_logo.jpg",
+        "phone": "123456789"
+      },
+      {
+        "pymeId": "3453465465-N10",
+        "active": true,
+        "name": "Cube Ventures S.A.S",
+        "city": "Bogota",
+        "country": "Colombia",
+        "address": "Cll 26 # 68 - 35",
+        "emailAddress": "company@example.com",
+        "photoUrl": "../../../assets/images/cube_logo.jpg",
+        "phone": "123456789"
+      },
+      {
+        "pymeId": "565754511",
+        "active": true,
+        "name": "Circle Ventures S.A.S",
+        "city": "Bogota",
+        "country": "Colombia",
+        "address": "Cll 26 # 68 - 35",
+        "emailAddress": "company@example.com",
+        "photoUrl": "../../../assets/images/cube_logo.jpg",
+        "phone": "123456789"
+      },
+      {
+        "pymeId": "435356546512",
+        "active": true,
+        "name": "Trinagle Ventures S.A.S",
+        "city": "Bogota",
+        "country": "Colombia",
+        "address": "Cll 26 # 68 - 35",
+        "emailAddress": "company@example.com",
+        "photoUrl": "../../../assets/images/cube_logo.jpg",
+        "phone": "123456789"
+      },
+      {
+        "pymeId": "3453465465-N13",
+        "active": true,
+        "name": "Cube Ventures S.A.S",
+        "city": "Bogota",
+        "country": "Colombia",
+        "address": "Cll 26 # 68 - 35",
+        "emailAddress": "company@example.com",
+        "photoUrl": "../../../assets/images/cube_logo.jpg",
+        "phone": "123456789"
+      },
+      {
+        "pymeId": "565754514",
+        "active": true,
+        "name": "Circle Ventures S.A.S",
+        "city": "Bogota",
+        "country": "Colombia",
+        "address": "Cll 26 # 68 - 35",
+        "emailAddress": "company@example.com",
+        "photoUrl": "../../../assets/images/cube_logo.jpg",
+        "phone": "123456789"
+      },
+      {
+        "pymeId": "435356546515",
+        "active": true,
+        "name": "Trinagle Ventures S.A.S",
+        "city": "Bogota",
+        "country": "Colombia",
+        "address": "Cll 26 # 68 - 35",
+        "emailAddress": "company@example.com",
+        "photoUrl": "../../../assets/images/cube_logo.jpg",
+        "phone": "123456789"
+      },
+      {
+        "pymeId": "3453465465-N16",
+        "active": true,
+        "name": "Cube Ventures S.A.S",
+        "city": "Bogota",
+        "country": "Colombia",
+        "address": "Cll 26 # 68 - 35",
+        "emailAddress": "company@example.com",
+        "photoUrl": "../../../assets/images/cube_logo.jpg",
+        "phone": "123456789"
+      },
+      {
+        "pymeId": "565754517",
+        "active": true,
+        "name": "Circle Ventures S.A.S",
+        "city": "Bogota",
+        "country": "Colombia",
+        "address": "Cll 26 # 68 - 35",
+        "emailAddress": "company@example.com",
+        "photoUrl": "../../../assets/images/cube_logo.jpg",
+        "phone": "123456789"
+      },
+      {
+        "pymeId": "435356546518",
+        "active": true,
+        "name": "Trinagle Ventures S.A.S",
+        "city": "Bogota",
+        "country": "Colombia",
+        "address": "Cll 26 # 68 - 35",
+        "emailAddress": "company@example.com",
+        "photoUrl": "../../../assets/images/cube_logo.jpg",
+        "phone": "123456789"
+      },
+      {
+        "pymeId": "3453465465-N19",
+        "active": true,
+        "name": "Cube Ventures S.A.S",
+        "city": "Bogota",
+        "country": "Colombia",
+        "address": "Cll 26 # 68 - 35",
+        "emailAddress": "company@example.com",
+        "photoUrl": "../../../assets/images/cube_logo.jpg",
+        "phone": "123456789"
+      },
+      {
+        "pymeId": "565754520",
+        "active": true,
+        "name": "Circle Ventures S.A.S",
+        "city": "Bogota",
+        "country": "Colombia",
+        "address": "Cll 26 # 68 - 35",
+        "emailAddress": "company@example.com",
+        "photoUrl": "../../../assets/images/cube_logo.jpg",
+        "phone": "123456789"
+      },
+      {
+        "pymeId": "435356546521",
+        "active": true,
+        "name": "Trinagle Ventures S.A.S",
+        "city": "Bogota",
+        "country": "Colombia",
+        "address": "Cll 26 # 68 - 35",
+        "emailAddress": "company@example.com",
+        "photoUrl": "../../../assets/images/cube_logo.jpg",
+        "phone": "123456789"
+      },
+      {
+        "pymeId": "3453465465-N22",
+        "active": true,
+        "name": "Cube Ventures S.A.S",
+        "city": "Bogota",
+        "country": "Colombia",
+        "address": "Cll 26 # 68 - 35",
+        "emailAddress": "company@example.com",
+        "photoUrl": "../../../assets/images/cube_logo.jpg",
+        "phone": "123456789"
+      },
+      {
+        "pymeId": "565754523",
+        "active": true,
+        "name": "Circle Ventures S.A.S",
+        "city": "Bogota",
+        "country": "Colombia",
+        "address": "Cll 26 # 68 - 35",
+        "emailAddress": "company@example.com",
+        "photoUrl": "../../../assets/images/cube_logo.jpg",
+        "phone": "123456789"
+      },
+      {
+        "pymeId": "435356546524",
+        "active": true,
+        "name": "Trinagle Ventures S.A.S",
+        "city": "Bogota",
+        "country": "Colombia",
+        "address": "Cll 26 # 68 - 35",
+        "emailAddress": "company@example.com",
+        "photoUrl": "../../../assets/images/cube_logo.jpg",
+        "phone": "123456789"
+      },
+      {
+        "pymeId": "3453465465-N25",
+        "active": true,
+        "name": "Cube Ventures S.A.S",
+        "city": "Bogota",
+        "country": "Colombia",
+        "address": "Cll 26 # 68 - 35",
+        "emailAddress": "company@example.com",
+        "photoUrl": "../../../assets/images/cube_logo.jpg",
+        "phone": "123456789"
+      },
+      {
+        "pymeId": "565754526",
+        "active": true,
+        "name": "Circle Ventures S.A.S",
+        "city": "Bogota",
+        "country": "Colombia",
+        "address": "Cll 26 # 68 - 35",
+        "emailAddress": "company@example.com",
+        "photoUrl": "../../../assets/images/cube_logo.jpg",
+        "phone": "123456789"
+      },
+      {
+        "pymeId": "435356546527",
+        "active": true,
+        "name": "Trinagle Ventures S.A.S",
+        "city": "Bogota",
+        "country": "Colombia",
+        "address": "Cll 26 # 68 - 35",
+        "emailAddress": "company@example.com",
+        "photoUrl": "../../../assets/images/cube_logo.jpg",
+        "phone": "123456789"
+      }
+    ],
+    "userRights": "ADMIN"
+  }
+}
