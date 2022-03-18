@@ -19,6 +19,7 @@
     "chart.js": "^3.7.1",
     "cloudinary-react": "^1.7.1",
     "crypto-js": "^4.1.1",
+    "env-cmd": "^10.1.0",
     "node-sass": "^7.0.1",
     "react": "^17.0.2",
     "react-bootstrap": "^2.1.2",
@@ -38,7 +39,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "aws s3 rm s3://cube.kpistartupmanager.com --recursive && aws s3 sync build/ s3://cube.kpistartupmanager.com"
   },
   "eslintConfig": {
     "extends": [
