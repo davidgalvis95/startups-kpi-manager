@@ -297,5 +297,5 @@ export const SamplePymes: StartUpType[] = [
     emailAddress: "company@example.com",
     photoUrl: "../../../assets/images/cube_logo.jpg",
     phone: "123456789",
-  },
+  }
 ];

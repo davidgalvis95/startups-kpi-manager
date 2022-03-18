@@ -4,7 +4,7 @@ import LoginComponent from "./LoginComponent";
 import useLoginAxios from "../../hooks/useLoginAxios";
 import useUserAxios from "../../hooks/useUserAxios";
 import usePymeAxios from "../../hooks/usePymeAxios";
-import useKpiAxios from "../../hooks/useKpiAxios";
+import useKpiAxiosNew from "../../hooks/useKpiAxiosNew";
 import { useNavigate } from "react-router-dom";
 import "./Login.scss";
 import {encrypt} from "../../util/Encryptor"
@@ -50,7 +50,7 @@ const Login = () => {
   } = useLoginAxios();
   const { getUserPointer, startUserOperationPointer } = useUserAxios();
   const { getPymesPointer, startPymeOperationPointer } = usePymeAxios();
-  const { getKpisPointer, startKpiOperationPointer } = useKpiAxios();
+  const { getKpisPointer, startKpiOperationPointer } = useKpiAxiosNew();
 
   useEffect(() => {
     if (accepted) {

@@ -18,7 +18,7 @@ export default function SideBarMenuItemView({
 
   return (
     <div className="SideBarMenuItemView">
-      <NavLink className="NavLink" to={item.url} replace>
+      <NavLink className="NavLink" to={item.url}>
         <div className={classNames("ItemContent", isOpen ? "" : "collapsed")}>
           <div className="icon">
             {item.label==="Perfil"?<item.icon size="30" style={profileStyle}></item.icon>:

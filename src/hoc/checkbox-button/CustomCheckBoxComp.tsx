@@ -26,29 +26,26 @@ const CustomCheckBoxComp = ({
         <div className={classes.chackBoxWrapper}>
           <p className={classes.textBoxLabel}>{name}</p>
           <Checkbox
-            checked={renderFromParent ? checked : chekcedBox}
+            checked={checked}
             size="small"
             style={{
               color: "#00a8ff",
             }}
             onClick={(e) => {
-              setCheckedBox(!chekcedBox);
-              click(e, name);
+              click(e, name, !checked);
             }}
           />
         </div>
       ) : (
         <div className={classes.chackBoxWrapper}>
           <Checkbox
-            checked={renderFromParent ? checked : chekcedBox}
+            checked={checked}
             size="small"
             style={{
               color: "#00a8ff",
             }}
-            onClick={(e) => {
-              setCheckedBox(!chekcedBox);
-              click(e, name);
-            }}
+            //This checked prop will be passed as negative 
+            onClick={(e) => click(e, name, !checked)}
           />
           <p className={classes.textBoxLabel}>{name}</p>
         </div>

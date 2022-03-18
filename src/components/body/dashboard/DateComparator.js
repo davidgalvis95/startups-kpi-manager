@@ -1,4 +1,4 @@
-const months = [
+export const months = [
   "Ene",
   "Feb",
   "Mar",
@@ -43,6 +43,31 @@ export const monthsMapper1 = {
   Dic: 12,
 };
 
+export function sortValuesArray(values) {
+  const reversedLabelValues = values.map((value) => {
+    const splitLabel = value.label.split("-");
+    const monthNumber = months.indexOf(splitLabel[0]) + 1;
+    return {
+      ...value,
+      label:
+        splitLabel[1] +
+        (monthNumber > 9 ? monthNumber : "0" + monthNumber) +
+        "01",
+    };
+  });
+  const sortedValues = reversedLabelValues.sort(sortValuesDateLabels);
+
+  const reversedAsString = [...sortedValues].map((value) => {
+    const year = value.label.substring(0, 4);
+    const z = parseInt(value.label.substring(4, 6), 10);
+    const month = getMonthFromNumber(z);
+
+    return { ...value, label: month + "-" + year };
+  });
+
+  return reversedAsString;
+}
+
 export function sortLabels(labels) {
   const reversedLabels = labels.map((label) => {
     const splitLabel = label.split("-");
@@ -67,6 +92,12 @@ export function sortLabels(labels) {
 function sortDateLabels(a, b) {
   a = a.split("/").reverse().join("");
   b = b.split("/").reverse().join("");
+  return a > b ? 1 : a < b ? -1 : 0;
+}
+
+function sortValuesDateLabels(a, b) {
+  a = a.label.split("/").reverse().join("");
+  b = b.label.split("/").reverse().join("");
   return a > b ? 1 : a < b ? -1 : 0;
 }
 

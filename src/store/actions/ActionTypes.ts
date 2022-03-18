@@ -4,6 +4,7 @@ export enum KpiActions {
     KPI_FETCHED = "KPI_FETCHED",
     KPIS_FETCHED = "KPIS_FETCHED",
     KPI_UPDATED = "KPI_UPDATED",
+    KPIS_UPDATED = "KPIS_UPDATED",
     KPI_ERROR =  "KPI_ERROR",
     CLEAR = "CLEAR",
 }

@@ -10,9 +10,9 @@ import { range } from "../../../util/RangeGenerator";
 import CustomInputComp from "../../../hoc/custom-input/CustomInputComp";
 import { RootState } from "../../../store/reducers/rootReducer";
 import { useSelector } from "react-redux";
-import useKpiAxios from "../../../hooks/useKpiAxios";
 import { useNavigate } from "react-router-dom";
 import { encrypt } from "../../../util/Encryptor";
+import useKpiAxiosNew from "../../../hooks/useKpiAxiosNew";
 
 interface StartupTableProps {
   displayContentArray: StartUpBodyRowContent[];
@@ -22,7 +22,7 @@ const numberOfElementsPerPage: number = 13;
 
 const StartupTable = () => {
   const { pymes } = useSelector((state: RootState) => state?.pymeReducer);
-  const { kpis } = useSelector((state: RootState) => state?.kpiReducer);
+  const { kpisFetched } = useSelector((state: RootState) => state?.kpiReducerNew);
 
   const [displayContentArray, setDisplayContentArray] = useState<
     StartUpBodyRowContent[]
@@ -37,7 +37,7 @@ const StartupTable = () => {
   const [seeKpis, setSeeKpis] = useState<boolean>(false);
   const [currentPymeId, setCurrentPymeId] = useState<string>('');
 
-  const { getKpisPointer, startKpiOperationPointer } = useKpiAxios();
+  const { getKpisPointer, startKpiOperationPointer } = useKpiAxiosNew();
 
   const navigate = useNavigate();
 
@@ -63,15 +63,7 @@ const StartupTable = () => {
       }) || [];
 
     setDisplayContentArray(newContent);
-    // setContentArray()
   }, [pymes]);
-
-  useEffect(() => {
-    if(kpis && kpis?.allKpisDetailed && kpis?.importantKpis){
-      const dashboardUrl = `/cube/platform/dashboard/${encrypt(currentPymeId)}`;
-      navigate(dashboardUrl);
-    }
-  }, [kpis, kpis?.allKpisDetailed, kpis?.importantKpis])
 
   useEffect(() => {
     setSeeKpis(false);
@@ -125,6 +117,8 @@ const StartupTable = () => {
     startKpiOperationPointer();
     getKpisPointer(id);
     setSeeKpis(true);
+    const dashboardUrl = `/cube/platform/dashboard/${encrypt(currentPymeId)}`;
+    navigate(dashboardUrl, {replace:false});
   };
   return (
     <div>

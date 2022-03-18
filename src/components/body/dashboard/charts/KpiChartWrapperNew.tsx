@@ -2,14 +2,14 @@ import { Grid } from "@mui/material";
 import React, { createContext, useState } from "react";
 import Card from "../../../../hoc/Card";
 import { ElementsToChar, ElementsToCharData } from "../../../../types/types";
-import { Kpi } from "../../../../types/Kpi";
+import { KpiFetching } from "../../../../types/Kpi";
 import CustomSelectComp from "./CustomSelect";
 import classes from "./KpiChartWrapper.module.css";
 import KpiChartLogicHandler from "./KpiChartLogicHandler";
 import ChartTypes from "./ChartTypes";
 
-interface KpiLineChartWrapperProps {
-  kpi: Kpi;
+interface KpiChartWrapperProps {
+  kpi: KpiFetching;
   chartType: ChartTypes;
 }
 
@@ -18,26 +18,23 @@ const kpiChartLogicHandler: KpiChartLogicHandler =
 
 export const KpiChartWrapperContext = createContext<any>(null);
 
-const KpiLineChartWrapper = ({ kpi, chartType }: KpiLineChartWrapperProps) => {
-  const [kpiToChar, setKpiToChar] = useState<Kpi>(
-    chartType === ChartTypes.RING
-      ? kpiChartLogicHandler.getKpiWhenRadiusPlot(kpi)
-      : kpi
-  );
+const KpiChartWrapperNew = ({ kpi, chartType }: KpiChartWrapperProps) => {
+  const [kpiToChar, setKpiToChar] = useState<KpiFetching>(kpi);
+  const [kpiLabels, setKpiLabels] = useState<string[]>(kpiChartLogicHandler.buildKpiLabelsFromDefinedKpis(kpi) || [])
   const [selectorLabels, setSelectorLabels] = useState<string[]>(
-    kpi?.labels || []
+    kpiLabels || []
   );
   const [selector1Labels, setSelector1Labels] = useState<string[]>(
-    kpi?.labels || []
+    kpiLabels || []
   );
   const [selector2Labels, setSelector2Labels] = useState<string[]>(
-    kpi?.labels || []
+    kpiLabels || []
   );
   const [elementsToChar, setElementsToChar] = useState<
     ElementsToChar<string, string, ElementsToCharData>
-  >(kpiChartLogicHandler.buildElementsToChar(kpiToChar));
+  >(kpiChartLogicHandler.buildElementsToCharFromDefinedKpis(kpiToChar));
   const [iFrom, setIFrom] = useState<number>(0);
-  const [iTo, setITo] = useState<number>(kpi?.labels?.length || 0);
+  const [iTo, setITo] = useState<number>(kpiLabels.length || 0);
 
   const filterSelector1Items = (selectedEl: string) =>
     setSelector1Labels(
@@ -55,7 +52,7 @@ const KpiLineChartWrapper = ({ kpi, chartType }: KpiLineChartWrapperProps) => {
     ]);
     setIFrom(selectedIndex);
     setElementsToChar(
-      kpiChartLogicHandler.filterDataInChart(selectedIndex, iTo, {
+      kpiChartLogicHandler.filterDataInChartWhenDefinedKpi(selectedIndex, iTo, {
         ...kpiToChar,
       })
     );
@@ -67,7 +64,7 @@ const KpiLineChartWrapper = ({ kpi, chartType }: KpiLineChartWrapperProps) => {
     ]);
     setITo(selectedIndex);
     setElementsToChar(
-      kpiChartLogicHandler.filterDataInChart(iFrom, selectedIndex, {
+      kpiChartLogicHandler.filterDataInChartWhenDefinedKpi(iFrom, selectedIndex, {
         ...kpiToChar,
       })
     );
@@ -112,4 +109,4 @@ const KpiLineChartWrapper = ({ kpi, chartType }: KpiLineChartWrapperProps) => {
   );
 };
 
-export default KpiLineChartWrapper;
+export default KpiChartWrapperNew;

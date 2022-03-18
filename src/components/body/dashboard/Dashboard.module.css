@@ -27,7 +27,7 @@
 .dashboardChartsWrapper::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: #54a0ff;
-  outline: 2px solid;
+  outline: 1px solid;
 }
 
 .importantKpiWrapper {

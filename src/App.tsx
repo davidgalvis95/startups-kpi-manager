@@ -17,7 +17,7 @@ function App() {
       } else if (user.rights === "USER") {
         navigate(`/cube/platform/dashboard/${encrypt(user.pymeId)}`);
       } else {
-        navigate("/cube/platform/profile");
+        navigate("/cube/platform/startup-table");
       }
     } else {
       navigate("/cube/login");
